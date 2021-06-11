@@ -1,0 +1,1474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AutoservisDATA.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdresaSet">
+          <Key>
+            <PropertyRef Name="IdAdresa" />
+          </Key>
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KucniBroj" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MjestoIdMjesto" Type="int" Nullable="false" />
+          <Property Name="IdAdresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DobavljacSet">
+          <Key>
+            <PropertyRef Name="IdDobavljac" />
+          </Key>
+          <Property Name="IdDobavljac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AdresaIdAdresa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KatalogSet">
+          <Key>
+            <PropertyRef Name="DobavljacIdDobavljac" />
+            <PropertyRef Name="RezervniDioIdRezervniDio" />
+          </Key>
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DobavljacIdDobavljac" Type="int" Nullable="false" />
+          <Property Name="RezervniDioIdRezervniDio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KlijentSet">
+          <Key>
+            <PropertyRef Name="IdKlijent" />
+          </Key>
+          <Property Name="IdKlijent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Lozinka" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AdresaIdAdresa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MjestoSet">
+          <Key>
+            <PropertyRef Name="IdMjesto" />
+          </Key>
+          <Property Name="IdMjesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NarudzbaSet">
+          <Key>
+            <PropertyRef Name="IdNarudzba" />
+          </Key>
+          <Property Name="IdNarudzba" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoditeljIdVoditelj" Type="int" Nullable="false" />
+          <Property Name="DatumNarudzbe" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ObradaVozilaMehanicar">
+          <Key>
+            <PropertyRef Name="ObradaVozilaMehanicar_Mehanicar_IdObrada" />
+            <PropertyRef Name="Mehanicari_IdZaposlenik" />
+          </Key>
+          <Property Name="ObradaVozilaMehanicar_Mehanicar_IdObrada" Type="int" Nullable="false" />
+          <Property Name="Mehanicari_IdZaposlenik" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ObradaVozilaSet">
+          <Key>
+            <PropertyRef Name="IdObrada" />
+          </Key>
+          <Property Name="IdObrada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumIVrijemeZaprimanja" Type="datetime" Nullable="false" />
+          <Property Name="DatumIVrijemePreuzimanja" Type="datetime" />
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VoziloIdVozilo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RacunSet">
+          <Key>
+            <PropertyRef Name="IdRacun" />
+          </Key>
+          <Property Name="IdRacun" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumIzdavanja" Type="datetime" />
+          <Property Name="Iznos" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="KlijentIdKlijent" Type="int" Nullable="false" />
+          <Property Name="MehanicarIdMehanicar" Type="int" Nullable="false" />
+          <Property Name="ObradaVozila_IdObrada" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RacunStavkaSet">
+          <Key>
+            <PropertyRef Name="RacunIdRacun" />
+            <PropertyRef Name="UslugaIdUsluga" />
+          </Key>
+          <Property Name="RacunIdRacun" Type="int" Nullable="false" />
+          <Property Name="UslugaIdUsluga" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RezervniDioSet">
+          <Key>
+            <PropertyRef Name="IdRezervniDio" />
+          </Key>
+          <Property Name="IdRezervniDio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DostupnaKolicina" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkaNarudzbaSet">
+          <Key>
+            <PropertyRef Name="RezervniDioIdRezervniDio" />
+            <PropertyRef Name="IdNarudzba" />
+          </Key>
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+          <Property Name="RezervniDioIdRezervniDio" Type="int" Nullable="false" />
+          <Property Name="IdNarudzba" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TerminPregledaSet">
+          <Key>
+            <PropertyRef Name="VoziloIdVozilo" />
+            <PropertyRef Name="KlijentIdKlijent" />
+          </Key>
+          <Property Name="DatumIVrijeme" Type="datetime" Nullable="false" />
+          <Property Name="VoziloIdVozilo" Type="int" Nullable="false" />
+          <Property Name="KlijentIdKlijent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UslugaSet">
+          <Key>
+            <PropertyRef Name="IdUsluga" />
+          </Key>
+          <Property Name="IdUsluga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UslugaSet_Posao">
+          <Key>
+            <PropertyRef Name="IdUsluga" />
+          </Key>
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUsluga" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UslugaSet_ZamijenaDijela">
+          <Key>
+            <PropertyRef Name="IdUsluga" />
+          </Key>
+          <Property Name="RezervniDioIdRezervniDio1" Type="int" Nullable="false" />
+          <Property Name="IdUsluga" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VoziloSet">
+          <Key>
+            <PropertyRef Name="IdVozilo" />
+          </Key>
+          <Property Name="IdVozilo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marka" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tip" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GodinaProizvodnje" Type="smallint" Nullable="false" />
+          <Property Name="Klijent_IdKlijent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZahtjevZaNarudzbomSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MehanicarIdMehanicar" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZahtjevZaNarudzbomStavkaSet">
+          <Key>
+            <PropertyRef Name="ZahtjevZaNarudzbomId" />
+            <PropertyRef Name="RezervniDioIdRezervniDio" />
+          </Key>
+          <Property Name="ZahtjevZaNarudzbomId" Type="int" Nullable="false" />
+          <Property Name="ZahtjevanaKolicina" Type="int" Nullable="false" />
+          <Property Name="NarucenaKolicina" Type="int" Nullable="false" />
+          <Property Name="RezervniDioIdRezervniDio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZaposlenikSet">
+          <Key>
+            <PropertyRef Name="IdZaposlenik" />
+          </Key>
+          <Property Name="IdZaposlenik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatumZaposlenja" Type="datetime" Nullable="false" />
+          <Property Name="IdAdresa_IdAdresa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZaposlenikSet_Mehanicar">
+          <Key>
+            <PropertyRef Name="IdZaposlenik" />
+          </Key>
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdZaposlenik" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZaposlenikSet_Voditelj">
+          <Key>
+            <PropertyRef Name="IdZaposlenik" />
+          </Key>
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdZaposlenik" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DobavljacAdresa">
+          <End Role="AdresaSet" Type="Self.AdresaSet" Multiplicity="1" />
+          <End Role="DobavljacSet" Type="Self.DobavljacSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdresaSet">
+              <PropertyRef Name="IdAdresa" />
+            </Principal>
+            <Dependent Role="DobavljacSet">
+              <PropertyRef Name="AdresaIdAdresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DobavljacKatalog">
+          <End Role="DobavljacSet" Type="Self.DobavljacSet" Multiplicity="1" />
+          <End Role="KatalogSet" Type="Self.KatalogSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DobavljacSet">
+              <PropertyRef Name="IdDobavljac" />
+            </Principal>
+            <Dependent Role="KatalogSet">
+              <PropertyRef Name="DobavljacIdDobavljac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KatalogRezervniDio">
+          <End Role="RezervniDioSet" Type="Self.RezervniDioSet" Multiplicity="1" />
+          <End Role="KatalogSet" Type="Self.KatalogSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDioSet">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="KatalogSet">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KlijentAdresa">
+          <End Role="AdresaSet" Type="Self.AdresaSet" Multiplicity="1" />
+          <End Role="KlijentSet" Type="Self.KlijentSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdresaSet">
+              <PropertyRef Name="IdAdresa" />
+            </Principal>
+            <Dependent Role="KlijentSet">
+              <PropertyRef Name="AdresaIdAdresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mehanicar_inherits_Zaposlenik">
+          <End Role="ZaposlenikSet" Type="Self.ZaposlenikSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ZaposlenikSet_Mehanicar" Type="Self.ZaposlenikSet_Mehanicar" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ZaposlenikSet">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="ZaposlenikSet_Mehanicar">
+              <PropertyRef Name="IdZaposlenik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MjestoAdresa">
+          <End Role="MjestoSet" Type="Self.MjestoSet" Multiplicity="1" />
+          <End Role="AdresaSet" Type="Self.AdresaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MjestoSet">
+              <PropertyRef Name="IdMjesto" />
+            </Principal>
+            <Dependent Role="AdresaSet">
+              <PropertyRef Name="MjestoIdMjesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NarudzbaVoditelj">
+          <End Role="ZaposlenikSet_Voditelj" Type="Self.ZaposlenikSet_Voditelj" Multiplicity="1" />
+          <End Role="NarudzbaSet" Type="Self.NarudzbaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZaposlenikSet_Voditelj">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="NarudzbaSet">
+              <PropertyRef Name="VoditeljIdVoditelj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObradaVozilaMehanicar_Mehanicar">
+          <End Role="ZaposlenikSet_Mehanicar" Type="Self.ZaposlenikSet_Mehanicar" Multiplicity="1" />
+          <End Role="ObradaVozilaMehanicar" Type="Self.ObradaVozilaMehanicar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZaposlenikSet_Mehanicar">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="ObradaVozilaMehanicar">
+              <PropertyRef Name="Mehanicari_IdZaposlenik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObradaVozilaMehanicar_ObradaVozila">
+          <End Role="ObradaVozilaSet" Type="Self.ObradaVozilaSet" Multiplicity="1" />
+          <End Role="ObradaVozilaMehanicar" Type="Self.ObradaVozilaMehanicar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObradaVozilaSet">
+              <PropertyRef Name="IdObrada" />
+            </Principal>
+            <Dependent Role="ObradaVozilaMehanicar">
+              <PropertyRef Name="ObradaVozilaMehanicar_Mehanicar_IdObrada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObradaVozilaVozilo">
+          <End Role="VoziloSet" Type="Self.VoziloSet" Multiplicity="1" />
+          <End Role="ObradaVozilaSet" Type="Self.ObradaVozilaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoziloSet">
+              <PropertyRef Name="IdVozilo" />
+            </Principal>
+            <Dependent Role="ObradaVozilaSet">
+              <PropertyRef Name="VoziloIdVozilo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posao_inherits_Usluga">
+          <End Role="UslugaSet" Type="Self.UslugaSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UslugaSet_Posao" Type="Self.UslugaSet_Posao" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UslugaSet">
+              <PropertyRef Name="IdUsluga" />
+            </Principal>
+            <Dependent Role="UslugaSet_Posao">
+              <PropertyRef Name="IdUsluga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RacunMehanicar">
+          <End Role="ZaposlenikSet_Mehanicar" Type="Self.ZaposlenikSet_Mehanicar" Multiplicity="1" />
+          <End Role="RacunSet" Type="Self.RacunSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZaposlenikSet_Mehanicar">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="RacunSet">
+              <PropertyRef Name="MehanicarIdMehanicar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RacunObradaVozila">
+          <End Role="ObradaVozilaSet" Type="Self.ObradaVozilaSet" Multiplicity="1" />
+          <End Role="RacunSet" Type="Self.RacunSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObradaVozilaSet">
+              <PropertyRef Name="IdObrada" />
+            </Principal>
+            <Dependent Role="RacunSet">
+              <PropertyRef Name="ObradaVozila_IdObrada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RacunStavkaRacun">
+          <End Role="RacunSet" Type="Self.RacunSet" Multiplicity="1" />
+          <End Role="RacunStavkaSet" Type="Self.RacunStavkaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RacunSet">
+              <PropertyRef Name="IdRacun" />
+            </Principal>
+            <Dependent Role="RacunStavkaSet">
+              <PropertyRef Name="RacunIdRacun" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RacunStavkaUsluga">
+          <End Role="UslugaSet" Type="Self.UslugaSet" Multiplicity="1" />
+          <End Role="RacunStavkaSet" Type="Self.RacunStavkaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UslugaSet">
+              <PropertyRef Name="IdUsluga" />
+            </Principal>
+            <Dependent Role="RacunStavkaSet">
+              <PropertyRef Name="UslugaIdUsluga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkaNarudzbaNarudzba">
+          <End Role="NarudzbaSet" Type="Self.NarudzbaSet" Multiplicity="1" />
+          <End Role="StavkaNarudzbaSet" Type="Self.StavkaNarudzbaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NarudzbaSet">
+              <PropertyRef Name="IdNarudzba" />
+            </Principal>
+            <Dependent Role="StavkaNarudzbaSet">
+              <PropertyRef Name="IdNarudzba" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkaNarudzbaRezervniDio">
+          <End Role="RezervniDioSet" Type="Self.RezervniDioSet" Multiplicity="1" />
+          <End Role="StavkaNarudzbaSet" Type="Self.StavkaNarudzbaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDioSet">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="StavkaNarudzbaSet">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminPregledaKlijent">
+          <End Role="KlijentSet" Type="Self.KlijentSet" Multiplicity="1" />
+          <End Role="TerminPregledaSet" Type="Self.TerminPregledaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KlijentSet">
+              <PropertyRef Name="IdKlijent" />
+            </Principal>
+            <Dependent Role="TerminPregledaSet">
+              <PropertyRef Name="KlijentIdKlijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminPregledaVozilo">
+          <End Role="VoziloSet" Type="Self.VoziloSet" Multiplicity="1" />
+          <End Role="TerminPregledaSet" Type="Self.TerminPregledaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoziloSet">
+              <PropertyRef Name="IdVozilo" />
+            </Principal>
+            <Dependent Role="TerminPregledaSet">
+              <PropertyRef Name="VoziloIdVozilo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voditelj_inherits_Zaposlenik">
+          <End Role="ZaposlenikSet" Type="Self.ZaposlenikSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ZaposlenikSet_Voditelj" Type="Self.ZaposlenikSet_Voditelj" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ZaposlenikSet">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="ZaposlenikSet_Voditelj">
+              <PropertyRef Name="IdZaposlenik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoziloKlijent">
+          <End Role="KlijentSet" Type="Self.KlijentSet" Multiplicity="1" />
+          <End Role="VoziloSet" Type="Self.VoziloSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KlijentSet">
+              <PropertyRef Name="IdKlijent" />
+            </Principal>
+            <Dependent Role="VoziloSet">
+              <PropertyRef Name="Klijent_IdKlijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtjevZaNarudzbomMehanicar">
+          <End Role="ZaposlenikSet_Mehanicar" Type="Self.ZaposlenikSet_Mehanicar" Multiplicity="1" />
+          <End Role="ZahtjevZaNarudzbomSet" Type="Self.ZahtjevZaNarudzbomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZaposlenikSet_Mehanicar">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="ZahtjevZaNarudzbomSet">
+              <PropertyRef Name="MehanicarIdMehanicar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtjevZaNarudzbomStavkaRezervniDio">
+          <End Role="RezervniDioSet" Type="Self.RezervniDioSet" Multiplicity="1" />
+          <End Role="ZahtjevZaNarudzbomStavkaSet" Type="Self.ZahtjevZaNarudzbomStavkaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDioSet">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="ZahtjevZaNarudzbomStavkaSet">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom">
+          <End Role="ZahtjevZaNarudzbomSet" Type="Self.ZahtjevZaNarudzbomSet" Multiplicity="1" />
+          <End Role="ZahtjevZaNarudzbomStavkaSet" Type="Self.ZahtjevZaNarudzbomStavkaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZahtjevZaNarudzbomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZahtjevZaNarudzbomStavkaSet">
+              <PropertyRef Name="ZahtjevZaNarudzbomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamijenaDijela_inherits_Usluga">
+          <End Role="UslugaSet" Type="Self.UslugaSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UslugaSet_ZamijenaDijela" Type="Self.UslugaSet_ZamijenaDijela" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UslugaSet">
+              <PropertyRef Name="IdUsluga" />
+            </Principal>
+            <Dependent Role="UslugaSet_ZamijenaDijela">
+              <PropertyRef Name="IdUsluga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamijenaDijelaRezervniDio">
+          <End Role="RezervniDioSet" Type="Self.RezervniDioSet" Multiplicity="1" />
+          <End Role="UslugaSet_ZamijenaDijela" Type="Self.UslugaSet_ZamijenaDijela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDioSet">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="UslugaSet_ZamijenaDijela">
+              <PropertyRef Name="RezervniDioIdRezervniDio1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZaposlenikAdresa">
+          <End Role="AdresaSet" Type="Self.AdresaSet" Multiplicity="1" />
+          <End Role="ZaposlenikSet" Type="Self.ZaposlenikSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdresaSet">
+              <PropertyRef Name="IdAdresa" />
+            </Principal>
+            <Dependent Role="ZaposlenikSet">
+              <PropertyRef Name="IdAdresa_IdAdresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AutoservisDATAStoreContainer">
+          <EntitySet Name="AdresaSet" EntityType="Self.AdresaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DobavljacSet" EntityType="Self.DobavljacSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KatalogSet" EntityType="Self.KatalogSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KlijentSet" EntityType="Self.KlijentSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MjestoSet" EntityType="Self.MjestoSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NarudzbaSet" EntityType="Self.NarudzbaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObradaVozilaMehanicar" EntityType="Self.ObradaVozilaMehanicar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObradaVozilaSet" EntityType="Self.ObradaVozilaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RacunSet" EntityType="Self.RacunSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RacunStavkaSet" EntityType="Self.RacunStavkaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RezervniDioSet" EntityType="Self.RezervniDioSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaNarudzbaSet" EntityType="Self.StavkaNarudzbaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminPregledaSet" EntityType="Self.TerminPregledaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UslugaSet" EntityType="Self.UslugaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UslugaSet_Posao" EntityType="Self.UslugaSet_Posao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UslugaSet_ZamijenaDijela" EntityType="Self.UslugaSet_ZamijenaDijela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoziloSet" EntityType="Self.VoziloSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZahtjevZaNarudzbomSet" EntityType="Self.ZahtjevZaNarudzbomSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZahtjevZaNarudzbomStavkaSet" EntityType="Self.ZahtjevZaNarudzbomStavkaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZaposlenikSet" EntityType="Self.ZaposlenikSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZaposlenikSet_Mehanicar" EntityType="Self.ZaposlenikSet_Mehanicar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZaposlenikSet_Voditelj" EntityType="Self.ZaposlenikSet_Voditelj" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DobavljacAdresa" Association="Self.FK_DobavljacAdresa">
+            <End Role="AdresaSet" EntitySet="AdresaSet" />
+            <End Role="DobavljacSet" EntitySet="DobavljacSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DobavljacKatalog" Association="Self.FK_DobavljacKatalog">
+            <End Role="DobavljacSet" EntitySet="DobavljacSet" />
+            <End Role="KatalogSet" EntitySet="KatalogSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KatalogRezervniDio" Association="Self.FK_KatalogRezervniDio">
+            <End Role="RezervniDioSet" EntitySet="RezervniDioSet" />
+            <End Role="KatalogSet" EntitySet="KatalogSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KlijentAdresa" Association="Self.FK_KlijentAdresa">
+            <End Role="AdresaSet" EntitySet="AdresaSet" />
+            <End Role="KlijentSet" EntitySet="KlijentSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mehanicar_inherits_Zaposlenik" Association="Self.FK_Mehanicar_inherits_Zaposlenik">
+            <End Role="ZaposlenikSet" EntitySet="ZaposlenikSet" />
+            <End Role="ZaposlenikSet_Mehanicar" EntitySet="ZaposlenikSet_Mehanicar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MjestoAdresa" Association="Self.FK_MjestoAdresa">
+            <End Role="MjestoSet" EntitySet="MjestoSet" />
+            <End Role="AdresaSet" EntitySet="AdresaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NarudzbaVoditelj" Association="Self.FK_NarudzbaVoditelj">
+            <End Role="ZaposlenikSet_Voditelj" EntitySet="ZaposlenikSet_Voditelj" />
+            <End Role="NarudzbaSet" EntitySet="NarudzbaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObradaVozilaMehanicar_Mehanicar" Association="Self.FK_ObradaVozilaMehanicar_Mehanicar">
+            <End Role="ZaposlenikSet_Mehanicar" EntitySet="ZaposlenikSet_Mehanicar" />
+            <End Role="ObradaVozilaMehanicar" EntitySet="ObradaVozilaMehanicar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObradaVozilaMehanicar_ObradaVozila" Association="Self.FK_ObradaVozilaMehanicar_ObradaVozila">
+            <End Role="ObradaVozilaSet" EntitySet="ObradaVozilaSet" />
+            <End Role="ObradaVozilaMehanicar" EntitySet="ObradaVozilaMehanicar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObradaVozilaVozilo" Association="Self.FK_ObradaVozilaVozilo">
+            <End Role="VoziloSet" EntitySet="VoziloSet" />
+            <End Role="ObradaVozilaSet" EntitySet="ObradaVozilaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posao_inherits_Usluga" Association="Self.FK_Posao_inherits_Usluga">
+            <End Role="UslugaSet" EntitySet="UslugaSet" />
+            <End Role="UslugaSet_Posao" EntitySet="UslugaSet_Posao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RacunMehanicar" Association="Self.FK_RacunMehanicar">
+            <End Role="ZaposlenikSet_Mehanicar" EntitySet="ZaposlenikSet_Mehanicar" />
+            <End Role="RacunSet" EntitySet="RacunSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RacunObradaVozila" Association="Self.FK_RacunObradaVozila">
+            <End Role="ObradaVozilaSet" EntitySet="ObradaVozilaSet" />
+            <End Role="RacunSet" EntitySet="RacunSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RacunStavkaRacun" Association="Self.FK_RacunStavkaRacun">
+            <End Role="RacunSet" EntitySet="RacunSet" />
+            <End Role="RacunStavkaSet" EntitySet="RacunStavkaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RacunStavkaUsluga" Association="Self.FK_RacunStavkaUsluga">
+            <End Role="UslugaSet" EntitySet="UslugaSet" />
+            <End Role="RacunStavkaSet" EntitySet="RacunStavkaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkaNarudzbaNarudzba" Association="Self.FK_StavkaNarudzbaNarudzba">
+            <End Role="NarudzbaSet" EntitySet="NarudzbaSet" />
+            <End Role="StavkaNarudzbaSet" EntitySet="StavkaNarudzbaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkaNarudzbaRezervniDio" Association="Self.FK_StavkaNarudzbaRezervniDio">
+            <End Role="RezervniDioSet" EntitySet="RezervniDioSet" />
+            <End Role="StavkaNarudzbaSet" EntitySet="StavkaNarudzbaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminPregledaKlijent" Association="Self.FK_TerminPregledaKlijent">
+            <End Role="KlijentSet" EntitySet="KlijentSet" />
+            <End Role="TerminPregledaSet" EntitySet="TerminPregledaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminPregledaVozilo" Association="Self.FK_TerminPregledaVozilo">
+            <End Role="VoziloSet" EntitySet="VoziloSet" />
+            <End Role="TerminPregledaSet" EntitySet="TerminPregledaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voditelj_inherits_Zaposlenik" Association="Self.FK_Voditelj_inherits_Zaposlenik">
+            <End Role="ZaposlenikSet" EntitySet="ZaposlenikSet" />
+            <End Role="ZaposlenikSet_Voditelj" EntitySet="ZaposlenikSet_Voditelj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoziloKlijent" Association="Self.FK_VoziloKlijent">
+            <End Role="KlijentSet" EntitySet="KlijentSet" />
+            <End Role="VoziloSet" EntitySet="VoziloSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtjevZaNarudzbomMehanicar" Association="Self.FK_ZahtjevZaNarudzbomMehanicar">
+            <End Role="ZaposlenikSet_Mehanicar" EntitySet="ZaposlenikSet_Mehanicar" />
+            <End Role="ZahtjevZaNarudzbomSet" EntitySet="ZahtjevZaNarudzbomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtjevZaNarudzbomStavkaRezervniDio" Association="Self.FK_ZahtjevZaNarudzbomStavkaRezervniDio">
+            <End Role="RezervniDioSet" EntitySet="RezervniDioSet" />
+            <End Role="ZahtjevZaNarudzbomStavkaSet" EntitySet="ZahtjevZaNarudzbomStavkaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom" Association="Self.FK_ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom">
+            <End Role="ZahtjevZaNarudzbomSet" EntitySet="ZahtjevZaNarudzbomSet" />
+            <End Role="ZahtjevZaNarudzbomStavkaSet" EntitySet="ZahtjevZaNarudzbomStavkaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamijenaDijela_inherits_Usluga" Association="Self.FK_ZamijenaDijela_inherits_Usluga">
+            <End Role="UslugaSet" EntitySet="UslugaSet" />
+            <End Role="UslugaSet_ZamijenaDijela" EntitySet="UslugaSet_ZamijenaDijela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamijenaDijelaRezervniDio" Association="Self.FK_ZamijenaDijelaRezervniDio">
+            <End Role="RezervniDioSet" EntitySet="RezervniDioSet" />
+            <End Role="UslugaSet_ZamijenaDijela" EntitySet="UslugaSet_ZamijenaDijela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZaposlenikAdresa" Association="Self.FK_ZaposlenikAdresa">
+            <End Role="AdresaSet" EntitySet="AdresaSet" />
+            <End Role="ZaposlenikSet" EntitySet="ZaposlenikSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AutoservisDATA" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="AutoservisDATAContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KlijentSet" EntityType="AutoservisDATA.Klijent" />
+          <EntitySet Name="MjestoSet" EntityType="AutoservisDATA.Mjesto" />
+          <EntitySet Name="AdresaSet" EntityType="AutoservisDATA.Adresa" />
+          <EntitySet Name="VoziloSet" EntityType="AutoservisDATA.Vozilo" />
+          <EntitySet Name="TerminPregledaSet" EntityType="AutoservisDATA.TerminPregleda" />
+          <EntitySet Name="ZaposlenikSet" EntityType="AutoservisDATA.Zaposlenik" />
+          <AssociationSet Name="ZaposlenikAdresa" Association="AutoservisDATA.ZaposlenikAdresa">
+            <End Role="Zaposlenik" EntitySet="ZaposlenikSet" />
+            <End Role="Adresa" EntitySet="AdresaSet" />
+          </AssociationSet>
+          <EntitySet Name="ObradaVozilaSet" EntityType="AutoservisDATA.ObradaVozila" />
+          <AssociationSet Name="ObradaVozilaMehanicar" Association="AutoservisDATA.ObradaVozilaMehanicar">
+            <End Role="ObradaVozila" EntitySet="ObradaVozilaSet" />
+            <End Role="Mehanicar" EntitySet="ZaposlenikSet" />
+          </AssociationSet>
+          <AssociationSet Name="ObradaVozilaVozilo" Association="AutoservisDATA.ObradaVozilaVozilo">
+            <End Role="ObradaVozila" EntitySet="ObradaVozilaSet" />
+            <End Role="Vozilo" EntitySet="VoziloSet" />
+          </AssociationSet>
+          <AssociationSet Name="MjestoAdresa" Association="AutoservisDATA.MjestoAdresa">
+            <End Role="Mjesto" EntitySet="MjestoSet" />
+            <End Role="Adresa" EntitySet="AdresaSet" />
+          </AssociationSet>
+          <AssociationSet Name="VoziloKlijent" Association="AutoservisDATA.VoziloKlijent">
+            <End Role="Vozilo" EntitySet="VoziloSet" />
+            <End Role="Klijent" EntitySet="KlijentSet" />
+          </AssociationSet>
+          <AssociationSet Name="TerminPregledaVozilo" Association="AutoservisDATA.TerminPregledaVozilo">
+            <End Role="TerminPregleda" EntitySet="TerminPregledaSet" />
+            <End Role="Vozilo" EntitySet="VoziloSet" />
+          </AssociationSet>
+          <AssociationSet Name="TerminPregledaKlijent" Association="AutoservisDATA.TerminPregledaKlijent">
+            <End Role="TerminPregleda" EntitySet="TerminPregledaSet" />
+            <End Role="Klijent" EntitySet="KlijentSet" />
+          </AssociationSet>
+          <EntitySet Name="RacunSet" EntityType="AutoservisDATA.Racun" />
+          <AssociationSet Name="RacunMehanicar" Association="AutoservisDATA.RacunMehanicar">
+            <End Role="Racun" EntitySet="RacunSet" />
+            <End Role="Mehanicar" EntitySet="ZaposlenikSet" />
+          </AssociationSet>
+          <AssociationSet Name="RacunObradaVozila" Association="AutoservisDATA.RacunObradaVozila">
+            <End Role="Racun" EntitySet="RacunSet" />
+            <End Role="ObradaVozila" EntitySet="ObradaVozilaSet" />
+          </AssociationSet>
+          <EntitySet Name="UslugaSet" EntityType="AutoservisDATA.Usluga" />
+          <EntitySet Name="RezervniDioSet" EntityType="AutoservisDATA.RezervniDio" />
+          <EntitySet Name="DobavljacSet" EntityType="AutoservisDATA.Dobavljac" />
+          <AssociationSet Name="DobavljacAdresa" Association="AutoservisDATA.DobavljacAdresa">
+            <End Role="Dobavljac" EntitySet="DobavljacSet" />
+            <End Role="Adresa" EntitySet="AdresaSet" />
+          </AssociationSet>
+          <EntitySet Name="KatalogSet" EntityType="AutoservisDATA.Katalog" />
+          <AssociationSet Name="DobavljacKatalog" Association="AutoservisDATA.DobavljacKatalog">
+            <End Role="Katalog" EntitySet="KatalogSet" />
+            <End Role="Dobavljac" EntitySet="DobavljacSet" />
+          </AssociationSet>
+          <AssociationSet Name="KatalogRezervniDio" Association="AutoservisDATA.KatalogRezervniDio">
+            <End Role="Katalog" EntitySet="KatalogSet" />
+            <End Role="RezervniDio" EntitySet="RezervniDioSet" />
+          </AssociationSet>
+          <EntitySet Name="NarudzbaSet" EntityType="AutoservisDATA.Narudzba" />
+          <AssociationSet Name="NarudzbaVoditelj" Association="AutoservisDATA.NarudzbaVoditelj">
+            <End Role="Narudzba" EntitySet="NarudzbaSet" />
+            <End Role="Voditelj" EntitySet="ZaposlenikSet" />
+          </AssociationSet>
+          <EntitySet Name="StavkaNarudzbaSet" EntityType="AutoservisDATA.StavkaNarudzba" />
+          <AssociationSet Name="StavkaNarudzbaRezervniDio" Association="AutoservisDATA.StavkaNarudzbaRezervniDio">
+            <End Role="StavkaNarudzba" EntitySet="StavkaNarudzbaSet" />
+            <End Role="RezervniDio" EntitySet="RezervniDioSet" />
+          </AssociationSet>
+          <AssociationSet Name="StavkaNarudzbaNarudzba" Association="AutoservisDATA.StavkaNarudzbaNarudzba">
+            <End Role="StavkaNarudzba" EntitySet="StavkaNarudzbaSet" />
+            <End Role="Narudzba" EntitySet="NarudzbaSet" />
+          </AssociationSet>
+          <EntitySet Name="ZahtjevZaNarudzbomSet" EntityType="AutoservisDATA.ZahtjevZaNarudzbom" />
+          <AssociationSet Name="ZahtjevZaNarudzbomMehanicar" Association="AutoservisDATA.ZahtjevZaNarudzbomMehanicar">
+            <End Role="ZahtjevZaNarudzbom" EntitySet="ZahtjevZaNarudzbomSet" />
+            <End Role="Mehanicar" EntitySet="ZaposlenikSet" />
+          </AssociationSet>
+          <EntitySet Name="ZahtjevZaNarudzbomStavkaSet" EntityType="AutoservisDATA.ZahtjevZaNarudzbomStavka" />
+          <AssociationSet Name="ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom" Association="AutoservisDATA.ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom">
+            <End Role="ZahtjevZaNarudzbomStavka" EntitySet="ZahtjevZaNarudzbomStavkaSet" />
+            <End Role="ZahtjevZaNarudzbom" EntitySet="ZahtjevZaNarudzbomSet" />
+          </AssociationSet>
+          <AssociationSet Name="ZahtjevZaNarudzbomStavkaRezervniDio" Association="AutoservisDATA.ZahtjevZaNarudzbomStavkaRezervniDio">
+            <End Role="ZahtjevZaNarudzbomStavka" EntitySet="ZahtjevZaNarudzbomStavkaSet" />
+            <End Role="RezervniDio" EntitySet="RezervniDioSet" />
+          </AssociationSet>
+          <EntitySet Name="RacunStavkaSet" EntityType="AutoservisDATA.RacunStavka" />
+          <AssociationSet Name="RacunStavkaRacun" Association="AutoservisDATA.RacunStavkaRacun">
+            <End Role="RacunStavka" EntitySet="RacunStavkaSet" />
+            <End Role="Racun" EntitySet="RacunSet" />
+          </AssociationSet>
+          <AssociationSet Name="RacunStavkaUsluga" Association="AutoservisDATA.RacunStavkaUsluga">
+            <End Role="RacunStavka" EntitySet="RacunStavkaSet" />
+            <End Role="Usluga" EntitySet="UslugaSet" />
+          </AssociationSet>
+          <AssociationSet Name="KlijentAdresa" Association="AutoservisDATA.KlijentAdresa">
+            <End Role="Klijent" EntitySet="KlijentSet" />
+            <End Role="Adresa" EntitySet="AdresaSet" />
+          </AssociationSet>
+          <AssociationSet Name="UslugaSet_ZamijenaDijela" Association="AutoservisDATA.UslugaSet_ZamijenaDijela">
+            <End Role="Usluga" EntitySet="UslugaSet" />
+            <End Role="RezervniDio" EntitySet="RezervniDioSet" />
+          </AssociationSet>
+          <AssociationSet Name="ZamijenaDijelaRezervniDio" Association="AutoservisDATA.ZamijenaDijelaRezervniDio">
+            <End Role="ZamijenaDijela" EntitySet="UslugaSet" />
+            <End Role="RezervniDio" EntitySet="RezervniDioSet" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Klijent">
+          <Key>
+            <PropertyRef Name="IdKlijent" />
+          </Key>
+          <Property Name="IdKlijent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Lozinka" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Vozilo" Relationship="AutoservisDATA.VoziloKlijent" FromRole="Klijent" ToRole="Vozilo" />
+          <NavigationProperty Name="Adresa" Relationship="AutoservisDATA.KlijentAdresa" FromRole="Klijent" ToRole="Adresa" />
+          <Property Name="AdresaIdAdresa" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mjesto">
+          <Key>
+            <PropertyRef Name="IdMjesto" />
+          </Key>
+          <Property Name="IdMjesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Adresa" >
+          <Key>
+            <PropertyRef Name="IdAdresa" />
+          </Key>
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="KucniBroj" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Mjesto" Relationship="AutoservisDATA.MjestoAdresa" FromRole="Adresa" ToRole="Mjesto" />
+          <Property Name="MjestoIdMjesto" Type="Int32" Nullable="false" />
+          <Property Name="IdAdresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Vozilo">
+          <Key>
+            <PropertyRef Name="IdVozilo" />
+          </Key>
+          <Property Name="IdVozilo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marka" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Tip" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GodinaProizvodnje" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ObradaVozila" Relationship="AutoservisDATA.ObradaVozilaVozilo" FromRole="Vozilo" ToRole="ObradaVozila" />
+          <NavigationProperty Name="Klijent" Relationship="AutoservisDATA.VoziloKlijent" FromRole="Vozilo" ToRole="Klijent" />
+        </EntityType>
+        <EntityType Name="TerminPregleda" >
+          <Key>
+            <PropertyRef Name="VoziloIdVozilo" />
+            <PropertyRef Name="KlijentIdKlijent" />
+          </Key>
+          <Property Name="DatumIVrijeme" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Vozilo" Relationship="AutoservisDATA.TerminPregledaVozilo" FromRole="TerminPregleda" ToRole="Vozilo" />
+          <Property Name="VoziloIdVozilo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Klijent" Relationship="AutoservisDATA.TerminPregledaKlijent" FromRole="TerminPregleda" ToRole="Klijent" />
+          <Property Name="KlijentIdKlijent" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="IdZaposlenik" />
+          </Key>
+          <Property Name="IdZaposlenik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DatumZaposlenja" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="IdAdresa" Relationship="AutoservisDATA.ZaposlenikAdresa" FromRole="Zaposlenik" ToRole="Adresa" />
+        </EntityType>
+        <Association Name="ZaposlenikAdresa">
+          <End Type="AutoservisDATA.Zaposlenik" Role="Zaposlenik" Multiplicity="*" />
+          <End Type="AutoservisDATA.Adresa" Role="Adresa" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Mehanicar" BaseType="AutoservisDATA.Zaposlenik" >
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ObradaVozila">
+          <Key>
+            <PropertyRef Name="IdObrada" />
+          </Key>
+          <Property Name="IdObrada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatumIVrijemeZaprimanja" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatumIVrijemePreuzimanja" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Mehanicari" Relationship="AutoservisDATA.ObradaVozilaMehanicar" FromRole="ObradaVozila" ToRole="Mehanicar" />
+          <NavigationProperty Name="Vozilo" Relationship="AutoservisDATA.ObradaVozilaVozilo" FromRole="ObradaVozila" ToRole="Vozilo" />
+          <Property Name="VoziloIdVozilo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Racun" Relationship="AutoservisDATA.RacunObradaVozila" FromRole="ObradaVozila" ToRole="Racun" />
+        </EntityType>
+        <Association Name="ObradaVozilaMehanicar">
+          <End Type="AutoservisDATA.ObradaVozila" Role="ObradaVozila" Multiplicity="*" />
+          <End Type="AutoservisDATA.Mehanicar" Role="Mehanicar" Multiplicity="*" />
+        </Association>
+        <Association Name="ObradaVozilaVozilo">
+          <End Type="AutoservisDATA.ObradaVozila" Role="ObradaVozila" Multiplicity="*" />
+          <End Type="AutoservisDATA.Vozilo" Role="Vozilo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Vozilo">
+              <PropertyRef Name="IdVozilo" />
+            </Principal>
+            <Dependent Role="ObradaVozila">
+              <PropertyRef Name="VoziloIdVozilo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MjestoAdresa">
+          <End Type="AutoservisDATA.Mjesto" Role="Mjesto" Multiplicity="1" />
+          <End Type="AutoservisDATA.Adresa" Role="Adresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mjesto">
+              <PropertyRef Name="IdMjesto" />
+            </Principal>
+            <Dependent Role="Adresa">
+              <PropertyRef Name="MjestoIdMjesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VoziloKlijent">
+          <End Type="AutoservisDATA.Vozilo" Role="Vozilo" Multiplicity="*" />
+          <End Type="AutoservisDATA.Klijent" Role="Klijent" Multiplicity="1" />
+        </Association>
+        <Association Name="TerminPregledaVozilo">
+          <End Type="AutoservisDATA.TerminPregleda" Role="TerminPregleda" Multiplicity="*" />
+          <End Type="AutoservisDATA.Vozilo" Role="Vozilo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Vozilo">
+              <PropertyRef Name="IdVozilo" />
+            </Principal>
+            <Dependent Role="TerminPregleda">
+              <PropertyRef Name="VoziloIdVozilo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TerminPregledaKlijent">
+          <End Type="AutoservisDATA.TerminPregleda" Role="TerminPregleda" Multiplicity="*" />
+          <End Type="AutoservisDATA.Klijent" Role="Klijent" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Klijent">
+              <PropertyRef Name="IdKlijent" />
+            </Principal>
+            <Dependent Role="TerminPregleda">
+              <PropertyRef Name="KlijentIdKlijent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="IdRacun" />
+          </Key>
+          <Property Name="IdRacun" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatumIzdavanja" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Iznos" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="KlijentIdKlijent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mehanicar" Relationship="AutoservisDATA.RacunMehanicar" FromRole="Racun" ToRole="Mehanicar" />
+          <Property Name="MehanicarIdMehanicar" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ObradaVozila" Relationship="AutoservisDATA.RacunObradaVozila" FromRole="Racun" ToRole="ObradaVozila" />
+          <NavigationProperty Name="RacunStavka" Relationship="AutoservisDATA.RacunStavkaRacun" FromRole="Racun" ToRole="RacunStavka" />
+        </EntityType>
+        <Association Name="RacunMehanicar">
+          <End Type="AutoservisDATA.Racun" Role="Racun" Multiplicity="*" />
+          <End Type="AutoservisDATA.Mehanicar" Role="Mehanicar" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Mehanicar">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="MehanicarIdMehanicar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RacunObradaVozila">
+          <End Type="AutoservisDATA.Racun" Role="Racun" Multiplicity="1" />
+          <End Type="AutoservisDATA.ObradaVozila" Role="ObradaVozila" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Usluga">
+          <Key>
+            <PropertyRef Name="IdUsluga" />
+          </Key>
+          <Property Name="IdUsluga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cijena" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="RacunStavka" Relationship="AutoservisDATA.RacunStavkaUsluga" FromRole="Usluga" ToRole="RacunStavka" />
+          <NavigationProperty Name="RezervniDioSet" Relationship="AutoservisDATA.UslugaSet_ZamijenaDijela" FromRole="Usluga" ToRole="RezervniDio" />
+        </EntityType>
+        <EntityType Name="ZamijenaDijela" BaseType="AutoservisDATA.Usluga">
+          <NavigationProperty Name="RezervniDio" Relationship="AutoservisDATA.ZamijenaDijelaRezervniDio" FromRole="ZamijenaDijela" ToRole="RezervniDio" />
+          <Property Name="RezervniDioIdRezervniDio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posao" BaseType="AutoservisDATA.Usluga">
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="RezervniDio">
+          <Key>
+            <PropertyRef Name="IdRezervniDio" />
+          </Key>
+          <Property Name="IdRezervniDio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Cijena" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DostupnaKolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StavkaNarudzba" Relationship="AutoservisDATA.StavkaNarudzbaRezervniDio" FromRole="RezervniDio" ToRole="StavkaNarudzba" />
+          <NavigationProperty Name="UslugaSet" Relationship="AutoservisDATA.UslugaSet_ZamijenaDijela" FromRole="RezervniDio" ToRole="Usluga" />
+          <Property Name="ZamijenaDijelaIdUsluga" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="IdDobavljac" />
+          </Key>
+          <Property Name="IdDobavljac" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Adresa" Relationship="AutoservisDATA.DobavljacAdresa" FromRole="Dobavljac" ToRole="Adresa" />
+          <Property Name="AdresaIdAdresa" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="DobavljacAdresa">
+          <End Type="AutoservisDATA.Dobavljac" Role="Dobavljac" Multiplicity="*" />
+          <End Type="AutoservisDATA.Adresa" Role="Adresa" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Adresa">
+              <PropertyRef Name="IdAdresa" />
+            </Principal>
+            <Dependent Role="Dobavljac">
+              <PropertyRef Name="AdresaIdAdresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Katalog" >
+          <Key>
+            <PropertyRef Name="DobavljacIdDobavljac" />
+            <PropertyRef Name="RezervniDioIdRezervniDio" />
+          </Key>
+          <Property Name="Cijena" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Dobavljac" Relationship="AutoservisDATA.DobavljacKatalog" FromRole="Katalog" ToRole="Dobavljac" />
+          <Property Name="DobavljacIdDobavljac" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RezervniDio" Relationship="AutoservisDATA.KatalogRezervniDio" FromRole="Katalog" ToRole="RezervniDio" />
+          <Property Name="RezervniDioIdRezervniDio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="DobavljacKatalog">
+          <End Type="AutoservisDATA.Katalog" Role="Katalog" Multiplicity="*" />
+          <End Type="AutoservisDATA.Dobavljac" Role="Dobavljac" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="IdDobavljac" />
+            </Principal>
+            <Dependent Role="Katalog">
+              <PropertyRef Name="DobavljacIdDobavljac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KatalogRezervniDio">
+          <End Type="AutoservisDATA.Katalog" Role="Katalog" Multiplicity="*" />
+          <End Type="AutoservisDATA.RezervniDio" Role="RezervniDio" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDio">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="Katalog">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Narudzba">
+          <Key>
+            <PropertyRef Name="IdNarudzba" />
+          </Key>
+          <Property Name="IdNarudzba" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Voditelj" Relationship="AutoservisDATA.NarudzbaVoditelj" FromRole="Narudzba" ToRole="Voditelj" />
+          <Property Name="VoditeljIdVoditelj" Type="Int32" Nullable="false" />
+          <Property Name="DatumNarudzbe" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="StavkaNarudzba" Relationship="AutoservisDATA.StavkaNarudzbaNarudzba" FromRole="Narudzba" ToRole="StavkaNarudzba" />
+        </EntityType>
+        <EntityType Name="Voditelj" BaseType="AutoservisDATA.Zaposlenik">
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="NarudzbaVoditelj">
+          <End Type="AutoservisDATA.Narudzba" Role="Narudzba" Multiplicity="*" />
+          <End Type="AutoservisDATA.Voditelj" Role="Voditelj" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Voditelj">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="Narudzba">
+              <PropertyRef Name="VoditeljIdVoditelj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StavkaNarudzba">
+          <Key>
+            <PropertyRef Name="IdNarudzba" />
+            <PropertyRef Name="RezervniDioIdRezervniDio" />
+          </Key>
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RezervniDio" Relationship="AutoservisDATA.StavkaNarudzbaRezervniDio" FromRole="StavkaNarudzba" ToRole="RezervniDio" />
+          <Property Name="RezervniDioIdRezervniDio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Narudzba" Relationship="AutoservisDATA.StavkaNarudzbaNarudzba" FromRole="StavkaNarudzba" ToRole="Narudzba" />
+          <Property Name="IdNarudzba" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="StavkaNarudzbaRezervniDio">
+          <End Type="AutoservisDATA.StavkaNarudzba" Role="StavkaNarudzba" Multiplicity="*" />
+          <End Type="AutoservisDATA.RezervniDio" Role="RezervniDio" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDio">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="StavkaNarudzba">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StavkaNarudzbaNarudzba">
+          <End Type="AutoservisDATA.StavkaNarudzba" Role="StavkaNarudzba" Multiplicity="*" />
+          <End Type="AutoservisDATA.Narudzba" Role="Narudzba" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Narudzba">
+              <PropertyRef Name="IdNarudzba" />
+            </Principal>
+            <Dependent Role="StavkaNarudzba">
+              <PropertyRef Name="IdNarudzba" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ZahtjevZaNarudzbom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Mehanicar" Relationship="AutoservisDATA.ZahtjevZaNarudzbomMehanicar" FromRole="ZahtjevZaNarudzbom" ToRole="Mehanicar" />
+          <Property Name="MehanicarIdMehanicar" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ZahtjevZaNarudzbomStavka" Relationship="AutoservisDATA.ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom" FromRole="ZahtjevZaNarudzbom" ToRole="ZahtjevZaNarudzbomStavka" />
+        </EntityType>
+        <Association Name="ZahtjevZaNarudzbomMehanicar">
+          <End Type="AutoservisDATA.ZahtjevZaNarudzbom" Role="ZahtjevZaNarudzbom" Multiplicity="*" />
+          <End Type="AutoservisDATA.Mehanicar" Role="Mehanicar" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Mehanicar">
+              <PropertyRef Name="IdZaposlenik" />
+            </Principal>
+            <Dependent Role="ZahtjevZaNarudzbom">
+              <PropertyRef Name="MehanicarIdMehanicar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ZahtjevZaNarudzbomStavka">
+          <Key>
+            <PropertyRef Name="ZahtjevZaNarudzbomId" />
+            <PropertyRef Name="RezervniDioIdRezervniDio" />
+          </Key>
+          <NavigationProperty Name="ZahtjevZaNarudzbom" Relationship="AutoservisDATA.ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom" FromRole="ZahtjevZaNarudzbomStavka" ToRole="ZahtjevZaNarudzbom" />
+          <Property Name="ZahtjevZaNarudzbomId" Type="Int32" Nullable="false" />
+          <Property Name="ZahtjevanaKolicina" Type="Int32" Nullable="false" />
+          <Property Name="NarucenaKolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RezervniDio" Relationship="AutoservisDATA.ZahtjevZaNarudzbomStavkaRezervniDio" FromRole="ZahtjevZaNarudzbomStavka" ToRole="RezervniDio" />
+          <Property Name="RezervniDioIdRezervniDio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom">
+          <End Type="AutoservisDATA.ZahtjevZaNarudzbomStavka" Role="ZahtjevZaNarudzbomStavka" Multiplicity="*" />
+          <End Type="AutoservisDATA.ZahtjevZaNarudzbom" Role="ZahtjevZaNarudzbom" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ZahtjevZaNarudzbom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZahtjevZaNarudzbomStavka">
+              <PropertyRef Name="ZahtjevZaNarudzbomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ZahtjevZaNarudzbomStavkaRezervniDio">
+          <End Type="AutoservisDATA.ZahtjevZaNarudzbomStavka" Role="ZahtjevZaNarudzbomStavka" Multiplicity="*" />
+          <End Type="AutoservisDATA.RezervniDio" Role="RezervniDio" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDio">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="ZahtjevZaNarudzbomStavka">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RacunStavka">
+          <Key>
+            <PropertyRef Name="RacunIdRacun" />
+            <PropertyRef Name="UslugaIdUsluga" />
+          </Key>
+          <NavigationProperty Name="Racun" Relationship="AutoservisDATA.RacunStavkaRacun" FromRole="RacunStavka" ToRole="Racun" />
+          <Property Name="RacunIdRacun" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usluga" Relationship="AutoservisDATA.RacunStavkaUsluga" FromRole="RacunStavka" ToRole="Usluga" />
+          <Property Name="UslugaIdUsluga" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <Property Name="Cijena" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="RacunStavkaRacun">
+          <End Type="AutoservisDATA.RacunStavka" Role="RacunStavka" Multiplicity="*" />
+          <End Type="AutoservisDATA.Racun" Role="Racun" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="IdRacun" />
+            </Principal>
+            <Dependent Role="RacunStavka">
+              <PropertyRef Name="RacunIdRacun" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RacunStavkaUsluga">
+          <End Type="AutoservisDATA.RacunStavka" Role="RacunStavka" Multiplicity="*" />
+          <End Type="AutoservisDATA.Usluga" Role="Usluga" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Usluga">
+              <PropertyRef Name="IdUsluga" />
+            </Principal>
+            <Dependent Role="RacunStavka">
+              <PropertyRef Name="UslugaIdUsluga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KlijentAdresa">
+          <End Type="AutoservisDATA.Klijent" Role="Klijent" Multiplicity="*" />
+          <End Type="AutoservisDATA.Adresa" Role="Adresa" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Adresa">
+              <PropertyRef Name="IdAdresa" />
+            </Principal>
+            <Dependent Role="Klijent">
+              <PropertyRef Name="AdresaIdAdresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UslugaSet_ZamijenaDijela">
+          <End Type="AutoservisDATA.Usluga" Role="Usluga" Multiplicity="*" />
+          <End Type="AutoservisDATA.RezervniDio" Role="RezervniDio" Multiplicity="0..1" />
+        </Association>
+        <Association Name="ZamijenaDijelaRezervniDio">
+          <End Type="AutoservisDATA.ZamijenaDijela" Role="ZamijenaDijela" Multiplicity="*" />
+          <End Type="AutoservisDATA.RezervniDio" Role="RezervniDio" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="RezervniDio">
+              <PropertyRef Name="IdRezervniDio" />
+            </Principal>
+            <Dependent Role="ZamijenaDijela">
+              <PropertyRef Name="RezervniDioIdRezervniDio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AutoservisDATAStoreContainer" CdmEntityContainer="AutoservisDATAContainer">
+    <EntitySetMapping Name="KlijentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Klijent)">
+        <MappingFragment StoreEntitySet="KlijentSet">
+          <ScalarProperty Name="IdKlijent" ColumnName="IdKlijent" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+          <ScalarProperty Name="AdresaIdAdresa" ColumnName="AdresaIdAdresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MjestoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Mjesto)">
+        <MappingFragment StoreEntitySet="MjestoSet">
+          <ScalarProperty Name="IdMjesto" ColumnName="IdMjesto" />
+          <ScalarProperty Name="PostanskiBroj" ColumnName="PostanskiBroj" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdresaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Adresa)">
+        <MappingFragment StoreEntitySet="AdresaSet">
+          <ScalarProperty Name="IdAdresa" ColumnName="IdAdresa" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="KucniBroj" ColumnName="KucniBroj" />
+          <ScalarProperty Name="MjestoIdMjesto" ColumnName="MjestoIdMjesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VoziloSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Vozilo)">
+        <MappingFragment StoreEntitySet="VoziloSet">
+          <ScalarProperty Name="IdVozilo" ColumnName="IdVozilo" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Tip" ColumnName="Tip" />
+          <ScalarProperty Name="GodinaProizvodnje" ColumnName="GodinaProizvodnje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TerminPregledaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.TerminPregleda)">
+        <MappingFragment StoreEntitySet="TerminPregledaSet">
+          <ScalarProperty Name="VoziloIdVozilo" ColumnName="VoziloIdVozilo" />
+          <ScalarProperty Name="KlijentIdKlijent" ColumnName="KlijentIdKlijent" />
+          <ScalarProperty Name="DatumIVrijeme" ColumnName="DatumIVrijeme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZaposlenikSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Zaposlenik)">
+        <MappingFragment StoreEntitySet="ZaposlenikSet">
+          <ScalarProperty Name="IdZaposlenik" ColumnName="IdZaposlenik" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Mehanicar)">
+        <MappingFragment StoreEntitySet="ZaposlenikSet_Mehanicar">
+          <ScalarProperty Name="IdZaposlenik" ColumnName="IdZaposlenik" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Voditelj)">
+        <MappingFragment StoreEntitySet="ZaposlenikSet_Voditelj">
+          <ScalarProperty Name="IdZaposlenik" ColumnName="IdZaposlenik" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObradaVozilaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.ObradaVozila)">
+        <MappingFragment StoreEntitySet="ObradaVozilaSet">
+          <ScalarProperty Name="IdObrada" ColumnName="IdObrada" />
+          <ScalarProperty Name="DatumIVrijemeZaprimanja" ColumnName="DatumIVrijemeZaprimanja" />
+          <ScalarProperty Name="DatumIVrijemePreuzimanja" ColumnName="DatumIVrijemePreuzimanja" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="VoziloIdVozilo" ColumnName="VoziloIdVozilo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RacunSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Racun)">
+        <MappingFragment StoreEntitySet="RacunSet">
+          <ScalarProperty Name="IdRacun" ColumnName="IdRacun" />
+          <ScalarProperty Name="DatumIzdavanja" ColumnName="DatumIzdavanja" />
+          <ScalarProperty Name="Iznos" ColumnName="Iznos" />
+          <ScalarProperty Name="KlijentIdKlijent" ColumnName="KlijentIdKlijent" />
+          <ScalarProperty Name="MehanicarIdMehanicar" ColumnName="MehanicarIdMehanicar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UslugaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Usluga)">
+        <MappingFragment StoreEntitySet="UslugaSet">
+          <ScalarProperty Name="IdUsluga" ColumnName="IdUsluga" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.ZamijenaDijela)">
+        <MappingFragment StoreEntitySet="UslugaSet_ZamijenaDijela">
+          <ScalarProperty Name="IdUsluga" ColumnName="IdUsluga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Posao)">
+        <MappingFragment StoreEntitySet="UslugaSet_Posao">
+          <ScalarProperty Name="IdUsluga" ColumnName="IdUsluga" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RezervniDioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.RezervniDio)">
+        <MappingFragment StoreEntitySet="RezervniDioSet">
+          <ScalarProperty Name="IdRezervniDio" ColumnName="IdRezervniDio" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="DostupnaKolicina" ColumnName="DostupnaKolicina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DobavljacSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Dobavljac)">
+        <MappingFragment StoreEntitySet="DobavljacSet">
+          <ScalarProperty Name="IdDobavljac" ColumnName="IdDobavljac" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="AdresaIdAdresa" ColumnName="AdresaIdAdresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KatalogSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Katalog)">
+        <MappingFragment StoreEntitySet="KatalogSet">
+          <ScalarProperty Name="DobavljacIdDobavljac" ColumnName="DobavljacIdDobavljac" />
+          <ScalarProperty Name="RezervniDioIdRezervniDio" ColumnName="RezervniDioIdRezervniDio" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NarudzbaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.Narudzba)">
+        <MappingFragment StoreEntitySet="NarudzbaSet">
+          <ScalarProperty Name="IdNarudzba" ColumnName="IdNarudzba" />
+          <ScalarProperty Name="VoditeljIdVoditelj" ColumnName="VoditeljIdVoditelj" />
+          <ScalarProperty Name="DatumNarudzbe" ColumnName="DatumNarudzbe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StavkaNarudzbaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.StavkaNarudzba)">
+        <MappingFragment StoreEntitySet="StavkaNarudzbaSet">
+          <ScalarProperty Name="IdNarudzba" ColumnName="IdNarudzba" />
+          <ScalarProperty Name="RezervniDioIdRezervniDio" ColumnName="RezervniDioIdRezervniDio" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZahtjevZaNarudzbomSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.ZahtjevZaNarudzbom)">
+        <MappingFragment StoreEntitySet="ZahtjevZaNarudzbomSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MehanicarIdMehanicar" ColumnName="MehanicarIdMehanicar" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZahtjevZaNarudzbomStavkaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.ZahtjevZaNarudzbomStavka)">
+        <MappingFragment StoreEntitySet="ZahtjevZaNarudzbomStavkaSet">
+          <ScalarProperty Name="ZahtjevZaNarudzbomId" ColumnName="ZahtjevZaNarudzbomId" />
+          <ScalarProperty Name="RezervniDioIdRezervniDio" ColumnName="RezervniDioIdRezervniDio" />
+          <ScalarProperty Name="ZahtjevanaKolicina" ColumnName="ZahtjevanaKolicina" />
+          <ScalarProperty Name="NarucenaKolicina" ColumnName="NarucenaKolicina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RacunStavkaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoservisDATA.RacunStavka)">
+        <MappingFragment StoreEntitySet="RacunStavkaSet">
+          <ScalarProperty Name="RacunIdRacun" ColumnName="RacunIdRacun" />
+          <ScalarProperty Name="UslugaIdUsluga" ColumnName="UslugaIdUsluga" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ZaposlenikAdresa" TypeName="AutoservisDATA.ZaposlenikAdresa" StoreEntitySet="ZaposlenikSet">
+      <EndProperty Name="Adresa">
+        <ScalarProperty Name="IdAdresa" ColumnName="IdAdresa_IdAdresa" />
+      </EndProperty>
+      <EndProperty Name="Zaposlenik">
+        <ScalarProperty Name="IdZaposlenik" ColumnName="IdZaposlenik" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ObradaVozilaMehanicar" TypeName="AutoservisDATA.ObradaVozilaMehanicar" StoreEntitySet="ObradaVozilaMehanicar">
+      <EndProperty Name="ObradaVozila">
+        <ScalarProperty Name="IdObrada" ColumnName="ObradaVozilaMehanicar_Mehanicar_IdObrada" />
+      </EndProperty>
+      <EndProperty Name="Mehanicar">
+        <ScalarProperty Name="IdZaposlenik" ColumnName="Mehanicari_IdZaposlenik" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VoziloKlijent" TypeName="AutoservisDATA.VoziloKlijent" StoreEntitySet="VoziloSet">
+      <EndProperty Name="Klijent">
+        <ScalarProperty Name="IdKlijent" ColumnName="Klijent_IdKlijent" />
+      </EndProperty>
+      <EndProperty Name="Vozilo">
+        <ScalarProperty Name="IdVozilo" ColumnName="IdVozilo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RacunObradaVozila" TypeName="AutoservisDATA.RacunObradaVozila" StoreEntitySet="RacunSet">
+      <EndProperty Name="ObradaVozila">
+        <ScalarProperty Name="IdObrada" ColumnName="ObradaVozila_IdObrada" />
+      </EndProperty>
+      <EndProperty Name="Racun">
+        <ScalarProperty Name="IdRacun" ColumnName="IdRacun" />
+      </EndProperty>
+    </AssociationSetMapping>
+          <AssociationSetMapping Name="UslugaSet_ZamijenaDijela" TypeName="AutoservisDATA.UslugaSet_ZamijenaDijela" StoreEntitySet="UslugaSet_ZamijenaDijela">
+            <EndProperty Name="RezervniDio">
+              <ScalarProperty Name="IdRezervniDio" ColumnName="RezervniDioIdRezervniDio1" />
+            </EndProperty>
+            <EndProperty Name="Usluga">
+              <ScalarProperty Name="IdUsluga" ColumnName="IdUsluga" />
+            </EndProperty>
+            <Condition ColumnName="RezervniDioIdRezervniDio1" IsNull="false" />
+          </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c3ff57391bf4cbb930d93960f701507" Name="Diagram1" >
+        <EntityTypeShape EntityType="AutoservisDATA.Klijent" Width="1.5" PointX="1.625" PointY="0.875" />
+        <EntityTypeShape EntityType="AutoservisDATA.Mjesto" Width="1.5" PointX="8.375" PointY="2.25" />
+        <EntityTypeShape EntityType="AutoservisDATA.Adresa" Width="1.5" PointX="4.875" PointY="1.125" />
+        <EntityTypeShape EntityType="AutoservisDATA.Vozilo" Width="1.5" PointX="4.5" PointY="3.625" />
+        <EntityTypeShape EntityType="AutoservisDATA.TerminPregleda" Width="1.5" PointX="0.5" PointY="4.5" />
+        <EntityTypeShape EntityType="AutoservisDATA.Zaposlenik" Width="1.5" PointX="7.375" PointY="4.75" />
+        <AssociationConnector Association="AutoservisDATA.ZaposlenikAdresa" />
+        <EntityTypeShape EntityType="AutoservisDATA.Mehanicar" Width="1.5" PointX="6.25" PointY="8.25" />
+        <EntityTypeShape EntityType="AutoservisDATA.ObradaVozila" Width="1.5" PointX="2.25" PointY="6.875" />
+        <AssociationConnector Association="AutoservisDATA.ObradaVozilaMehanicar" />
+        <AssociationConnector Association="AutoservisDATA.ObradaVozilaVozilo" />
+        <AssociationConnector Association="AutoservisDATA.MjestoAdresa" />
+        <AssociationConnector Association="AutoservisDATA.VoziloKlijent" />
+        <AssociationConnector Association="AutoservisDATA.TerminPregledaVozilo" />
+        <AssociationConnector Association="AutoservisDATA.TerminPregledaKlijent" />
+        <EntityTypeShape EntityType="AutoservisDATA.Racun" Width="1.5" PointX="4.375" PointY="10.25" />
+        <AssociationConnector Association="AutoservisDATA.RacunMehanicar" />
+        <AssociationConnector Association="AutoservisDATA.RacunObradaVozila" />
+        <EntityTypeShape EntityType="AutoservisDATA.Usluga" Width="1.5" PointX="7.625" PointY="10.75" />
+        <EntityTypeShape EntityType="AutoservisDATA.ZamijenaDijela" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AutoservisDATA.Posao" Width="1.5" PointX="10.875" PointY="12.375" />
+        <EntityTypeShape EntityType="AutoservisDATA.RezervniDio" Width="1.5" PointX="13.5" PointY="6.625" />
+        <EntityTypeShape EntityType="AutoservisDATA.Dobavljac" Width="1.5" PointX="12.125" PointY="1.625" />
+        <AssociationConnector Association="AutoservisDATA.DobavljacAdresa" />
+        <EntityTypeShape EntityType="AutoservisDATA.Katalog" Width="1.5" PointX="14.75" PointY="4" />
+        <AssociationConnector Association="AutoservisDATA.DobavljacKatalog" />
+        <AssociationConnector Association="AutoservisDATA.KatalogRezervniDio" />
+        <EntityTypeShape EntityType="AutoservisDATA.Narudzba" Width="1.5" PointX="17.625" PointY="3" />
+        <EntityTypeShape EntityType="AutoservisDATA.Voditelj" Width="1.5" PointX="10.125" PointY="7.5" />
+        <AssociationConnector Association="AutoservisDATA.NarudzbaVoditelj" />
+        <EntityTypeShape EntityType="AutoservisDATA.StavkaNarudzba" Width="1.5" PointX="19.875" PointY="5.375" />
+        <AssociationConnector Association="AutoservisDATA.StavkaNarudzbaRezervniDio" />
+        <AssociationConnector Association="AutoservisDATA.StavkaNarudzbaNarudzba" />
+        <EntityTypeShape EntityType="AutoservisDATA.ZahtjevZaNarudzbom" Width="1.5" PointX="8.625" PointY="14.375" />
+        <AssociationConnector Association="AutoservisDATA.ZahtjevZaNarudzbomMehanicar" />
+        <EntityTypeShape EntityType="AutoservisDATA.ZahtjevZaNarudzbomStavka" Width="1.5" PointX="15" PointY="14.75" />
+        <AssociationConnector Association="AutoservisDATA.ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom" />
+        <AssociationConnector Association="AutoservisDATA.ZahtjevZaNarudzbomStavkaRezervniDio" />
+        <EntityTypeShape EntityType="AutoservisDATA.RacunStavka" Width="1.5" PointX="5.75" PointY="13.375" />
+        <AssociationConnector Association="AutoservisDATA.RacunStavkaRacun" />
+        <AssociationConnector Association="AutoservisDATA.RacunStavkaUsluga" />
+        <AssociationConnector Association="AutoservisDATA.KlijentAdresa" />
+        <InheritanceConnector EntityType="AutoservisDATA.Voditelj" />
+        <InheritanceConnector EntityType="AutoservisDATA.Mehanicar" />
+        <InheritanceConnector EntityType="AutoservisDATA.Posao" />
+        <InheritanceConnector EntityType="AutoservisDATA.ZamijenaDijela" />
+        <AssociationConnector Association="AutoservisDATA.UslugaSet_ZamijenaDijela" />
+        <AssociationConnector Association="AutoservisDATA.ZamijenaDijelaRezervniDio" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

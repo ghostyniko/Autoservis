@@ -1,0 +1,36 @@
+﻿@model AutoservisBLL.Mjesto
+
+
+@{
+    ViewBag.Title = "Unos novog mjesta";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Naziv</td>
+                    <td>@Html.EditorFor(m => m.NazivMjesta)</td>
+                </tr>
+                <tr>
+                    <td>Postanski broj</td>
+                    <td>@Html.EditorFor(m => m.PostanskiBroj)</td>
+                </tr>
+               
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    <td>@Html.ActionLink("Odustani", "Index",null,null)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@{Html.RenderPartial("ValidationError");}
+

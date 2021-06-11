@@ -1,0 +1,61 @@
+﻿@model AutoservisBLL.Klijent
+
+@{
+    ViewBag.Title = "Unos novog klijenta";
+}
+
+@{
+    AutoservisBLL.MjestoList listaMjesta = AutoservisBLL.MjestoList.Get();
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Ime</td>
+                    <td>@Html.EditorFor(kl => kl.ImeKlijenta)</td>
+                </tr>
+                <tr>
+                    <td>Prezime</td>
+                    <td>@Html.EditorFor(kl => kl.PrezimeKlijenta)</td>
+                </tr>
+                <tr>
+                    <td>Lozinka</td>
+                    <td>@Html.EditorFor(kl => kl.LozinkaKlijenta)</td>
+                </tr>
+                <tr>
+                    <td>Ulica</td>
+                    <td>@Html.EditorFor(kl => kl.UlicaKlijenta)</td>
+                </tr>
+                <tr>
+                    <td>Kućni broj</td>
+                    <td>@Html.EditorFor(kl => kl.KucniBrojKlijenta)</td>
+                </tr>
+               
+                <tr>
+                    <td>Mjesto</td>
+                    <td>
+                        @Html.DropDownListFor(kl=>kl.IdMjesto,
+                       new SelectList(listaMjesta, "Key", "Value"),
+                       "Mjesto",
+                       new { @class = "form-control" })
+                    </td>
+
+                </tr>
+
+            <tr>
+                <td>
+                    <a class="submit">Spremi</a>
+                </td>
+                <td>@Html.ActionLink("Odustani", "Index")</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@{Html.RenderPartial("ValidationError");}

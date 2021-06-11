@@ -1,0 +1,42 @@
+﻿@model AutoservisBLL.Klijent
+
+
+@{
+    ViewBag.Title = Model.PrezimeKlijenta;
+}
+
+<div class="noviPodatak">
+    <table>
+        <tbody>
+            <tr>
+                <td>Ime</td>
+                <td>@Model.ImeKlijenta</td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td>@Model.PrezimeKlijenta</td>
+            </tr>
+            <tr>
+                <td>Adresa</td>
+                <td>@Model.UlicaKlijenta @Model.KucniBrojKlijenta</td>
+            </tr>
+            <tr>
+                <td>Mjeso</td>
+                <td>@Model.MjestoKlijenta.NazivMjesta @Model.MjestoKlijenta.PostanskiBroj</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Ažuriraj", "Edit", new { idKlijenta = Model.IdKlijenta })
+                    &nbsp;
+                    @using (Html.BeginForm("Delete", "Klijent", new { IdKlijenta = Model.IdKlijenta }))
+                    {
+                        <a class="delete">Obriši</a>
+                    }
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
