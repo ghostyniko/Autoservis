@@ -1,0 +1,29 @@
+﻿@model Autoservis.KlijentVozilaInfoList
+
+<table class="tablica">
+    <tr>
+        <th>
+            Vozilo
+        </th>
+        
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @*@item.NazProjekta*@
+            @Html.ActionLink(item.NazVozila, "Details", "Vozilo", new { IdVozila = item.IdVozila }, null)
+        </td>
+        <td>
+            @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }))
+            {
+                <a class="delete">Obriši</a>
+            }
+        </td>
+
+    </tr>
+    }
+
+</table>

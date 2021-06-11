@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autoservis.DAL", "Autoservis.DAL\Autoservis.DAL.csproj", "{7DE672AE-3217-4832-953C-AD97E8E19A09}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{6F02B7A2-692B-41FD-8C6B-1B5AAEEA7BF6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autoservis.BLL", "Autoservis.BLL\Autoservis.BLL.csproj", "{9D05D8C9-5946-4AE8-8E31-E59E9A271680}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autoservis.MVC", "Autoservis.MVC\Autoservis.MVC.csproj", "{57E554D3-3DF2-4132-B9F5-3422CF31E4D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autoservis.Test", "Autoservis.Test\Autoservis.Test.csproj", "{57879795-C7A9-442A-851B-67DA7FD41EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +29,10 @@ Global
 		{57E554D3-3DF2-4132-B9F5-3422CF31E4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57E554D3-3DF2-4132-B9F5-3422CF31E4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57E554D3-3DF2-4132-B9F5-3422CF31E4D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57879795-C7A9-442A-851B-67DA7FD41EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57879795-C7A9-442A-851B-67DA7FD41EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57879795-C7A9-442A-851B-67DA7FD41EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57879795-C7A9-442A-851B-67DA7FD41EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

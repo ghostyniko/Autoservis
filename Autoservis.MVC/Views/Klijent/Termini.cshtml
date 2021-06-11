@@ -1,0 +1,74 @@
+﻿@model Autoservis.TerminPregledaInfoList
+
+@if (false)
+{
+    <script src="../../Scripts/jquery-1.5.1-vsdoc.js" type="text/javascript"></script>
+}
+
+<table class="tablica">
+    <tr>
+        <th>
+            Termin
+        </th>
+        <th>
+            Status
+        </th>
+
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+
+            @Html.ActionLink(item.NazTermina, "Details", "TerminPregleda", new { IdTermina = item.IdTermina }, null)
+        </td>
+        <td>@Html.Label("Labela", new { @class = item.Status })</td>
+       
+
+        @if (item.Status == Autoservis.Status.PonudaAutoservisa)
+        {
+            <td>@Html.ActionLink("Potvdri termin", "PrihvatiTermin", new { IdTermina = item.IdTermina })</td>
+            <td>@Html.ActionLink("Ponudi novi termin", "UrediTermin",  new { IdTermina = item.IdTermina })</td>
+            <td>@Html.ActionLink("Poništi termin", "PonistiTermin", new { IdTermina = item.IdTermina })</td>
+
+        }
+        else if (item.Status == Autoservis.Status.PonudaKlijenta)
+        {
+            <td>@Html.ActionLink("Poništi termin", "PonistiTermin", new { IdTermina = item.IdTermina })</td>
+        }
+
+    </tr>
+    }
+
+</table>
+
+
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+            $(".PonudaKlijenta").text("Obrađuje se");
+            $(".PonudaKlijenta").css("color", "orange");
+        });
+
+        $(function () {
+            $(".PonudaAutoservisa").text("Nova ponuda");
+            $(".PonudaAutoservisa").css("color", "orange");
+        });
+
+        $(function () {
+            $(".PrihvatioAutoservis").text("Prihvaćeno");
+            $(".PrihvatioAutoservis").css("color", "green");
+        });
+
+        $(function () {
+            $(".PrihvatioKlijent").text("Prihvaćeno");
+            $(".PrihvatioKlijent").css("color", "green");
+        });
+
+        $(function () {
+            $(".Ponisteno").text("Poništeno");
+            $(".Ponisteno").css("color", "red");
+        });
+    </script>

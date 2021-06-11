@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Effort;
+using Effort.DataLoaders;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.EntityClient;
 using System.Linq;
 using System.Text;
 
-namespace AutoservisBLL.DAL
+namespace Autoservis.DAL
 {
   // po uzoru na CSLA.ContextManger - komentirano na kraju datoteke
   public class ContextManager<C> : IDisposable where C : System.Data.Entity.DbContext
@@ -11,11 +14,12 @@ namespace AutoservisBLL.DAL
     private C dalContext;
     private string connectionString;
     private static ContextManager<C> dalContextManager;
-
     private ContextManager(string ConnectionString) // stvara se u GetManager 
     {
       connectionString = ConnectionString;
     }
+
+     
 
     public C DataContext 
     {
@@ -23,27 +27,29 @@ namespace AutoservisBLL.DAL
       {
         if (dalContext == null)
         {
-         //dalContext = (C)Activator.CreateInstance(typeof(C), connectionString);
-          dalContext = (C)Activator.CreateInstance(typeof(C));
-        }
+
+                    dalContext = ContextConfigurer<C>.GetContextProvider().DataContext;
+                }
         return dalContext;
       }
     }
 
-        public C NewDataContext
+   /*     public C NewDataContext
         {
+            
             get
             {
                 dalContext = (C)Activator.CreateInstance(typeof(C));
                 return dalContext;
             }
-        }
+        }*/
 
     // stvara ContextManager koji će stvoriti kontekst na temelju connStringa
     public static ContextManager<C> GetManager(string ConnectionString)
     {
       if (dalContextManager == null)
       {
+      
         dalContextManager = new ContextManager<C>(ConnectionString);
       }
       return dalContextManager;

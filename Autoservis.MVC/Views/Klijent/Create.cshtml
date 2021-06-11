@@ -1,12 +1,105 @@
-﻿@model AutoservisBLL.Klijent
+﻿@model Autoservis.Klijent
 
 @{
     ViewBag.Title = "Unos novog klijenta";
 }
 
 @{
-    AutoservisBLL.MjestoList listaMjesta = AutoservisBLL.MjestoList.Get();
+    Autoservis.MjestoList listaMjesta = Autoservis.MjestoList.Get();
 }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Klijent</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrezimeKlijenta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PrezimeKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrezimeKlijenta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImeKlijenta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImeKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImeKlijenta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LozinkaKlijenta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LozinkaKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LozinkaKlijenta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UlicaKlijenta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UlicaKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UlicaKlijenta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KucniBrojKlijenta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KucniBrojKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.KucniBrojKlijenta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdMjesto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.IdMjesto, new SelectList(listaMjesta, "Key", "Value"), new { @class = "form-control" });
+                
+                @Html.ValidationMessageFor(model => model.IdMjesto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @using (Html.BeginForm())
@@ -34,11 +127,11 @@
                     <td>Kućni broj</td>
                     <td>@Html.EditorFor(kl => kl.KucniBrojKlijenta)</td>
                 </tr>
-               
+
                 <tr>
                     <td>Mjesto</td>
                     <td>
-                        @Html.DropDownListFor(kl=>kl.IdMjesto,
+                        @Html.DropDownListFor(kl => kl.IdMjesto,
                        new SelectList(listaMjesta, "Key", "Value"),
                        "Mjesto",
                        new { @class = "form-control" })
@@ -46,16 +139,37 @@
 
                 </tr>
 
-            <tr>
-                <td>
-                    <a class="submit">Spremi</a>
-                </td>
-                <td>@Html.ActionLink("Odustani", "Index")</td>
-            </tr>
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    <td>@Html.ActionLink("Odustani", "Index")</td>
+                </tr>
             </tbody>
         </table>
     </div>
 }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImeKlijenta)
+        @Html.EditorFor(model => model.ImeKlijenta, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrezimeKlijenta)
+        @Html.EditorFor(model => model.PrezimeKlijenta, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UlicaKlijenta)
+        @Html.EditorFor(model => model.UlicaKlijenta, new { @class = "form-control" })
+    </div>
+
+}
+
 
 
 @{Html.RenderPartial("ValidationError");}

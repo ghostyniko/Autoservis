@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AutoservisBLL.DAL;
+using Autoservis.DAL;
 using Csla;
 using Csla.Data;
 using Csla.Validation;
 
-namespace AutoservisBLL
+namespace Autoservis
 {
     public class Adresa:BusinessBase<Adresa>
     {
@@ -71,10 +71,10 @@ namespace AutoservisBLL
         #region Data Access
         private void DataPortal_Fetch(SingleCriteria<Adresa, int> criteria)
         {
-            using (var ctx = AutoservisBLL.DAL.ContextManager<AutoservisModel>.GetManager(Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(Database.ProjektConnectionString))
             {
                 // var data = (from o in ctx.DataContext.Osoba where o.IdOsobe == criteria.Value select o).Single();
-                var data = ctx.DataContext.Adresa.Find(criteria.Value);
+                var data = ctx.DataContext.AdresaSet.Find(criteria.Value);
 
                 LoadProperty(IdAdreseProperty, data.IdAdresa);
                 LoadProperty(NazivUliceProperty, data.Naziv);
@@ -86,7 +86,7 @@ namespace AutoservisBLL
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Insert()
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
 
             {
                 DAL.Adresa ad = new DAL.Adresa
@@ -96,7 +96,7 @@ namespace AutoservisBLL
                     MjestoIdMjesto = IdMjesto
                 };
 
-                ctx.DataContext.Adresa.Add(ad);
+                ctx.DataContext.AdresaSet.Add(ad);
                 ctx.DataContext.SaveChanges();
                 LoadProperty(IdAdreseProperty, ad.IdAdresa);
                 LoadProperty(MjestoProperty, ad.Mjesto);
@@ -108,10 +108,10 @@ namespace AutoservisBLL
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Update()
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
 
             {
-                DAL.Adresa ad = ctx.DataContext.Adresa.Find(this.IdAdrese);
+                DAL.Adresa ad = ctx.DataContext.AdresaSet.Find(this.IdAdrese);
 
                 ad.Naziv = NazivUlice;
                 ad.KucniBroj = KucniBroj;

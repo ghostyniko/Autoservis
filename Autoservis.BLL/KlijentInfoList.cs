@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoservisBLL.DAL;
+using Autoservis.DAL;
 using Csla;
 using Csla.Data;
 using Csla.Validation;
 
-namespace AutoservisBLL
+namespace Autoservis
 {
     public class KlijentInfoList: ReadOnlyListBase<KlijentInfoList, KlijentInfo>
     {
@@ -30,11 +30,11 @@ namespace AutoservisBLL
         private void DataPortal_Fetch()
         {
             RaiseListChangedEvents = false;
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(Database.ProjektConnectionString))
             {
                 
                 List<KlijentInfo> data = new List<KlijentInfo>();
-                foreach (var o in ctx.DataContext.Klijent.AsNoTracking().ToList())
+                foreach (var o in ctx.DataContext.KlijentSet.AsNoTracking().ToList())
                 {
                     data.Add(new KlijentInfo(o.IdKlijent, o.Prezime, o.Ime));
                 }

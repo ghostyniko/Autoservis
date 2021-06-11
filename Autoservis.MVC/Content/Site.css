@@ -1,6 +1,7 @@
 body
 {   
     background-color: #DEDEDE;
+	height:100vh;
 }
 
 header,
@@ -26,9 +27,13 @@ legend
     font-weight: bold;
 }
 
-textarea 
-{
+textarea {
     min-height: 75px;
+    border: 1px solid #999999;
+    width: inherit;
+    margin: 5px 0;
+    padding: 3px;
+    
 }
 
 .editor-label 
@@ -97,6 +102,7 @@ a:hover
     background-color: #FFFFFF;
 }
 
+/*
 #header 
 {
   background-image: url('images/background.jpg'); 
@@ -110,6 +116,14 @@ a:hover
   font-weight: bold; 
   font-style: italic; 
   padding-left: 10px
+}*/
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: blue;
+    display: block;
 }
 
 #navigation 
@@ -143,7 +157,7 @@ a:hover
 
 #navigationContent a
 {
-	color: white;
+	color: blue;
 	font-size: 12px;	
 	text-decoration: none;
 	font-family: Verdana;   
@@ -232,4 +246,58 @@ a:hover
 {
 	color:Red;
 	font-weight:bold;
+}
+
+/*my styles*/
+body {
+	height: 100vh;
+}
+
+#header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 72px;
+}
+
+#sidebar {
+	width: 200px;
+	height: 100vh;
+	overflow-y: scroll;
+	position: fixed;
+	margin-top: 88px;
+}
+
+#main {
+	background-color: aquamarine;
+	height: 2000px;
+	margin-top: 88px;
+	margin-left: 200px;
+}
+
+#toggleSidebar {
+	border: 1px solid white;
+	border-radius: 3px;
+}
+
+#toggleSidebar {
+	display: none;
+}
+
+@media(max-width:800px) {
+	#sidebar {
+		display: none;
+	}
+
+		#sidebar.show {
+			display: inherit;
+		}
+
+	#main {
+		margin-left: 0;
+	}
+
+	#toggleSidebar {
+		display: inline;
+	}
 }

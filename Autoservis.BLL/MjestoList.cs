@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Csla;
 using Csla.Data;
 using Csla.Validation;
-using AutoservisBLL.DAL;
+using Autoservis.DAL;
 
-namespace AutoservisBLL
+namespace Autoservis
 {
     public class MjestoList: NameValueListBase<int, string>
     {
@@ -45,6 +45,11 @@ namespace AutoservisBLL
             return list;
         }
 
+        public static NameValuePair Get (MjestoList list, int IdMjesto)
+        {
+            var res = list.Where(el => el.Key == IdMjesto).SingleOrDefault();
+            return res;
+        }
         public static void InvalidateCache()
         {
             list = null;
@@ -53,11 +58,10 @@ namespace AutoservisBLL
 
         #region Data Access
         #region DataPortal Methods
-        private void DataPortal_Fetch()
-        {
+        private void DataPortal_Fetch()        {
             this.RaiseListChangedEvents = false;
             
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
             {
                 // uobičajeno bi bilo
                 // var data = from u in ctx.DataContext.Uloga select new NameValuePair(u.IdUloge, u.NazUloge);
@@ -68,7 +72,7 @@ namespace AutoservisBLL
 
                 List<NameValuePair> data = new List<NameValuePair>();
           
-                foreach (var u in ctx.DataContext.Mjesto.AsNoTracking().ToList())
+                foreach (var u in ctx.DataContext.MjestoSet.AsNoTracking().ToList())
                 {
                     data.Add(new NameValuePair(u.IdMjesto, u.Naziv + ", " +u.PostanskiBroj));
                 }

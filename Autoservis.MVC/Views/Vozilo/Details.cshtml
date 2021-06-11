@@ -1,0 +1,49 @@
+﻿@model Autoservis.Vozilo
+
+@{
+    ViewBag.Title = Model.MarkaVozila;
+}
+
+<div class="noviPodatak">
+    <table>
+        <tbody>
+            <tr>
+                <td>Marka</td>
+                <td>@Model.MarkaVozila</td>
+            </tr>
+            <tr>
+                <td>Tip</td>
+                <td>@Model.TipVozila</td>
+            </tr>
+            <tr>
+                <td>Godina proizvodnje</td>
+                <td>@Model.GodinaProizvodnje</td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.ActionLink("Ažuriraj", "Edit", new { IdVozila = Model.IdVozila })
+                    &nbsp;
+                    @using (Html.BeginForm("Delete", "Vozilo", new { IdVozila = Model.IdVozila, IdKlijenta=Model.Vlasnik.IdKlijenta }))
+                    {
+                        <a class="delete">Obriši</a>
+                    }
+                </td>
+
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Dodaj obradu", "DodajObradu", new { IdVozila = Model.IdVozila })
+
+</p>
+
+@{
+    if (Model.ObradaVozila.Count > 0)
+    {
+        Html.RenderPartial("Obrade", Model.ObradaVozila, new ViewDataDictionary() { { "IdVozila", Model.IdVozila } });
+    }
+}

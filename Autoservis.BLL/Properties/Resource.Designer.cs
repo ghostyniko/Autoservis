@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoservisBLL.BLL.Properties {
+namespace Autoservis.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AutoservisBLL.BLL.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Autoservis.BLL.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Autoservis.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,33 @@ namespace AutoservisBLL.BLL.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum preuzimanja mora biti veći ili jednak datumu zaprimanja.
+        /// </summary>
+        internal static string DatumError {
+            get {
+                return ResourceManager.GetString("DatumError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum termina mora biti veći od današnjeg.
+        /// </summary>
+        internal static string DatumTerminaError {
+            get {
+                return ResourceManager.GetString("DatumTerminaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaposlenik je već dodijeljen ovoj obradi vozila.
+        /// </summary>
+        internal static string ZaposlenikVecRadiNaAutomobilu {
+            get {
+                return ResourceManager.GetString("ZaposlenikVecRadiNaAutomobilu", resourceCulture);
             }
         }
     }

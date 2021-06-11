@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Csla;
 using Csla.Data;
 using Csla.Validation;
-using AutoservisBLL.DAL;
+using Autoservis.DAL;
 
-namespace AutoservisBLL
+namespace Autoservis
 {
     [Serializable()]
     public class Klijent:BusinessBase<Klijent>
@@ -53,21 +53,7 @@ namespace AutoservisBLL
             set { SetProperty(LozinkaKlijentaProperty, value); }
         }
 
-        /*    private static PropertyInfo<DAL.Adresa> AdresaKlijentaProperty =
-           RegisterProperty(typeof(Klijent), new PropertyInfo<DAL.Adresa>(Reflector.GetPropertyName<Klijent>(x => x.AdresaKlijenta)));
-            public DAL.Adresa AdresaKlijenta
-            {
-                get { return GetProperty(AdresaKlijentaProperty); }
-                set { SetProperty(AdresaKlijentaProperty, value); }
-            }
-
-            private static PropertyInfo<int> IdAdresaProperty =
-          RegisterProperty(typeof(Klijent), new PropertyInfo<int>(Reflector.GetPropertyName<Klijent>(x => x.AdresaKlijenta)));
-            public int IdAdresa
-            {
-                get { return GetProperty(IdAdresaProperty); }
-                set { SetProperty(IdAdresaProperty, value); }
-            }*/
+      
 
         private static PropertyInfo<string> UlicaKlijentaProperty =
         RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.UlicaKlijenta)));
@@ -101,8 +87,39 @@ namespace AutoservisBLL
             set { SetProperty(IdMjestoProperty, value); }
         }
 
+        private static PropertyInfo<KlijentVozilaInfoList> KlijentVozilaProperty =
+     RegisterProperty(typeof(Klijent), new PropertyInfo<KlijentVozilaInfoList>(Reflector.GetPropertyName<Klijent>(x => x.KlijentVozila)));
+        public KlijentVozilaInfoList KlijentVozila
+        {
+            get { return GetProperty(KlijentVozilaProperty); }
+        }
+
         #endregion
 
+        #region  Validation Rules
+        protected override void AddBusinessRules()
+        {
+            ValidationRules.AddRule(CommonRules.StringRequired, ImeKlijentaProperty);
+            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(ImeKlijentaProperty, 25));
+
+            ValidationRules.AddRule(CommonRules.StringRequired, PrezimeKlijentaProperty);
+            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(PrezimeKlijentaProperty, 25));
+
+            ValidationRules.AddRule(CommonRules.StringRequired, UlicaKlijentaProperty);
+            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(UlicaKlijentaProperty, 50));
+
+            ValidationRules.AddRule(CommonRules.StringRequired, KucniBrojKlijentaProperty);
+            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));
+
+         //   ValidationRules.AddRule(CommonRules.StringRequired, IdMjestoProperty);
+            //ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));
+
+
+            /* ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(OIBProperty, 11));
+             ValidationRules.AddRule<Osoba>(IsOIBValid, OIBProperty);
+             ValidationRules.AddRule<Osoba>(IsOIBUnique, OIBProperty);*/
+        }
+        #endregion
         #region Factory Methods
 
         public static Klijent New()
@@ -121,10 +138,11 @@ namespace AutoservisBLL
         #region Data Access
         private void DataPortal_Fetch(SingleCriteria<Klijent, int> criteria)
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
             {
+        
                 // var data = (from o in ctx.DataContext.Osoba where o.IdOsobe == criteria.Value select o).Single();
-                var data = ctx.DataContext.Klijent.Find(criteria.Value);
+                var data = ctx.DataContext.KlijentSet.Find(criteria.Value);
                
                 LoadProperty(IdKlijentaProperty, data.IdKlijent);
                 LoadProperty(ImeKlijentaProperty, data.Ime);
@@ -133,13 +151,14 @@ namespace AutoservisBLL
                 LoadProperty(UlicaKlijentaProperty, data.Adresa.Naziv);
                 LoadProperty(KucniBrojKlijentaProperty, data.Adresa.KucniBroj);
                 LoadProperty(MjestoKlijentaProperty,Mjesto.Get(data.Adresa.MjestoIdMjesto));
+                LoadProperty(KlijentVozilaProperty, KlijentVozilaInfoList.Get(data.IdKlijent));
             }
         }
         
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Insert()
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
 
             {
 
@@ -157,7 +176,7 @@ namespace AutoservisBLL
                    
                 };
 
-                ctx.DataContext.Klijent.Add(kl);
+                ctx.DataContext.KlijentSet.Add(kl);
                 ctx.DataContext.SaveChanges();
 
                 LoadProperty(IdKlijentaProperty, kl.IdKlijent);
@@ -169,11 +188,11 @@ namespace AutoservisBLL
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Update()
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
 
             {
-                DAL.Klijent kl = ctx.DataContext.Klijent.Find(this.IdKlijenta);
-               
+                DAL.Klijent kl = ctx.DataContext.KlijentSet.Find(this.IdKlijenta);
+         
                 kl.Ime = ImeKlijenta;
                 kl.Prezime = PrezimeKlijenta;
                 kl.Adresa.Naziv = UlicaKlijenta;
@@ -196,14 +215,21 @@ namespace AutoservisBLL
         [Transactional(TransactionalTypes.TransactionScope)]
         private void DataPortal_Delete(SingleCriteria<Klijent, int> criteria)
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
             {
-                var o = ctx.DataContext.Klijent.Find(criteria.Value);
+                var o = ctx.DataContext.KlijentSet.Find(criteria.Value);
                 if (o != null)
                 {
-                    ctx.DataContext.Adresa.Remove(o.Adresa);
-                    ctx.DataContext.Klijent.Remove(o);
-                    ctx.DataContext.SaveChanges();
+                    try
+                    {
+                        ctx.DataContext.AdresaSet.Remove(o.Adresa);
+                        ctx.DataContext.KlijentSet.Remove(o);
+                        ctx.DataContext.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Izbrišite sve podatke");
+                    }
                 }
             }
         }

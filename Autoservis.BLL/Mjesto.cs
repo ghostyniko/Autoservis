@@ -4,15 +4,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AutoservisBLL.DAL;
+using Autoservis.DAL;
 using Csla;
 using Csla.Data;
 using Csla.Validation;
 
-namespace AutoservisBLL
+namespace Autoservis
 {
     [Serializable()]
-    public class Mjesto:BusinessBase<Mjesto>
+    public class Mjesto : BusinessBase<Mjesto>
     {
         #region Constructors
         private Mjesto()
@@ -43,6 +43,17 @@ namespace AutoservisBLL
             get { return GetProperty(PostanskiBrojProperty); }
             set { SetProperty(PostanskiBrojProperty, value); }
         }
+        #endregion
+
+        #region  Validation Rules
+        protected override void AddBusinessRules()
+        {
+            ValidationRules.AddRule(CommonRules.StringRequired, NazivMjestaProperty);
+            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(NazivMjestaProperty, 25));
+
+            ValidationRules.AddRule(CommonRules.IntegerMinValue, new CommonRules.IntegerMinValueRuleArgs(PostanskiBrojProperty, 0));
+            ValidationRules.AddRule(CommonRules.IntegerMaxValue, new CommonRules.IntegerMaxValueRuleArgs(PostanskiBrojProperty, 100000));
+        }
 
         #endregion
         #region Factory Methods
@@ -57,14 +68,19 @@ namespace AutoservisBLL
             return DataPortal.Fetch<Mjesto>(new SingleCriteria<Mjesto, int>(idMjesta));
         }
 
+        public static void Delete(int idMjesta)
+        {
+            DataPortal.Delete<Mjesto>(new SingleCriteria<Mjesto, int>(idMjesta));
+        }
+
         #endregion
         #region Data Access
         private void DataPortal_Fetch(SingleCriteria<Mjesto, int> criteria)
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(Database.ProjektConnectionString))
             {
                 // var data = (from o in ctx.DataContext.Osoba where o.IdOsobe == criteria.Value select o).Single();
-                var data = ctx.DataContext.Mjesto.Find(criteria.Value);
+                var data = ctx.DataContext.MjestoSet.Find(criteria.Value);
                 LoadProperty(IdMjestaProperty, data.IdMjesto);
                 LoadProperty(NazivMjestaProperty, data.Naziv);
                 LoadProperty(PostanskiBrojProperty, data.PostanskiBroj);
@@ -74,7 +90,7 @@ namespace AutoservisBLL
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Insert()
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
 
             {
                 DAL.Mjesto mj = new DAL.Mjesto
@@ -83,12 +99,13 @@ namespace AutoservisBLL
                     PostanskiBroj = PostanskiBroj
                 };
 
-                ctx.DataContext.Mjesto.Add(mj);
+                ctx.DataContext.MjestoSet.Add(mj);
                 ctx.DataContext.SaveChanges();
 
-                ctx.DataContext.Entry<DAL.Mjesto>(mj).Reload();
+                //  ctx.DataContext.Entry<DAL.Mjesto>(mj).Reload();
 
                 LoadProperty(IdMjestaProperty, mj.IdMjesto);
+
                 FieldManager.UpdateChildren(this);
             }
         }
@@ -96,10 +113,10 @@ namespace AutoservisBLL
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Update()
         {
-            using (var ctx = DAL.ContextManager<AutoservisModel>.GetManager(DAL.Database.ProjektConnectionString))
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
 
             {
-                DAL.Mjesto mj = ctx.DataContext.Mjesto.Find(this.IdMjesta);
+                DAL.Mjesto mj = ctx.DataContext.MjestoSet.Find(this.IdMjesta);
 
                 mj.Naziv = NazivMjesta;
                 mj.PostanskiBroj = PostanskiBroj;
@@ -110,6 +127,24 @@ namespace AutoservisBLL
             }
         }
 
+        [Transactional(TransactionalTypes.TransactionScope)]
+        protected override void DataPortal_DeleteSelf()
+        {
+            DataPortal_Delete(new SingleCriteria<Mjesto, int>(IdMjesta));
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope)]
+        private void DataPortal_Delete(SingleCriteria<Mjesto, int> criteria)
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+            {
+                
+                var mjesto = ctx.DataContext.MjestoSet.Find(criteria.Value);
+                ctx.DataContext.MjestoSet.Remove(mjesto);
+            }
+        }
+    
+        
         #endregion
 
     }

@@ -1,0 +1,29 @@
+﻿@model Autoservis.ObradaVozilaInfoList
+
+<table class="tablica">
+    <tr>
+        <th>
+            Obrada
+        </th>
+
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@item.NazProjekta*@
+                @Html.ActionLink(item.NazObrade, "Details", "Obrada", new { IdObrade = item.IdObrade }, null)
+            </td>
+            <td>
+                @using (Html.BeginForm("Delete", "Obrada", new { IdObrade = item.IdObrade, IdVozila = ViewData["IdVozila"] }))
+                {
+                    <a class="delete">Obriši</a>
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>

@@ -15,6 +15,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Effort, Version=2.1.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Effort.EF6.2.1.0\lib\net45\Effort.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -88,6 +95,15 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NMemory, Version=3.0.0.0, Culture=neutral, PublicKeyToken=afc61983f100d280, processorArchitecture=MSIL">
+      <HintPath>..\packages\NMemory.3.1.0\lib\net45\NMemory.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -103,6 +119,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlClient, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.6.0\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
@@ -130,93 +147,92 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adresa.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AutoservisDATA.cs">
+    <Compile Include="AtuoservisModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AutoservisDATA.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AtuoservisModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AutoservisDATA.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AutoservisDATA.edmx</DependentUpon>
     </Compile>
-    <Compile Include="AutoservisModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AutoservisModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AutoservisModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="ContextConfigurer.cs" />
     <Compile Include="ContextManager.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Dobavljac.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IContextProvider.cs" />
     <Compile Include="Katalog.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Klijent.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Mehanicar.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Mjesto.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Narudzba.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ObradaVozila.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Posao.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Racun.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RacunStavka.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RezervniDio.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerContextProvider.cs" />
     <Compile Include="StavkaNarudzba.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TerminPregleda.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestContextProvider.cs" />
     <Compile Include="Usluga.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Voditelj.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Vozilo.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZahtjevZaNarudzbom.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZahtjevZaNarudzbomStavka.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ZamijenaDijela.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Zaposlenik.cs">
-      <DependentUpon>AutoservisModel.tt</DependentUpon>
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZaposlenikObrada.cs">
+      <DependentUpon>AtuoservisModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -227,31 +243,25 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AutoservisDATA.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AutoservisDATA.edmx.diagram">
-      <DependentUpon>AutoservisDATA.edmx</DependentUpon>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="AutoservisDATA.edmx.sql" />
-    <Content Include="AutoservisDATA.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AutoservisDATA.cs</LastGenOutput>
-      <DependentUpon>AutoservisDATA.edmx</DependentUpon>
-    </Content>
-    <Content Include="AutoservisModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AutoservisModel.Context.cs</LastGenOutput>
-      <DependentUpon>AutoservisDATA.edmx</DependentUpon>
-    </Content>
-    <Content Include="AutoservisModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AutoservisModel.cs</LastGenOutput>
-      <DependentUpon>AutoservisDATA.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AtuoservisModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AtuoservisModel.Context.cs</LastGenOutput>
+      <DependentUpon>AutoservisDATA.edmx</DependentUpon>
+    </Content>
+    <Content Include="AtuoservisModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AtuoservisModel.cs</LastGenOutput>
+      <DependentUpon>AutoservisDATA.edmx</DependentUpon>
+    </Content>
+    <Content Include="AutoservisDATA.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

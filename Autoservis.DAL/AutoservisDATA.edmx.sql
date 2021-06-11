@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/20/2019 00:57:52
+-- Date Created: 06/12/2019 20:24:03
 -- Generated from EDMX file: C:\Users\matija\source\repos\Autoservis\Autoservis.DAL\AutoservisDATA.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [master];
+USE [autoservis];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,11 +17,143 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ZaposlenikAdresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZaposlenikSet] DROP CONSTRAINT [FK_ZaposlenikAdresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ObradaVozilaVozilo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ObradaVozilaSet] DROP CONSTRAINT [FK_ObradaVozilaVozilo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MjestoAdresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AdresaSet] DROP CONSTRAINT [FK_MjestoAdresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VoziloKlijent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VoziloSet] DROP CONSTRAINT [FK_VoziloKlijent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TerminPregledaVozilo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TerminPregledaSet] DROP CONSTRAINT [FK_TerminPregledaVozilo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TerminPregledaKlijent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TerminPregledaSet] DROP CONSTRAINT [FK_TerminPregledaKlijent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DobavljacAdresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DobavljacSet] DROP CONSTRAINT [FK_DobavljacAdresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DobavljacKatalog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[KatalogSet] DROP CONSTRAINT [FK_DobavljacKatalog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_KatalogRezervniDio]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[KatalogSet] DROP CONSTRAINT [FK_KatalogRezervniDio];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StavkaNarudzbaRezervniDio]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StavkaNarudzbaSet] DROP CONSTRAINT [FK_StavkaNarudzbaRezervniDio];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StavkaNarudzbaNarudzba]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StavkaNarudzbaSet] DROP CONSTRAINT [FK_StavkaNarudzbaNarudzba];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZahtjevZaNarudzbomStavkaSet] DROP CONSTRAINT [FK_ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZahtjevZaNarudzbomStavkaRezervniDio]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZahtjevZaNarudzbomStavkaSet] DROP CONSTRAINT [FK_ZahtjevZaNarudzbomStavkaRezervniDio];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZamijenaDijelaRezervniDio]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UslugaSet_ZamijenaDijela] DROP CONSTRAINT [FK_ZamijenaDijelaRezervniDio];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RacunStavkaRacun]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RacunStavkaSet] DROP CONSTRAINT [FK_RacunStavkaRacun];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RacunStavkaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RacunStavkaSet] DROP CONSTRAINT [FK_RacunStavkaUsluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_KlijentAdresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[KlijentSet] DROP CONSTRAINT [FK_KlijentAdresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RacunZaposlenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RacunSet] DROP CONSTRAINT [FK_RacunZaposlenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZahtjevZaNarudzbomZaposlenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZahtjevZaNarudzbomSet] DROP CONSTRAINT [FK_ZahtjevZaNarudzbomZaposlenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NarudzbaZaposlenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NarudzbaSet] DROP CONSTRAINT [FK_NarudzbaZaposlenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZaposlenikObradaZaposlenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZaposlenikObradaSet] DROP CONSTRAINT [FK_ZaposlenikObradaZaposlenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZaposlenikObradaObradaVozila]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ZaposlenikObradaSet] DROP CONSTRAINT [FK_ZaposlenikObradaObradaVozila];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ZamijenaDijela_inherits_Usluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UslugaSet_ZamijenaDijela] DROP CONSTRAINT [FK_ZamijenaDijela_inherits_Usluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Posao_inherits_Usluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UslugaSet_Posao] DROP CONSTRAINT [FK_Posao_inherits_Usluga];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[KlijentSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KlijentSet];
+GO
+IF OBJECT_ID(N'[dbo].[MjestoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MjestoSet];
+GO
+IF OBJECT_ID(N'[dbo].[AdresaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AdresaSet];
+GO
+IF OBJECT_ID(N'[dbo].[VoziloSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VoziloSet];
+GO
+IF OBJECT_ID(N'[dbo].[TerminPregledaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TerminPregledaSet];
+GO
+IF OBJECT_ID(N'[dbo].[ZaposlenikSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ZaposlenikSet];
+GO
+IF OBJECT_ID(N'[dbo].[ObradaVozilaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ObradaVozilaSet];
+GO
+IF OBJECT_ID(N'[dbo].[RacunSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RacunSet];
+GO
+IF OBJECT_ID(N'[dbo].[UslugaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UslugaSet];
+GO
+IF OBJECT_ID(N'[dbo].[RezervniDioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RezervniDioSet];
+GO
+IF OBJECT_ID(N'[dbo].[DobavljacSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DobavljacSet];
+GO
+IF OBJECT_ID(N'[dbo].[KatalogSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KatalogSet];
+GO
+IF OBJECT_ID(N'[dbo].[NarudzbaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NarudzbaSet];
+GO
+IF OBJECT_ID(N'[dbo].[StavkaNarudzbaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StavkaNarudzbaSet];
+GO
+IF OBJECT_ID(N'[dbo].[ZahtjevZaNarudzbomSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ZahtjevZaNarudzbomSet];
+GO
+IF OBJECT_ID(N'[dbo].[ZahtjevZaNarudzbomStavkaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ZahtjevZaNarudzbomStavkaSet];
+GO
+IF OBJECT_ID(N'[dbo].[RacunStavkaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RacunStavkaSet];
+GO
+IF OBJECT_ID(N'[dbo].[ZaposlenikObradaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ZaposlenikObradaSet];
+GO
+IF OBJECT_ID(N'[dbo].[UslugaSet_ZamijenaDijela]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UslugaSet_ZamijenaDijela];
+GO
+IF OBJECT_ID(N'[dbo].[UslugaSet_Posao]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UslugaSet_Posao];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -68,7 +200,9 @@ GO
 CREATE TABLE [dbo].[TerminPregledaSet] (
     [DatumIVrijeme] datetime  NOT NULL,
     [VoziloIdVozilo] int  NOT NULL,
-    [KlijentIdKlijent] int  NOT NULL
+    [KlijentIdKlijent] int  NOT NULL,
+    [Status] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
@@ -98,8 +232,7 @@ CREATE TABLE [dbo].[RacunSet] (
     [DatumIzdavanja] datetime  NULL,
     [Iznos] decimal(18,0)  NOT NULL,
     [KlijentIdKlijent] int  NOT NULL,
-    [MehanicarIdMehanicar] int  NOT NULL,
-    [ObradaVozila_IdObrada] int  NOT NULL
+    [ZaposlenikIdZaposlenik] int  NOT NULL
 );
 GO
 
@@ -140,7 +273,8 @@ GO
 CREATE TABLE [dbo].[NarudzbaSet] (
     [IdNarudzba] int IDENTITY(1,1) NOT NULL,
     [VoditeljIdVoditelj] int  NOT NULL,
-    [DatumNarudzbe] datetime  NOT NULL
+    [DatumNarudzbe] datetime  NOT NULL,
+    [ZaposlenikIdZaposlenik] int  NOT NULL
 );
 GO
 
@@ -156,7 +290,8 @@ GO
 CREATE TABLE [dbo].[ZahtjevZaNarudzbomSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [MehanicarIdMehanicar] int  NOT NULL,
-    [Datum] datetime  NOT NULL
+    [Datum] datetime  NOT NULL,
+    [ZaposlenikIdZaposlenik] int  NOT NULL
 );
 GO
 
@@ -178,17 +313,11 @@ CREATE TABLE [dbo].[RacunStavkaSet] (
 );
 GO
 
--- Creating table 'ZaposlenikSet_Mehanicar'
-CREATE TABLE [dbo].[ZaposlenikSet_Mehanicar] (
-    [Opis] nvarchar(max)  NOT NULL,
-    [IdZaposlenik] int  NOT NULL
-);
-GO
-
--- Creating table 'ZaposlenikSet_Voditelj'
-CREATE TABLE [dbo].[ZaposlenikSet_Voditelj] (
-    [Opis] nvarchar(max)  NOT NULL,
-    [IdZaposlenik] int  NOT NULL
+-- Creating table 'ZaposlenikObradaSet'
+CREATE TABLE [dbo].[ZaposlenikObradaSet] (
+    [ZaposlenikIdZaposlenik] int  NOT NULL,
+    [ObradaVozilaIdObrada] int  NOT NULL,
+    [BrojPopravaka] int  NOT NULL
 );
 GO
 
@@ -204,13 +333,6 @@ CREATE TABLE [dbo].[UslugaSet_Posao] (
     [Naziv] nvarchar(max)  NOT NULL,
     [Opis] nvarchar(max)  NOT NULL,
     [IdUsluga] int  NOT NULL
-);
-GO
-
--- Creating table 'ObradaVozilaMehanicar'
-CREATE TABLE [dbo].[ObradaVozilaMehanicar] (
-    [ObradaVozilaMehanicar_Mehanicar_IdObrada] int  NOT NULL,
-    [Mehanicari_IdZaposlenik] int  NOT NULL
 );
 GO
 
@@ -242,10 +364,10 @@ ADD CONSTRAINT [PK_VoziloSet]
     PRIMARY KEY CLUSTERED ([IdVozilo] ASC);
 GO
 
--- Creating primary key on [VoziloIdVozilo], [KlijentIdKlijent] in table 'TerminPregledaSet'
+-- Creating primary key on [Id] in table 'TerminPregledaSet'
 ALTER TABLE [dbo].[TerminPregledaSet]
 ADD CONSTRAINT [PK_TerminPregledaSet]
-    PRIMARY KEY CLUSTERED ([VoziloIdVozilo], [KlijentIdKlijent] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [IdZaposlenik] in table 'ZaposlenikSet'
@@ -320,16 +442,10 @@ ADD CONSTRAINT [PK_RacunStavkaSet]
     PRIMARY KEY CLUSTERED ([RacunIdRacun], [UslugaIdUsluga] ASC);
 GO
 
--- Creating primary key on [IdZaposlenik] in table 'ZaposlenikSet_Mehanicar'
-ALTER TABLE [dbo].[ZaposlenikSet_Mehanicar]
-ADD CONSTRAINT [PK_ZaposlenikSet_Mehanicar]
-    PRIMARY KEY CLUSTERED ([IdZaposlenik] ASC);
-GO
-
--- Creating primary key on [IdZaposlenik] in table 'ZaposlenikSet_Voditelj'
-ALTER TABLE [dbo].[ZaposlenikSet_Voditelj]
-ADD CONSTRAINT [PK_ZaposlenikSet_Voditelj]
-    PRIMARY KEY CLUSTERED ([IdZaposlenik] ASC);
+-- Creating primary key on [ZaposlenikIdZaposlenik], [ObradaVozilaIdObrada] in table 'ZaposlenikObradaSet'
+ALTER TABLE [dbo].[ZaposlenikObradaSet]
+ADD CONSTRAINT [PK_ZaposlenikObradaSet]
+    PRIMARY KEY CLUSTERED ([ZaposlenikIdZaposlenik], [ObradaVozilaIdObrada] ASC);
 GO
 
 -- Creating primary key on [IdUsluga] in table 'UslugaSet_ZamijenaDijela'
@@ -342,12 +458,6 @@ GO
 ALTER TABLE [dbo].[UslugaSet_Posao]
 ADD CONSTRAINT [PK_UslugaSet_Posao]
     PRIMARY KEY CLUSTERED ([IdUsluga] ASC);
-GO
-
--- Creating primary key on [ObradaVozilaMehanicar_Mehanicar_IdObrada], [Mehanicari_IdZaposlenik] in table 'ObradaVozilaMehanicar'
-ALTER TABLE [dbo].[ObradaVozilaMehanicar]
-ADD CONSTRAINT [PK_ObradaVozilaMehanicar]
-    PRIMARY KEY CLUSTERED ([ObradaVozilaMehanicar_Mehanicar_IdObrada], [Mehanicari_IdZaposlenik] ASC);
 GO
 
 -- --------------------------------------------------
@@ -367,30 +477,6 @@ GO
 CREATE INDEX [IX_FK_ZaposlenikAdresa]
 ON [dbo].[ZaposlenikSet]
     ([IdAdresa_IdAdresa]);
-GO
-
--- Creating foreign key on [ObradaVozilaMehanicar_Mehanicar_IdObrada] in table 'ObradaVozilaMehanicar'
-ALTER TABLE [dbo].[ObradaVozilaMehanicar]
-ADD CONSTRAINT [FK_ObradaVozilaMehanicar_ObradaVozila]
-    FOREIGN KEY ([ObradaVozilaMehanicar_Mehanicar_IdObrada])
-    REFERENCES [dbo].[ObradaVozilaSet]
-        ([IdObrada])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Mehanicari_IdZaposlenik] in table 'ObradaVozilaMehanicar'
-ALTER TABLE [dbo].[ObradaVozilaMehanicar]
-ADD CONSTRAINT [FK_ObradaVozilaMehanicar_Mehanicar]
-    FOREIGN KEY ([Mehanicari_IdZaposlenik])
-    REFERENCES [dbo].[ZaposlenikSet_Mehanicar]
-        ([IdZaposlenik])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ObradaVozilaMehanicar_Mehanicar'
-CREATE INDEX [IX_FK_ObradaVozilaMehanicar_Mehanicar]
-ON [dbo].[ObradaVozilaMehanicar]
-    ([Mehanicari_IdZaposlenik]);
 GO
 
 -- Creating foreign key on [VoziloIdVozilo] in table 'ObradaVozilaSet'
@@ -429,7 +515,7 @@ ADD CONSTRAINT [FK_VoziloKlijent]
     FOREIGN KEY ([Klijent_IdKlijent])
     REFERENCES [dbo].[KlijentSet]
         ([IdKlijent])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_VoziloKlijent'
@@ -447,6 +533,12 @@ ADD CONSTRAINT [FK_TerminPregledaVozilo]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
+-- Creating non-clustered index for FOREIGN KEY 'FK_TerminPregledaVozilo'
+CREATE INDEX [IX_FK_TerminPregledaVozilo]
+ON [dbo].[TerminPregledaSet]
+    ([VoziloIdVozilo]);
+GO
+
 -- Creating foreign key on [KlijentIdKlijent] in table 'TerminPregledaSet'
 ALTER TABLE [dbo].[TerminPregledaSet]
 ADD CONSTRAINT [FK_TerminPregledaKlijent]
@@ -460,36 +552,6 @@ GO
 CREATE INDEX [IX_FK_TerminPregledaKlijent]
 ON [dbo].[TerminPregledaSet]
     ([KlijentIdKlijent]);
-GO
-
--- Creating foreign key on [MehanicarIdMehanicar] in table 'RacunSet'
-ALTER TABLE [dbo].[RacunSet]
-ADD CONSTRAINT [FK_RacunMehanicar]
-    FOREIGN KEY ([MehanicarIdMehanicar])
-    REFERENCES [dbo].[ZaposlenikSet_Mehanicar]
-        ([IdZaposlenik])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RacunMehanicar'
-CREATE INDEX [IX_FK_RacunMehanicar]
-ON [dbo].[RacunSet]
-    ([MehanicarIdMehanicar]);
-GO
-
--- Creating foreign key on [ObradaVozila_IdObrada] in table 'RacunSet'
-ALTER TABLE [dbo].[RacunSet]
-ADD CONSTRAINT [FK_RacunObradaVozila]
-    FOREIGN KEY ([ObradaVozila_IdObrada])
-    REFERENCES [dbo].[ObradaVozilaSet]
-        ([IdObrada])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RacunObradaVozila'
-CREATE INDEX [IX_FK_RacunObradaVozila]
-ON [dbo].[RacunSet]
-    ([ObradaVozila_IdObrada]);
 GO
 
 -- Creating foreign key on [AdresaIdAdresa] in table 'DobavljacSet'
@@ -531,21 +593,6 @@ ON [dbo].[KatalogSet]
     ([RezervniDioIdRezervniDio]);
 GO
 
--- Creating foreign key on [VoditeljIdVoditelj] in table 'NarudzbaSet'
-ALTER TABLE [dbo].[NarudzbaSet]
-ADD CONSTRAINT [FK_NarudzbaVoditelj]
-    FOREIGN KEY ([VoditeljIdVoditelj])
-    REFERENCES [dbo].[ZaposlenikSet_Voditelj]
-        ([IdZaposlenik])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_NarudzbaVoditelj'
-CREATE INDEX [IX_FK_NarudzbaVoditelj]
-ON [dbo].[NarudzbaSet]
-    ([VoditeljIdVoditelj]);
-GO
-
 -- Creating foreign key on [RezervniDioIdRezervniDio] in table 'StavkaNarudzbaSet'
 ALTER TABLE [dbo].[StavkaNarudzbaSet]
 ADD CONSTRAINT [FK_StavkaNarudzbaRezervniDio]
@@ -570,21 +617,6 @@ ADD CONSTRAINT [FK_StavkaNarudzbaNarudzba]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [MehanicarIdMehanicar] in table 'ZahtjevZaNarudzbomSet'
-ALTER TABLE [dbo].[ZahtjevZaNarudzbomSet]
-ADD CONSTRAINT [FK_ZahtjevZaNarudzbomMehanicar]
-    FOREIGN KEY ([MehanicarIdMehanicar])
-    REFERENCES [dbo].[ZaposlenikSet_Mehanicar]
-        ([IdZaposlenik])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ZahtjevZaNarudzbomMehanicar'
-CREATE INDEX [IX_FK_ZahtjevZaNarudzbomMehanicar]
-ON [dbo].[ZahtjevZaNarudzbomSet]
-    ([MehanicarIdMehanicar]);
-GO
-
 -- Creating foreign key on [ZahtjevZaNarudzbomId] in table 'ZahtjevZaNarudzbomStavkaSet'
 ALTER TABLE [dbo].[ZahtjevZaNarudzbomStavkaSet]
 ADD CONSTRAINT [FK_ZahtjevZaNarudzbomStavkaZahtjevZaNarudzbom]
@@ -600,7 +632,7 @@ ADD CONSTRAINT [FK_ZahtjevZaNarudzbomStavkaRezervniDio]
     FOREIGN KEY ([RezervniDioIdRezervniDio])
     REFERENCES [dbo].[RezervniDioSet]
         ([IdRezervniDio])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ZahtjevZaNarudzbomStavkaRezervniDio'
@@ -663,22 +695,73 @@ ON [dbo].[KlijentSet]
     ([AdresaIdAdresa]);
 GO
 
--- Creating foreign key on [IdZaposlenik] in table 'ZaposlenikSet_Mehanicar'
-ALTER TABLE [dbo].[ZaposlenikSet_Mehanicar]
-ADD CONSTRAINT [FK_Mehanicar_inherits_Zaposlenik]
-    FOREIGN KEY ([IdZaposlenik])
+-- Creating foreign key on [ZaposlenikIdZaposlenik] in table 'RacunSet'
+ALTER TABLE [dbo].[RacunSet]
+ADD CONSTRAINT [FK_RacunZaposlenik]
+    FOREIGN KEY ([ZaposlenikIdZaposlenik])
     REFERENCES [dbo].[ZaposlenikSet]
         ([IdZaposlenik])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [IdZaposlenik] in table 'ZaposlenikSet_Voditelj'
-ALTER TABLE [dbo].[ZaposlenikSet_Voditelj]
-ADD CONSTRAINT [FK_Voditelj_inherits_Zaposlenik]
-    FOREIGN KEY ([IdZaposlenik])
+-- Creating non-clustered index for FOREIGN KEY 'FK_RacunZaposlenik'
+CREATE INDEX [IX_FK_RacunZaposlenik]
+ON [dbo].[RacunSet]
+    ([ZaposlenikIdZaposlenik]);
+GO
+
+-- Creating foreign key on [ZaposlenikIdZaposlenik] in table 'ZahtjevZaNarudzbomSet'
+ALTER TABLE [dbo].[ZahtjevZaNarudzbomSet]
+ADD CONSTRAINT [FK_ZahtjevZaNarudzbomZaposlenik]
+    FOREIGN KEY ([ZaposlenikIdZaposlenik])
     REFERENCES [dbo].[ZaposlenikSet]
         ([IdZaposlenik])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ZahtjevZaNarudzbomZaposlenik'
+CREATE INDEX [IX_FK_ZahtjevZaNarudzbomZaposlenik]
+ON [dbo].[ZahtjevZaNarudzbomSet]
+    ([ZaposlenikIdZaposlenik]);
+GO
+
+-- Creating foreign key on [ZaposlenikIdZaposlenik] in table 'NarudzbaSet'
+ALTER TABLE [dbo].[NarudzbaSet]
+ADD CONSTRAINT [FK_NarudzbaZaposlenik]
+    FOREIGN KEY ([ZaposlenikIdZaposlenik])
+    REFERENCES [dbo].[ZaposlenikSet]
+        ([IdZaposlenik])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_NarudzbaZaposlenik'
+CREATE INDEX [IX_FK_NarudzbaZaposlenik]
+ON [dbo].[NarudzbaSet]
+    ([ZaposlenikIdZaposlenik]);
+GO
+
+-- Creating foreign key on [ZaposlenikIdZaposlenik] in table 'ZaposlenikObradaSet'
+ALTER TABLE [dbo].[ZaposlenikObradaSet]
+ADD CONSTRAINT [FK_ZaposlenikObradaZaposlenik]
+    FOREIGN KEY ([ZaposlenikIdZaposlenik])
+    REFERENCES [dbo].[ZaposlenikSet]
+        ([IdZaposlenik])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ObradaVozilaIdObrada] in table 'ZaposlenikObradaSet'
+ALTER TABLE [dbo].[ZaposlenikObradaSet]
+ADD CONSTRAINT [FK_ZaposlenikObradaObradaVozila]
+    FOREIGN KEY ([ObradaVozilaIdObrada])
+    REFERENCES [dbo].[ObradaVozilaSet]
+        ([IdObrada])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ZaposlenikObradaObradaVozila'
+CREATE INDEX [IX_FK_ZaposlenikObradaObradaVozila]
+ON [dbo].[ZaposlenikObradaSet]
+    ([ObradaVozilaIdObrada]);
 GO
 
 -- Creating foreign key on [IdUsluga] in table 'UslugaSet_ZamijenaDijela'
