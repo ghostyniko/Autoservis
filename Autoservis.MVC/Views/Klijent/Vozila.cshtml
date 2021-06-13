@@ -1,29 +1,55 @@
 ﻿@model Autoservis.KlijentVozilaInfoList
 
-<table class="tablica">
+<table class="table table-dark table-striped">
     <tr>
         <th>
-            Vozilo
+            Marka
         </th>
-        
+        <th>
+            Tip
+        </th>
+        <th>
+            Godina proizvodnje
+        </th>
+        <th></th>
+
     </tr>
 
 
     @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @*@item.NazProjekta*@
-            @Html.ActionLink(item.NazVozila, "Details", "Vozilo", new { IdVozila = item.IdVozila }, null)
-        </td>
-        <td>
-            @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }))
-            {
-                <a class="delete">Obriši</a>
-            }
-        </td>
+    /* {
+     <tr>
+         <td>
 
-    </tr>
+             @Html.ActionLink(item.NazVozila, "Details", "Vozilo", new { IdVozila = item.IdVozila }, null)
+         </td>
+         <td>
+             @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }))
+             {
+                 <a class="delete">Obriši</a>
+             }
+         </td>
+
+     </tr>
+     }*/
+    {
+        <tr>
+            <td>
+                @Html.Encode(item.MarkaVozila)
+            </td>
+            <td>
+                @Html.Encode(item.TipVozila)
+            </td>
+            <td>
+                @Html.Encode(item.GodinaProizvodnje)
+            </td>
+            <td class="text-right">
+                @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }))
+                {
+                    <a class="delete btn-sm btn-danger">Obriši</a>
+                }
+            </td>
+        </tr>
     }
 
 </table>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Messaging;
+//using System.Messaging;
 
 namespace Autoservis.MVC.Controllers
 {
@@ -18,8 +18,8 @@ namespace Autoservis.MVC.Controllers
         public ActionResult Index()
         {
             var list = TerminPregledaInfoList.Get();
-            var poruke = Receive();
-            ViewBag.Poruke = poruke;
+            
+            ViewBag.Poruke = "";
             return View(list);
         }
 
@@ -59,6 +59,7 @@ namespace Autoservis.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        /*
         private string Receive()
         {
 
@@ -82,7 +83,7 @@ namespace Autoservis.MVC.Controllers
 
             queue.Close();
             return sb.ToString();
-
-        }
+        
+        }*/
     }
 }

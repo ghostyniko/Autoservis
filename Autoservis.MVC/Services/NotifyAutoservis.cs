@@ -2,7 +2,7 @@
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Messaging;
+//using System.Messaging;
 using System.Web;
 
 namespace Autoservis.MVC.Services
@@ -30,6 +30,7 @@ namespace Autoservis.MVC.Services
         private void SendNotification(TerminPregleda t)
         {
          
+            /*
             var queue = Queue.Queue.GetAutoservisMQ();
             // queue.Formatter = new XmlMessageFormatter(new Type[] { (typeof(string)) });
             // var message = (string)queue.Receive().Body;
@@ -41,7 +42,7 @@ namespace Autoservis.MVC.Services
             message.Body = sadrzaj;
 
             queue.Send(message);
-            queue.Close();
+            queue.Close();*/
 
         }
     }

@@ -17,11 +17,15 @@ namespace Autoservis
         {
             IdKlijenta = id;
             NazOsobe = string.Format("{0}, {1}", prezime, ime);
+            Prezime = prezime;
+            Ime = ime;
         }
         #endregion
         #region Properties
         public int IdKlijenta { get; private set; }
         public string NazOsobe { get; private set; }
+        public string Prezime { get; private set; }
+        public string Ime { get; private set; }
         #endregion
         #region Overrides
         public override string ToString()

@@ -436,6 +436,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\Klijent\Createv1.cshtml" />
+    <Content Include="Views\Klijent\Index1.cshtml" />
+    <Content Include="Views\Klijent\Details1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

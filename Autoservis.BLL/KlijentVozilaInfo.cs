@@ -17,11 +17,18 @@ namespace Autoservis
         {
             IdVozila = idVozila;
             NazVozila = string.Format("{0} {1}, {2}", markaVozila, tipVozila,godinaProizvodnje);
+            MarkaVozila = markaVozila;
+            TipVozila = tipVozila;
+            GodinaProizvodnje = godinaProizvodnje;
+            
         }
         #endregion
         #region Properties
         public int IdVozila { get; private set; }
         public string NazVozila { get; private set; }
+        public string MarkaVozila { get; private set; }
+        public string TipVozila { get; private set; }
+        public short GodinaProizvodnje { get; private set; }
         #endregion
         #region Overrides
         public override string ToString()

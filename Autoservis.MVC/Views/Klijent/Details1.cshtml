@@ -1,0 +1,76 @@
+﻿@model Autoservis.Klijent
+
+@{
+    ViewBag.Title = "Details1";
+}
+
+<h2>Details1</h2>
+
+<div>
+    <h4>Klijent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdKlijenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdKlijenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrezimeKlijenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrezimeKlijenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeKlijenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeKlijenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LozinkaKlijenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LozinkaKlijenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UlicaKlijenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UlicaKlijenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KucniBrojKlijenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KucniBrojKlijenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMjesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdMjesto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

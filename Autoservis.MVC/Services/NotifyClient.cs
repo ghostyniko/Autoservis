@@ -2,7 +2,7 @@
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Messaging;
+//using System.Messaging;
 using System.Web;
 
 namespace Autoservis.MVC.Services
@@ -31,6 +31,7 @@ namespace Autoservis.MVC.Services
 
         private void SendNotification(TerminPregleda t)
         {
+            /*
             var IdKlijent = t.IdKlijenta;
 
             if (!Queue.Queue.Exists(IdKlijent))
@@ -38,7 +39,7 @@ namespace Autoservis.MVC.Services
             var queue = Queue.Queue.GetClientMQ(IdKlijent);
             // queue.Formatter = new XmlMessageFormatter(new Type[] { (typeof(string)) });
             // var message = (string)queue.Receive().Body;
-            Message message = new Message();
+           /* Message message = new Message();
         
             var sadrzaj = GetMessage(t);
 
@@ -46,7 +47,7 @@ namespace Autoservis.MVC.Services
             message.Body = sadrzaj;
           
             queue.Send(message);
-            queue.Close();
+            queue.Close();*/
            
         }
     }

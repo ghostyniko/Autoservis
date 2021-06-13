@@ -2,7 +2,7 @@
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Messaging;
+//using System.Messaging;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -28,9 +28,9 @@ namespace Autoservis.MVC.Controllers
         public ActionResult Details(int IdKlijenta)
         {
             var termini = TerminPregledaInfoList.Get(IdKlijenta);
-            var messages = Receive(IdKlijenta);
+            /*var messages = Receive(IdKlijenta);*/
 
-            ViewBag.Message = messages;
+            ViewBag.Message = "";
 
             ViewBag.Termini = termini;
             return View(Klijent.Get(IdKlijenta));
@@ -220,6 +220,7 @@ namespace Autoservis.MVC.Controllers
             return RedirectToAction("Details", "Klijent", new { IdKlijenta = IdKlijenta });
         }
 
+        /*
         private string Receive(int IdKlijenta)
         {
             if (!Queue.Queue.Exists(IdKlijenta)) return "";
@@ -243,7 +244,7 @@ namespace Autoservis.MVC.Controllers
             queue.Close();
             return sb.ToString();
 
-        }
+        }*/
 
         /// <summary>Poziva se nakon što se zatraži uređivanje termina pregleda od strane klijenta.</summary>
         /// <param name="IdTermina">Identifikator termina koji se želi uređivati.</param>

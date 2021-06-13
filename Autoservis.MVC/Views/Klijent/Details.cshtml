@@ -13,7 +13,7 @@
     <script src="../../Scripts/jquery-1.5.1-vsdoc.js" type="text/javascript"></script>
 }
 
-
+<!--
 <div class="noviPodatak">
     <table>
         <tbody>
@@ -49,6 +49,54 @@
         </tbody>
     </table>
 </div>
+    -->
+
+<div class="bg-info p-5 rounded">
+    <h4>Detalji</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Prezime
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrezimeKlijenta)
+        </dd>
+
+        <dt>
+            Ime
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeKlijenta)
+        </dd>
+
+        <dt>
+            Adresa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UlicaKlijenta) @Html.DisplayFor(model => model.KucniBrojKlijenta)
+        </dd>
+        <dt>
+            Mjesto i poštanski broj
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MjestoKlijenta.NazivMjesta), @Model.MjestoKlijenta.PostanskiBroj
+        </dd>
+
+    </dl>
+    <div class="d-flex flex-row justify-content-end align-items-center">
+        @Html.ActionLink("Ažuriraj", "Edit", new { IdKlijenta = Model.IdKlijenta },new { @class="btn-sm btn-primary"})
+        &nbsp;
+        @using (Html.BeginForm("Delete", "Klijent", new { IdKlijenta = Model.IdKlijenta }))
+        {
+            <a class="delete btn-sm btn-danger">Obriši</a>
+        }
+    </div>
+</div>
 
 
 <p>
@@ -79,13 +127,13 @@
 }
 
 
-<p/>
+<p />
 Obavijesti
-<br/>
-<div >
+<br />
+<div>
     <textarea cols="100" rows="15">@poruke</textarea>
-    
-    </div>
+
+</div>
 
 <script type="text/javascript" language="javascript">
 
