@@ -17,6 +17,7 @@ namespace Autoservis.MVC.Controllers
         /// <summary>Poziva se nakon zahtjeva za pregled popisa svih klijenata.</summary>
         /// <returns>Akcija koja generira pogled koji sadrži popis svih klijenata.</returns>
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             return View(KlijentInfoList.Get());

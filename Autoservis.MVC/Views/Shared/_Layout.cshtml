@@ -39,6 +39,9 @@
             <span class="navbar-text text-white ml-5">
                 <h1>Naslov</h1>
             </span>
+            <div class="text-white ml-auto mr-3 bg-light p-3 rounded">
+                @Html.Partial("_LoginPartial")
+             </div>
         </nav>
     </header>
     <div class="row h-100 container-fluid">
@@ -147,6 +150,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap");
     @RenderSection("JavaScript", required: false)
-
+    @RenderSection("scripts", required: false)
 </body>
 </html>
