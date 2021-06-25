@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Autoservis.MVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -152,10 +153,19 @@ namespace Autoservis.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                if (!Roles.RoleExists("Customer"))
+                    Roles.CreateRole("Customer");
+
+                Roles.AddUserToRole(model.Email, "Customer");
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
+                    model.Klijent.KorisnickoIme = model.Email;
+                    model.Klijent.Save();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -348,6 +358,7 @@ namespace Autoservis.MVC.Controllers
             }
         }
 
+        
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]

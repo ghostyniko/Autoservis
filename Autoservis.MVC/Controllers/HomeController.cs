@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,16 @@ namespace Autoservis.MVC.Controllers
         /// <returns>Pogled početne stranice</returns>
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Customer"))
+                {
+                    var klijent = Klijent.Get(User.Identity.GetUserName());
+                    return RedirectToAction("Details", "Klijent", new { IdKlijenta=klijent.IdKlijenta});
+                }
+            }
             return View();
+            
         }
 
     }

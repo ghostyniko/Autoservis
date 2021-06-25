@@ -484,6 +484,9 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_UnregisteredUserSidebar.cshtml" />
+    <Content Include="Views\Shared\_RegisteredUserSidebar.cshtml" />
+    <Content Include="Views\Shared\_AdminSidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

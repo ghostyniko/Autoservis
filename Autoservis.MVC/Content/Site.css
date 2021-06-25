@@ -269,14 +269,14 @@ body {
 	height: 100vh;
 	overflow-y: scroll;
 	position: fixed;
-	margin-top: 88px;
+	
 	z-index: 1;
 }
 
 #main {
 	background-color: aquamarine;
 	height: 2000px;
-	margin-top: 88px;
+	
 	margin-left: 200px;
 }
 

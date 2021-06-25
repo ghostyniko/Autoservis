@@ -44,28 +44,27 @@
              </div>
         </nav>
     </header>
-    <div class="row h-100 container-fluid">
+
+    <div class="row h-100 container-fluid" id="underHeaderContent">
 
         <nav id="sidebar" class="navbar h-100 bg-dark">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    @Html.ActionLink("Početna stranica", "Index", "Home", null, new { @class = "nav-link text-white" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Novo mjesto", "Create", "Mjesto", null, new { @class = "nav-link text-white" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Novi klijent", "Create", "Klijent", null, new { @class = "nav-link text-white" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Klijenti", "Index", "Klijent", null, new { @class = "nav-link text-white" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Zaposlenici", "Index", "Zaposlenik", null, new { @class = "nav-link text-white" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Voditelj", "Index", "Voditelj", null, new { @class = "nav-link text-white" })
-                </li>
+                
+                @if (!Request.IsAuthenticated)
+                {
+                    @Html.Partial("_UnregisteredUserSidebar")
+                }
+                else
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.Partial("_AdminSidebar")
+                    }
+                else
+                    {
+                        @Html.Partial("_RegisteredUserSidebar")
+                    }
+                }
             </ul>
         </nav>
 
@@ -108,11 +107,22 @@
                     $(this).closest('form').submit();
                 });
             });
+
+            adjustHeaderAndContent();
         }
+
         );
 
+        function adjustHeaderAndContent() {
+            const navHeight = $("#navbar").innerHeight();
+            $("#header").height(navHeight);
+            $("#underHeaderContent").css("margin-top", navHeight);
+            
+            
+        }
     </script>
     <script>
+        
         $('#toggleSidebar').on('click', () => {
             console.log("klik")
             let target = $('#toggleSidebar').attr("target");

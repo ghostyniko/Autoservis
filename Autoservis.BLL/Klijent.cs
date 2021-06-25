@@ -45,12 +45,12 @@ namespace Autoservis
             set { SetProperty(ImeKlijentaProperty, value); }
         }
 
-        private static PropertyInfo<string> LozinkaKlijentaProperty =
-        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.LozinkaKlijenta)));
-        public string LozinkaKlijenta
+        private static PropertyInfo<string> KorisnickoImeProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.KorisnickoIme)));
+        public string KorisnickoIme
         {
-            get { return GetProperty(LozinkaKlijentaProperty); }
-            set { SetProperty(LozinkaKlijentaProperty, value); }
+            get { return GetProperty(KorisnickoImeProperty); }
+            set { SetProperty(KorisnickoImeProperty, value); }
         }
 
       
@@ -130,6 +130,10 @@ namespace Autoservis
         {
             return DataPortal.Fetch<Klijent>(new SingleCriteria<Klijent, int>(idKlijenta));
         }
+        public static Klijent Get(string username)
+        {
+            return DataPortal.Fetch<Klijent>(new SingleCriteria<Klijent, string>(username));
+        }
         public static void Delete(int idKlijenta)
         {
             DataPortal.Delete<Klijent>(new SingleCriteria<Klijent, int>(idKlijenta));
@@ -145,16 +149,37 @@ namespace Autoservis
                 var data = ctx.DataContext.KlijentSet.Find(criteria.Value);
                
                 LoadProperty(IdKlijentaProperty, data.IdKlijent);
+                LoadProperty(KorisnickoImeProperty, data.Username);
                 LoadProperty(ImeKlijentaProperty, data.Ime);
                 LoadProperty(PrezimeKlijentaProperty, data.Prezime);
-                LoadProperty(LozinkaKlijentaProperty, data.Lozinka);
+               
                 LoadProperty(UlicaKlijentaProperty, data.Adresa.Naziv);
                 LoadProperty(KucniBrojKlijentaProperty, data.Adresa.KucniBroj);
                 LoadProperty(MjestoKlijentaProperty,Mjesto.Get(data.Adresa.MjestoIdMjesto));
                 LoadProperty(KlijentVozilaProperty, KlijentVozilaInfoList.Get(data.IdKlijent));
             }
         }
-        
+
+        private void DataPortal_Fetch(SingleCriteria<Klijent, string> criteria)
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+            {
+
+                // var data = (from o in ctx.DataContext.Osoba where o.IdOsobe == criteria.Value select o).Single();
+                var data = ctx.DataContext.KlijentSet.Where(d => d.Username == criteria.Value).FirstOrDefault();
+
+                LoadProperty(IdKlijentaProperty, data.IdKlijent);
+                LoadProperty(KorisnickoImeProperty, data.Username);
+                LoadProperty(ImeKlijentaProperty, data.Ime);
+                LoadProperty(PrezimeKlijentaProperty, data.Prezime);
+
+                LoadProperty(UlicaKlijentaProperty, data.Adresa.Naziv);
+                LoadProperty(KucniBrojKlijentaProperty, data.Adresa.KucniBroj);
+                LoadProperty(MjestoKlijentaProperty, Mjesto.Get(data.Adresa.MjestoIdMjesto));
+                LoadProperty(KlijentVozilaProperty, KlijentVozilaInfoList.Get(data.IdKlijent));
+            }
+        }
+
         [Transactional(TransactionalTypes.TransactionScope)]
         protected override void DataPortal_Insert()
         {
@@ -166,7 +191,7 @@ namespace Autoservis
                 {
                     Ime = ImeKlijenta,
                     Prezime = PrezimeKlijenta,
-                    Lozinka = LozinkaKlijenta,
+                    Username = KorisnickoIme,
                     Adresa = new DAL.Adresa
                     {
                         Naziv = UlicaKlijenta,
@@ -198,7 +223,7 @@ namespace Autoservis
                 kl.Adresa.Naziv = UlicaKlijenta;
                 kl.Adresa.KucniBroj = KucniBrojKlijenta;
                 kl.Adresa.MjestoIdMjesto = IdMjesto;
-                kl.Lozinka = LozinkaKlijenta;
+                kl.Username = KorisnickoIme;
 
                 FieldManager.UpdateChildren(this);
 

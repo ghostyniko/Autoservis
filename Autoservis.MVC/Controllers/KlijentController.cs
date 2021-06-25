@@ -59,7 +59,7 @@ namespace Autoservis.MVC.Controllers
         /// <returns>U slučaju uspješnog ažuriranja vraća se akcija koja generira pogled s detaljima o klijentu. Inače, vraća se akcija koja generira pogled s obrascem za
         /// uređivanjem s porukom o greškama.</returns>
         [HttpPost]
-        public ActionResult Edit(int IdKlijenta, string ImeKlijenta, string PrezimeKlijenta, string LozinkaKlijenta, string UlicaKlijenta, string KucniBrojKlijenta, int IdMjesto)
+        public ActionResult Edit(int IdKlijenta, string ImeKlijenta, string PrezimeKlijenta, string UlicaKlijenta, string KucniBrojKlijenta, int IdMjesto)
         {
             Klijent klijent = null;
             try
@@ -67,7 +67,7 @@ namespace Autoservis.MVC.Controllers
                 klijent = Klijent.Get(IdKlijenta);
                 klijent.ImeKlijenta = ImeKlijenta;
                 klijent.PrezimeKlijenta = PrezimeKlijenta;
-                klijent.LozinkaKlijenta = LozinkaKlijenta;
+               
                 klijent.UlicaKlijenta = UlicaKlijenta;
                 klijent.KucniBrojKlijenta = KucniBrojKlijenta;
                 klijent.IdMjesto = IdMjesto;
@@ -154,14 +154,14 @@ namespace Autoservis.MVC.Controllers
         /// <returns>Ovisno o uspjehu unosa, vraća se odgovarajući pogled. U slučaju uspjeha, vrši se preusmjeravanje na akciju koja vraća pogled s detaljima novog klijenta. U
         /// slučaju pogreške, vraća se pogled s obrascem za unos podataka s obavijestima o pogreškama.</returns>
         [HttpPost]
-        public ActionResult Create(string ImeKlijenta, string PrezimeKlijenta, string LozinkaKlijenta, string UlicaKlijenta, string KucniBrojKlijenta, int IdMjesto)
+        public ActionResult Create(string ImeKlijenta, string PrezimeKlijenta, string UlicaKlijenta, string KucniBrojKlijenta, int IdMjesto)
         {
             Klijent klijent = Klijent.New();
             try
             {
                 klijent.ImeKlijenta = ImeKlijenta;
                 klijent.PrezimeKlijenta = PrezimeKlijenta;
-                klijent.LozinkaKlijenta = LozinkaKlijenta;
+             
                 klijent.UlicaKlijenta = UlicaKlijenta;
                 klijent.KucniBrojKlijenta = KucniBrojKlijenta;
                 klijent.IdMjesto = IdMjesto;

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/12/2019 20:24:03
--- Generated from EDMX file: C:\Users\matija\source\repos\Autoservis\Autoservis.DAL\AutoservisDATA.edmx
+-- Date Created: 06/24/2021 21:45:34
+-- Generated from EDMX file: C:\Users\matija\Documents\Autoservis\Autoservis.DAL\AutoservisDATA.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -164,8 +164,8 @@ CREATE TABLE [dbo].[KlijentSet] (
     [IdKlijent] int IDENTITY(1,1) NOT NULL,
     [Prezime] nvarchar(max)  NOT NULL,
     [Ime] nvarchar(max)  NOT NULL,
-    [Lozinka] nvarchar(max)  NOT NULL,
-    [AdresaIdAdresa] int  NOT NULL
+    [AdresaIdAdresa] int  NOT NULL,
+    [Username] nvarchar(max)  NOT NULL
 );
 GO
 

@@ -130,8 +130,8 @@
     <Property Name="IdKlijent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Lozinka" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AdresaIdAdresa" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MjestoSet">
     <Key>
@@ -720,10 +720,10 @@
           <Property Name="IdKlijent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Prezime" Type="String" Nullable="false" />
           <Property Name="Ime" Type="String" Nullable="false" />
-          <Property Name="Lozinka" Type="String" Nullable="false" />
           <NavigationProperty Name="Vozilo" Relationship="AutoservisDATA.VoziloKlijent" FromRole="Klijent" ToRole="Vozilo" />
           <NavigationProperty Name="Adresa" Relationship="AutoservisDATA.KlijentAdresa" FromRole="Klijent" ToRole="Adresa" />
           <Property Name="AdresaIdAdresa" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Mjesto">
           <Key>
@@ -1180,8 +1180,8 @@
           <ScalarProperty Name="IdKlijent" ColumnName="IdKlijent" />
           <ScalarProperty Name="Prezime" ColumnName="Prezime" />
           <ScalarProperty Name="Ime" ColumnName="Ime" />
-          <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
           <ScalarProperty Name="AdresaIdAdresa" ColumnName="AdresaIdAdresa" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
