@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Optimization;
+using System.Data.Entity;
+using Autoservis.MVC.Models;
 
 namespace Autoservis.MVC
 {
@@ -15,6 +17,7 @@ namespace Autoservis.MVC
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ApplicationDbContextInitializer.Initialize(new ApplicationDbContext());
         }
     }
 }

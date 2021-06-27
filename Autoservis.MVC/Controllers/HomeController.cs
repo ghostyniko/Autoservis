@@ -11,6 +11,7 @@ namespace Autoservis.MVC.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+
         /// <summary>Metoda kontrolera koja generira pogled početne stranice</summary>
         /// <returns>Pogled početne stranice</returns>
         public ActionResult Index()

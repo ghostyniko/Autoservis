@@ -154,34 +154,59 @@ namespace Autoservis.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
-                if (!Roles.RoleExists("Customer"))
-                    Roles.CreateRole("Customer");
-
-                Roles.AddUserToRole(model.Email, "Customer");
-
+              
                 var result = await UserManager.CreateAsync(user, model.Password);
-                
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
-                    model.Klijent.KorisnickoIme = model.Email;
-                    model.Klijent.Save();
-
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    AddErrors(result);
+                    return View(model);
                 }
-                AddErrors(result);
+                var userId = UserManager.FindByEmail(model.Email).Id;
+
+                var resultAddRole = UserManager.AddToRole(userId, "Customer");
+
+                if (!resultAddRole.Succeeded)
+                {
+                    AddErrors(result);
+                    return View(model);
+                }
+
+               
+                model.Klijent.KorisnickoIme = model.Email;
+                model.Klijent.Save();
+
+                await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return RedirectToAction("Index", "Home");
+                
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        /*
+        // POST: /Account/RegisterAdmin
+        [HttpPost]
+        [AllowAnonymous]
+     
+        public async Task<ActionResult> RegisterAdmin(RegisterViewModel model)
+        {
+            var user = new ApplicationUser { UserName = "matija.cavlovic96@gmail.com", Email = "matija.cavlovic96@gmail.com" };
+            var result = await UserManager.CreateAsync(user, "mc270396MC_");
+            var userId = UserManager.FindByEmail("matija.cavlovic96@gmail.com").Id;
+            var resultAddRole = UserManager.AddToRole(userId, "Admin");
+
+            return View("Index", "Home");
+        }
+        */
+
 
         //
         // GET: /Account/ConfirmEmail

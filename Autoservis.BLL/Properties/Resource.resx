@@ -123,6 +123,18 @@
   <data name="DatumTerminaError" xml:space="preserve">
     <value>Datum termina mora biti veći od današnjeg</value>
   </data>
+  <data name="HouseNumberMissing" xml:space="preserve">
+    <value>Oznaka kućnog broja nedostaje</value>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Ime nedostaje</value>
+  </data>
+  <data name="StreetNameMissing" xml:space="preserve">
+    <value>Naziv ulice nedostaje</value>
+  </data>
+  <data name="SurnameMissing" xml:space="preserve">
+    <value>Prezime nedostaje</value>
+  </data>
   <data name="ZaposlenikVecRadiNaAutomobilu" xml:space="preserve">
     <value>Zaposlenik je već dodijeljen ovoj obradi vozila</value>
   </data>

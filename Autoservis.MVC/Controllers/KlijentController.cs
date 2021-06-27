@@ -10,22 +10,25 @@ using Autoservis;
 
 namespace Autoservis.MVC.Controllers
 {
-
+    [Authorize]
     /// <summary>Kontroler koji obrađuje akcije vezane uz klijenta</summary>
     public class KlijentController : Controller
     {
         /// <summary>Poziva se nakon zahtjeva za pregled popisa svih klijenata.</summary>
         /// <returns>Akcija koja generira pogled koji sadrži popis svih klijenata.</returns>
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         public ActionResult Index()
         {
             return View(KlijentInfoList.Get());
         }
 
+        
         /// <summary>Poziva se nakon zahtjeva za pregledom detalja klijenta.</summary>
         /// <param name="IdKlijenta">Identikikator klijenta za kojeg se želi pregled detalja.</param>
         /// <returns>Akcija koja generira pogled koji sadrži detalje o klijentu.</returns>
+        
+        
         public ActionResult Details(int IdKlijenta)
         {
             var termini = TerminPregledaInfoList.Get(IdKlijenta);

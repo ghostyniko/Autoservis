@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adresa.cs" />
+    <Compile Include="CustomRuleHandlers\CommonRulesDecorator.cs" />
     <Compile Include="ObradaSudionici.cs" />
     <Compile Include="ObradaSudioniciList.cs" />
     <Compile Include="ObradaVozila.cs" />

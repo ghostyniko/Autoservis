@@ -19,7 +19,7 @@ namespace Autoservis.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resource {
@@ -75,6 +75,42 @@ namespace Autoservis.Properties {
         internal static string DatumTerminaError {
             get {
                 return ResourceManager.GetString("DatumTerminaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oznaka kućnog broja nedostaje.
+        /// </summary>
+        internal static string HouseNumberMissing {
+            get {
+                return ResourceManager.GetString("HouseNumberMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ime nedostaje.
+        /// </summary>
+        internal static string NameMissing {
+            get {
+                return ResourceManager.GetString("NameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv ulice nedostaje.
+        /// </summary>
+        internal static string StreetNameMissing {
+            get {
+                return ResourceManager.GetString("StreetNameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prezime nedostaje.
+        /// </summary>
+        internal static string SurnameMissing {
+            get {
+                return ResourceManager.GetString("SurnameMissing", resourceCulture);
             }
         }
         

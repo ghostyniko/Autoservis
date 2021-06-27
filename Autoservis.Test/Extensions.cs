@@ -12,8 +12,7 @@ namespace Autoservis.Test
         {
             klijent.ImeKlijenta = "Default";
             klijent.PrezimeKlijenta = "Default";
-            klijent.LozinkaKlijenta = "Default";
-            klijent.LozinkaKlijenta = "Default";
+           
             klijent.UlicaKlijenta = "Default";
             klijent.KucniBrojKlijenta = "Default";
             klijent.MjestoKlijenta = Mjesto.New().GetDefault();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Autoservis.CustomRuleHandlers;
 using Autoservis.DAL;
 using Csla;
 using Csla.Data;
@@ -29,7 +30,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> NazivMjestaProperty =
-        RegisterProperty(typeof(Mjesto), new PropertyInfo<string>(Reflector.GetPropertyName<Mjesto>(x => x.NazivMjesta)));
+        RegisterProperty(typeof(Mjesto), new PropertyInfo<string>(Reflector.GetPropertyName<Mjesto>(x => x.NazivMjesta),"Naziv mjesta"));
         public string NazivMjesta
         {
             get { return GetProperty(NazivMjestaProperty); }
@@ -48,7 +49,7 @@ namespace Autoservis
         #region  Validation Rules
         protected override void AddBusinessRules()
         {
-            ValidationRules.AddRule(CommonRules.StringRequired, NazivMjestaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), NazivMjestaProperty);
             ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(NazivMjestaProperty, 25));
 
             ValidationRules.AddRule(CommonRules.IntegerMinValue, new CommonRules.IntegerMinValueRuleArgs(PostanskiBrojProperty, 0));

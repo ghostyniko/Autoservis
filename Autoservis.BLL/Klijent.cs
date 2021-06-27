@@ -8,6 +8,8 @@ using Csla;
 using Csla.Data;
 using Csla.Validation;
 using Autoservis.DAL;
+using Autoservis.CustomRuleHandlers;
+using Autoservis.Properties;
 
 namespace Autoservis
 {
@@ -30,7 +32,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> PrezimeKlijentaProperty =
-        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.PrezimeKlijenta)));
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.PrezimeKlijenta),"Prezime"));
         public string PrezimeKlijenta
         {
             get { return GetProperty(PrezimeKlijentaProperty); }
@@ -38,7 +40,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> ImeKlijentaProperty =
-        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.ImeKlijenta)));
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.ImeKlijenta),"Ime"));
         public string ImeKlijenta
         {
             get { return GetProperty(ImeKlijentaProperty); }
@@ -56,7 +58,7 @@ namespace Autoservis
       
 
         private static PropertyInfo<string> UlicaKlijentaProperty =
-        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.UlicaKlijenta)));
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.UlicaKlijenta),"Ulica"));
         public string UlicaKlijenta
         {
             get { return GetProperty(UlicaKlijentaProperty); }
@@ -64,7 +66,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> KucniBrojKlijentaProperty =
-        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.KucniBrojKlijenta)));
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.KucniBrojKlijenta),"Kućni broj"));
         public string KucniBrojKlijenta
         {
             get { return GetProperty(KucniBrojKlijentaProperty); }
@@ -72,7 +74,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<Mjesto> MjestoKlijentaProperty =
-        RegisterProperty(typeof(Klijent), new PropertyInfo<Mjesto>(Reflector.GetPropertyName<Klijent>(x => x.MjestoKlijenta)));
+        RegisterProperty(typeof(Klijent), new PropertyInfo<Mjesto>(Reflector.GetPropertyName<Klijent>(x => x.MjestoKlijenta),"Mjesto"));
         public Mjesto MjestoKlijenta
         {
             get { return GetProperty(MjestoKlijentaProperty); }
@@ -99,17 +101,17 @@ namespace Autoservis
         #region  Validation Rules
         protected override void AddBusinessRules()
         {
-            ValidationRules.AddRule(CommonRules.StringRequired, ImeKlijentaProperty);
-            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(ImeKlijentaProperty, 25));
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), ImeKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(ImeKlijentaProperty, 25));
 
-            ValidationRules.AddRule(CommonRules.StringRequired, PrezimeKlijentaProperty);
-            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(PrezimeKlijentaProperty, 25));
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), PrezimeKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(PrezimeKlijentaProperty, 25));
 
-            ValidationRules.AddRule(CommonRules.StringRequired, UlicaKlijentaProperty);
-            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(UlicaKlijentaProperty, 50));
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), UlicaKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(UlicaKlijentaProperty, 50));
 
-            ValidationRules.AddRule(CommonRules.StringRequired, KucniBrojKlijentaProperty);
-            ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), KucniBrojKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));
 
          //   ValidationRules.AddRule(CommonRules.StringRequired, IdMjestoProperty);
             //ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));

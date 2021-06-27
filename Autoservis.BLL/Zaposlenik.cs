@@ -8,6 +8,7 @@ using Csla;
 using Csla.Data;
 using Csla.Validation;
 using Autoservis.DAL;
+using Autoservis.CustomRuleHandlers;
 
 namespace Autoservis
 {
@@ -30,7 +31,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> PrezimeZaposlenikaProperty =
-        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.PrezimeZaposlenika)));
+        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.PrezimeZaposlenika),"Prezime"));
         public string PrezimeZaposlenika
         {
             get { return GetProperty(PrezimeZaposlenikaProperty); }
@@ -38,7 +39,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> ImeZaposlenikaProperty =
-        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.ImeZaposlenika)));
+        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.ImeZaposlenika),"Ime"));
         public string ImeZaposlenika
         {
             get { return GetProperty(ImeZaposlenikaProperty); }
@@ -47,7 +48,7 @@ namespace Autoservis
 
 
         private static PropertyInfo<string> UlicaZaposlenikaProperty =
-        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.UlicaZaposlenika)));
+        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.UlicaZaposlenika),"Ulica"));
         public string UlicaZaposlenika
         {
             get { return GetProperty(UlicaZaposlenikaProperty); }
@@ -55,7 +56,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> KucniBrojZaposlenikaProperty =
-        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.KucniBrojZaposlenika)));
+        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<string>(Reflector.GetPropertyName<Zaposlenik>(x => x.KucniBrojZaposlenika),"Kućni broj"));
         public string KucniBrojZaposlenika
         {
             get { return GetProperty(KucniBrojZaposlenikaProperty); }
@@ -63,7 +64,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<Mjesto> MjestoZaposlenikaProperty =
-        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<Mjesto>(Reflector.GetPropertyName<Zaposlenik>(x => x.MjestoZaposlenika)));
+        RegisterProperty(typeof(Zaposlenik), new PropertyInfo<Mjesto>(Reflector.GetPropertyName<Zaposlenik>(x => x.MjestoZaposlenika),"Mjesto"));
         public Mjesto MjestoZaposlenika
         {
             get { return GetProperty(MjestoZaposlenikaProperty); }
@@ -79,7 +80,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<DateTime> DatumZaposlenjaProperty =
-       RegisterProperty(typeof(Zaposlenik), new PropertyInfo<DateTime>(Reflector.GetPropertyName<Zaposlenik>(x => x.DatumZaposlenja)));
+       RegisterProperty(typeof(Zaposlenik), new PropertyInfo<DateTime>(Reflector.GetPropertyName<Zaposlenik>(x => x.DatumZaposlenja),"Datum zaposlenja"));
         public DateTime DatumZaposlenja
         {
             get { return GetProperty(DatumZaposlenjaProperty); }
@@ -87,7 +88,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<ObradaSudioniciList> ObradeProperty =
-       RegisterProperty(typeof(Zaposlenik), new PropertyInfo<ObradaSudioniciList>(Reflector.GetPropertyName<Zaposlenik>(x => x.DatumZaposlenja)));
+       RegisterProperty(typeof(Zaposlenik), new PropertyInfo<ObradaSudioniciList>(Reflector.GetPropertyName<Zaposlenik>(x => x.DatumZaposlenja),"Obrade"));
         public ObradaSudioniciList Obrade
         {
             get
@@ -106,16 +107,16 @@ namespace Autoservis
         #region  Validation Rules
         protected override void AddBusinessRules()
         {
-            ValidationRules.AddRule(CommonRules.StringRequired, ImeZaposlenikaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), ImeZaposlenikaProperty);
             ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(ImeZaposlenikaProperty, 25));
 
-            ValidationRules.AddRule(CommonRules.StringRequired, PrezimeZaposlenikaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), PrezimeZaposlenikaProperty);
             ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(PrezimeZaposlenikaProperty, 25));
 
-            ValidationRules.AddRule(CommonRules.StringRequired, UlicaZaposlenikaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), UlicaZaposlenikaProperty);
             ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(UlicaZaposlenikaProperty, 50));
 
-            ValidationRules.AddRule(CommonRules.StringRequired, KucniBrojZaposlenikaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), KucniBrojZaposlenikaProperty);
             ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(KucniBrojZaposlenikaProperty, 10));
         }
         #endregion

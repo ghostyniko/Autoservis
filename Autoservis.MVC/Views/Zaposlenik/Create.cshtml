@@ -9,66 +9,99 @@
 }
 
 
-@using (Html.BeginForm())
+
+
+@using (Html.BeginForm("Create", "Zaposlenik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    <div class="noviPodatak">
-        <table>
-            <tbody>
-                <tr>
-                    <td>Ime</td>
-                    <td>@Html.EditorFor(zap => zap.ImeZaposlenika)</td>
-                </tr>
-                <tr>
-                    <td>Prezime</td>
-                    <td>@Html.EditorFor(zap => zap.PrezimeZaposlenika)</td>
-                </tr>
-                
-                <tr>
-                    <td>Ulica</td>
-                    <td>@Html.EditorFor(zap => zap.UlicaZaposlenika)</td>
-                </tr>
-                <tr>
-                    <td>Kućni broj</td>
-                    <td>@Html.EditorFor(zap => zap.KucniBrojZaposlenika)</td>
-                </tr>
-                <tr>
-                    <td>Datum zaposlenja</td>
-                    <td>@Html.TextBoxFor(zap => zap.DatumZaposlenja,new { @class="datum"})</td>
-                </tr>
-                <tr>
-                    <td>Mjesto</td>
-                    <td>
-                        @Html.DropDownListFor(zap=>zap.IdMjesto,
-                       new SelectList(listaMjesta, "Key", "Value"),
-                       "Mjesto",
-                       new { @class = "form-control" })
-                    </td>
+    @Html.AntiForgeryToken()
+    <h4>Unos novog zaposlenika.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
 
-                </tr>
-
-            <tr>
-                <td>
-                    <a class="submit">Spremi</a>
-                </td>
-                <td>@Html.ActionLink("Odustani", "Index")</td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PrezimeZaposlenika, "Prezime", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.PrezimeZaposlenika, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.PrezimeZaposlenika, "", new { @class = "text-danger" })
+        </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ImeZaposlenika, "Ime", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.ImeZaposlenika, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.ImeZaposlenika, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UlicaZaposlenika, "Ulica", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.UlicaZaposlenika, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.UlicaZaposlenika, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.KucniBrojZaposlenika, "Kućni broj", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.KucniBrojZaposlenika, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.KucniBrojZaposlenika, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdMjesto, "Mjesto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.DropDownListFor(m => m.IdMjesto, new SelectList(listaMjesta, "Key", "Value"), new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(m => m.IdMjesto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DatumZaposlenja, "Datum zaposlenja", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.DatumZaposlenja, new { htmlAttributes = new { @class = "form-control datum",id="txtSelectedDate" } })
+            @Html.ValidationMessageFor(m => m.DatumZaposlenja, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Unesi" />
+        </div>
+    </div>
+
 }
 
 
 @{Html.RenderPartial("ValidationError");}
 
-    <script language="javascript" type="text/javascript">
-	$(function () {
-		$.datepicker.setDefaults($.extend(
-			    { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
-	       	)); //default postavke kalendara
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $.datepicker.setDefaults($.extend(
+            { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
+        )); //default postavke kalendara
 
         $('.datum').datepicker();
         $('.datum').val('01.01.2000.');
-       // $('.datum').datepicker("setDate", new Date());
-	});
+        // $('.datum').datepicker("setDate", new Date());
+    });
 
-    </script>
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#txtSelectedDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "tr"
+        });
+    });
+
+</script>
