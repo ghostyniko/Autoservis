@@ -497,7 +497,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CusomBinders\" />
+    <Folder Include="ExceptionFilters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Autoservis.BLL\Autoservis.BLL.csproj">

@@ -71,7 +71,7 @@ namespace Autoservis.MVC.Controllers
      
         public ActionResult Create([Bind(Include ="IdKlijenta,Vozilo")]VoziloViewModel voziloViewModel)
         {
-            var req = HttpContext.Request;
+          
             if (ModelState.IsValid)
             {
                 try
