@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autoservis.MVC.ViewModel;
+using System;
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +48,12 @@ namespace Autoservis.MVC.Controllers
         [HttpGet]
         public ActionResult Create(int IdKlijenta)
         {
-            Vozilo v = Vozilo.New();
-            v.Vlasnik = Klijent.Get(IdKlijenta);
+            var viewModel = new VoziloViewModel() 
+            { 
+                IdKlijenta = IdKlijenta
+            };
 
-            return View(v);
+            return View(viewModel);
         }
 
 
@@ -65,16 +68,30 @@ namespace Autoservis.MVC.Controllers
         /// <returns>Ovisno o uspjehu unosa, vraća se odgovarajući pogled. U slučaju uspjeha, vrši se preusmjeravanje na akciju koja vraća pogled s detaljima novog vozila. U
         /// slučaju pogreške, vraća se pogled s obrascem za unos podataka s obavijestima o pogreškama.</returns>
         [HttpPost]
-        public ActionResult Create(int IdKlijenta, string MarkaVozila, string TipVozila, short GodinaProizvodnje)
+     
+        public ActionResult Create([Bind(Include ="IdKlijenta,Vozilo")]VoziloViewModel voziloViewModel)
         {
-            Vozilo vozilo = Vozilo.New();
+            var req = HttpContext.Request;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    voziloViewModel.Vozilo.Vlasnik = Klijent.Get(voziloViewModel.IdKlijenta);
+                    voziloViewModel.Vozilo.Save();
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Pogreska = ex.Message;
+                    return View(voziloViewModel);
+                }
+            }
+           
+            return View(voziloViewModel);
+        /*
             try
             {
                 vozilo.Vlasnik = Klijent.Get(IdKlijenta);
-                vozilo.MarkaVozila = MarkaVozila;
-                vozilo.TipVozila = TipVozila;
-                vozilo.GodinaProizvodnje = GodinaProizvodnje;
-
+                
                 // System.Diagnostics.Debug.WriteLine(ImeKlijenta + " "+PrezimeKlijenta +" " +UlicaKlijenta + " " +KucniBrojKlijenta + " " +"");
 
                 vozilo = vozilo.Save();
@@ -104,7 +121,7 @@ namespace Autoservis.MVC.Controllers
             {
                 ViewBag.Pogreska = ex.Message;
                 return View(vozilo);
-            }
+            }*/
         }
 
         /// <summary>Obrađuje GET zahtjev.</summary>

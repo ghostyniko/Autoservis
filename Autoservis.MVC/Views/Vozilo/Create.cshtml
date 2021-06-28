@@ -1,36 +1,37 @@
-﻿@model Autoservis.Vozilo
+﻿@model Autoservis.MVC.ViewModel.VoziloViewModel
 
 @{
     ViewBag.Title = "Unos novog vozila";
 }
 
-@using (Html.BeginForm(new { IdKlijenta = Model.Vlasnik.IdKlijenta }))
+@using (Html.BeginForm(new { IdKlijenta = Model.IdKlijenta}))
 {
     <div class="noviPodatak">
         <table>
             <tbody>
                 <tr>
                     <td>Vlasnik</td>
-                    <td>@Model.Vlasnik.PrezimeKlijenta</td>
+                    <td>Vlasnik</td>
                 </tr>
                 <tr>
                     <td>Marka</td>
-                    <td>@Html.EditorFor(voz => voz.MarkaVozila)</td>
+                    <td>@Html.EditorFor(m=>m.Vozilo.MarkaVozila)</td>
+                    <td>@Html.ValidationMessageFor(m => m.Vozilo.MarkaVozila, "", new { @class = "text-danger" })</td>
                 </tr>
                 <tr>
                     <td>Tip</td>
-                    <td>@Html.EditorFor(voz => voz.TipVozila)</td>
+                    <td>@Html.EditorFor(m=>m.Vozilo.TipVozila)</td>
                 </tr>
                 <tr>
                     <td>Godina proizvodnje</td>
-                    <td>@Html.EditorFor(voz => voz.GodinaProizvodnje)</td>
+                    <td>@Html.EditorFor(m=>m.Vozilo.GodinaProizvodnje)</td>
                 </tr>
                 <tr></tr>
                 <tr>
                     <td>
                         <a class="submit">Spremi</a>
                     </td>
-                    <td>@Html.ActionLink("Odustani", "Details", "Klijent", new { IdKlijenta = Model.Vlasnik.IdKlijenta }, null)</td>
+                    <td>@Html.ActionLink("Odustani", "Details", "Klijent", new { IdKlijenta = Model.IdKlijenta}, null)</td>
                 </tr>
             </tbody>
         </table>
