@@ -10,7 +10,7 @@ using Csla;
 using Csla.Data;
 using Csla.Validation;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class Mjesto : BusinessBase<Mjesto>

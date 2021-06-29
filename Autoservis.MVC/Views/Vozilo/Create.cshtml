@@ -1,43 +1,51 @@
-﻿@model Autoservis.MVC.ViewModel.VoziloViewModel
+﻿@model Autoservis.BLL.Vozilo
 
 @{
-    ViewBag.Title = "Unos novog vozila";
+    ViewBag.Title = "Unos novog vozila za korisnika "+Model.Vlasnik.PrezimeKlijenta;
 }
 
-@using (Html.BeginForm(new { IdKlijenta = Model.IdKlijenta}))
+@{
+    
+}
+
+
+@using (Html.BeginForm("Create", "Vozilo",new { IdKlijenta = Model.Vlasnik.IdKlijenta}, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    <div class="noviPodatak">
-        <table>
-            <tbody>
-                <tr>
-                    <td>Vlasnik</td>
-                    <td>Vlasnik</td>
-                </tr>
-                <tr>
-                    <td>Marka</td>
-                    <td>@Html.EditorFor(m=>m.Vozilo.MarkaVozila)</td>
-                    <td>@Html.ValidationMessageFor(m => m.Vozilo.MarkaVozila, "", new { @class = "text-danger" })</td>
-                </tr>
-                <tr>
-                    <td>Tip</td>
-                    <td>@Html.EditorFor(m=>m.Vozilo.TipVozila)</td>
-                </tr>
-                <tr>
-                    <td>Godina proizvodnje</td>
-                    <td>@Html.EditorFor(m=>m.Vozilo.GodinaProizvodnje)</td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td>
-                        <a class="submit">Spremi</a>
-                    </td>
-                    <td>@Html.ActionLink("Odustani", "Details", "Klijent", new { IdKlijenta = Model.IdKlijenta}, null)</td>
-                </tr>
-            </tbody>
-        </table>
+    @Html.AntiForgeryToken()
+    <h4>Unos novog vozila.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m=>m.MarkaVozila,"Marka vozila", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.MarkaVozila, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.MarkaVozila, "", new { @class = "text-danger" })
+        </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.TipVozila, "Tip vozila", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.TipVozila, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.TipVozila, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.GodinaProizvodnje, "Godina proizvodnje", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.GodinaProizvodnje, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.GodinaProizvodnje, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Unesi" />
+        </div>
+    </div>
+
 }
-
-
-@{Html.RenderPartial("ValidationError");}
 

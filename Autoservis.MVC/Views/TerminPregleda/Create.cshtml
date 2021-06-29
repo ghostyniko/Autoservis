@@ -1,7 +1,7 @@
-﻿@model Autoservis.TerminPregleda
+﻿@model Autoservis.BLL.TerminPregleda
 
 @{
-    var klijent = Autoservis.Klijent.Get(Model.IdKlijenta);
+    var klijent = Autoservis.BLL.Klijent.Get(Model.IdKlijenta);
     ViewBag.Title = "Novi termin za klijenta " + klijent.PrezimeKlijenta;
     var listaAutomobila = klijent.KlijentVozila;
     var defaultId = listaAutomobila[0].IdVozila;

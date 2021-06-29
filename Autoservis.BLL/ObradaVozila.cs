@@ -19,7 +19,7 @@ using Autoservis.DAL;
 using Autoservis.Properties;
 
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class ObradaVozila:BusinessBase<ObradaVozila>

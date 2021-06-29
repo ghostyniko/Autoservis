@@ -10,7 +10,7 @@ using Csla.Validation;
 using Autoservis.DAL;
 using Autoservis.CustomRuleHandlers;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class Zaposlenik:BusinessBase<Zaposlenik>

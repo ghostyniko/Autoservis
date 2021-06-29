@@ -407,6 +407,7 @@
     <Compile Include="Controllers\VoditeljController.cs" />
     <Compile Include="Controllers\VoziloController.cs" />
     <Compile Include="Controllers\ZaposlenikController.cs" />
+    <Compile Include="ExceptionFilters\CslaValidationExeption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -437,7 +438,6 @@
     <Content Include="Views\Shared\ValidationError.cshtml" />
     <Content Include="Views\Klijent\Index.cshtml" />
     <Content Include="Views\Klijent\Details.cshtml" />
-    <Content Include="Views\Vozilo\Create.cshtml" />
     <Content Include="Views\Klijent\Vozila.cshtml" />
     <Content Include="Views\Zaposlenik\Index.cshtml" />
     <Content Include="Views\Zaposlenik\Create.cshtml" />
@@ -488,6 +488,7 @@
     <Content Include="Views\Shared\_UnregisteredUserSidebar.cshtml" />
     <Content Include="Views\Shared\_RegisteredUserSidebar.cshtml" />
     <Content Include="Views\Shared\_AdminSidebar.cshtml" />
+    <Content Include="Views\Vozilo\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -497,7 +498,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ExceptionFilters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Autoservis.BLL\Autoservis.BLL.csproj">

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Csla;
 using Autoservis.Properties;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class ObradaSudioniciList: BusinessListBase<ObradaSudioniciList, ObradaSudionici>

@@ -1,4 +1,4 @@
-﻿using Autoservis;
+﻿using Autoservis.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace Autoservis.MVC.Controllers
                 mjesto.PostanskiBroj = PostanskiBroj;
 
                 mjesto = mjesto.Save();
-                Autoservis.MjestoList.InvalidateCache();
+                Autoservis.BLL.MjestoList.InvalidateCache();
 
                 return RedirectToAction("Index", "Home");
             }

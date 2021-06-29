@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Autoservis.BLL;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Autoservis.MVC.Models

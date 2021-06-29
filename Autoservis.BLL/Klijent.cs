@@ -11,7 +11,7 @@ using Autoservis.DAL;
 using Autoservis.CustomRuleHandlers;
 using Autoservis.Properties;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class Klijent:BusinessBase<Klijent>

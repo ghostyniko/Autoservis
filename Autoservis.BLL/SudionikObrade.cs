@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Csla;
 using Csla.Validation;
-namespace Autoservis
+
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class SudionikObrade:BusinessBase<SudionikObrade>

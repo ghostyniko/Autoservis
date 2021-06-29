@@ -1,4 +1,4 @@
-﻿@model Autoservis.Klijent
+﻿@model Autoservis.BLL.Klijent
 
 
 @{
@@ -6,8 +6,8 @@
 }
 
 @{
-    Autoservis.MjestoList listaMjesta = Autoservis.MjestoList.Get();
-    var defaultValue = Autoservis.MjestoList.Get(listaMjesta, Model.MjestoKlijenta.IdMjesta);
+    Autoservis.BLL.MjestoList listaMjesta = Autoservis.BLL.MjestoList.Get();
+    var defaultValue = Autoservis.BLL.MjestoList.Get(listaMjesta, Model.MjestoKlijenta.IdMjesta);
 }
 
 

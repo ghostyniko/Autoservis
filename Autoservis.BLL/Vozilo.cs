@@ -9,7 +9,7 @@ using Csla.Data;
 using Csla.Validation;
 using Autoservis.DAL;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     [Serializable()]
     public class Vozilo:BusinessBase<Vozilo>
@@ -30,7 +30,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> MarkaVozilaProperty =
-        RegisterProperty(typeof(Vozilo), new PropertyInfo<string>(Reflector.GetPropertyName<Vozilo>(x => x.MarkaVozila)));
+        RegisterProperty(typeof(Vozilo), new PropertyInfo<string>(Reflector.GetPropertyName<Vozilo>(x => x.MarkaVozila),"Marka vozila"));
         public string MarkaVozila
         {
             get { return GetProperty(MarkaVozilaProperty); }
@@ -38,7 +38,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<string> TipVozilaProperty =
-        RegisterProperty(typeof(Vozilo), new PropertyInfo<string>(Reflector.GetPropertyName<Vozilo>(x => x.TipVozila)));
+        RegisterProperty(typeof(Vozilo), new PropertyInfo<string>(Reflector.GetPropertyName<Vozilo>(x => x.TipVozila),"Tip"));
         public string TipVozila
         {
             get { return GetProperty(TipVozilaProperty); }
@@ -46,7 +46,7 @@ namespace Autoservis
         }
 
         private static PropertyInfo<short> GodinaProizvodnjeProperty =
-        RegisterProperty(typeof(Vozilo), new PropertyInfo<short>(Reflector.GetPropertyName<Vozilo>(x => x.GodinaProizvodnje)));
+        RegisterProperty(typeof(Vozilo), new PropertyInfo<short>(Reflector.GetPropertyName<Vozilo>(x => x.GodinaProizvodnje),"Godina proizvodnje"));
         public short GodinaProizvodnje
         {
             get { return GetProperty(GodinaProizvodnjeProperty); }

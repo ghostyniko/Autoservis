@@ -8,7 +8,7 @@ using Csla.Data;
 using Csla.Validation;
 using Autoservis.DAL;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     public class MjestoList: NameValueListBase<int, string>
     {

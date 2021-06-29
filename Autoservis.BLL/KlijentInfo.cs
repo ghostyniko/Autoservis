@@ -8,7 +8,7 @@ using Csla.Data;
 using Csla.Validation;
 
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     public class KlijentInfo:ReadOnlyBase<KlijentInfo>
     {
