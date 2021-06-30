@@ -17,21 +17,7 @@
 
 
     @foreach (var item in Model)
-    /* {
-     <tr>
-         <td>
-
-             @Html.ActionLink(item.NazVozila, "Details", "Vozilo", new { IdVozila = item.IdVozila }, null)
-         </td>
-         <td>
-             @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }))
-             {
-                 <a class="delete">Obriši</a>
-             }
-         </td>
-
-     </tr>
-     }*/
+   
     {
         <tr>
             <td>
@@ -44,7 +30,9 @@
                 @Html.Encode(item.GodinaProizvodnje)
             </td>
             <td class="text-right">
-                @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }))
+                @Html.ActionLink("Detalji","Details", "Vozilo", new { IdVozila = item.IdVozila }, new { @class = "btn-sm btn-primary", style = "text-decoration:none;" })
+
+                @using (Html.BeginForm("IzbrisiVozilo", "Klijent", new { IdKlijenta = ViewData["IdKlijenta"], IdVozila = item.IdVozila }, FormMethod.Post, new { style = "display:inline;" }))
                 {
                     <a class="delete btn-sm btn-danger">Obriši</a>
                 }

@@ -4,23 +4,31 @@
     ViewBag.Title = "Zaposlenici";
 }
 
-<table class="tablica">
+<table class="table table-striped table-dark">
     <tr>
         <th>
-            Zaposlenik
+            Prezime
+        </th>
+        <th>
+            Ime
         </th>
         <th></th>
     </tr>
     @foreach (var item in Model)
+
     {
         <tr>
             <td>
-                @Html.ActionLink(item.NazOsobe, "Details", new { IdZaposlenika = item.IdZaposlenika })
+                @Html.Encode(item.Prezime)
             </td>
             <td>
-                @using (Html.BeginForm("Delete", "Zaposlenik", new { IdZaposlenika = item.IdZaposlenika }))
+                @Html.Encode(item.Ime)
+            </td>
+            <td class="text-right">
+                @Html.ActionLink("Detalji", "Details", new { IdZaposlenika = item.IdZaposlenika}, new { @class = "btn-sm btn-primary", style = "text-decoration:none;" })
+                @using (Html.BeginForm("Delete", "Klijent", new { IdZaposlenika = item.IdZaposlenika }, FormMethod.Post, new { style = "display:inline;" }))
                 {
-                    <a class="delete">Obriši</a>
+                    <a class="delete btn-sm btn-danger">Obriši</a>
                 }
             </td>
         </tr>
