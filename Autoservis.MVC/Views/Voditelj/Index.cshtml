@@ -33,7 +33,7 @@
                 @Html.Label("Labela", new {@class=item.Status})
             </td>
 
-            @if ((item.Status == Autoservis.Status.Ponisteno) || (item.Status == Autoservis.Status.PrihvatioAutoservis) || (item.Status == Autoservis.Status.PrihvatioKlijent))
+            @if ((item.Status == Autoservis.BLL.Status.Ponisteno) || (item.Status == Autoservis.BLL.Status.PrihvatioAutoservis) || (item.Status == Autoservis.BLL.Status.PrihvatioKlijent))
         {
             <td>
 
@@ -47,7 +47,7 @@
 
 
         }
-        else if (item.Status == Autoservis.Status.PonudaKlijenta)
+        else if (item.Status == Autoservis.BLL.Status.PonudaKlijenta)
         {
             <td>@Html.ActionLink("Ponudi novi termin", "UrediTermin", new { IdTermina = item.IdTermina }, null)</td>
             <td>@Html.ActionLink("Prihvati termin", "PrihvatiTermin", new { IdTermina = item.IdTermina }, null)</td>

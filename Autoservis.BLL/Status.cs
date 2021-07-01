@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Autoservis
+namespace Autoservis.BLL
 {
     public enum Status
     {

@@ -1,33 +1,6 @@
 ﻿@model Autoservis.BLL.TerminPregleda
 
 
-<div class="noviPodatak">
-    <table>
-        <tbody>
-
-            <tr>
-                <td>Naziv vozila</td>
-                <td>@Model.Vozilo.PuniNazivVozila</td>
-            </tr>
-            <tr>
-                <td>Prezime klijenta</td>
-                <td>@Model.Klijent.PrezimeKlijenta</td>
-            </tr>
-            <tr>
-                <td>Ime klijenta</td>
-                <td>@Model.Klijent.ImeKlijenta</td>
-            </tr>
-            <tr>
-                <td>Datum </td>
-                <td>@Model.DatumIVrijemeTermina.ToLongDateString()</td>
-            </tr>
-            <tr>
-                <td>Status</td>
-                <td>@Autoservis.StatusHelper.GetString(Model.Status)</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 
 <div class="bg-info p-5 rounded">
     <h4>Detalji termina</h4>
@@ -68,7 +41,7 @@
             Status
         </dt>
         <dd>
-            @Html.Encode(Autoservis.StatusHelper.GetString(Model.Status))
+            @Html.Encode(Autoservis.BLL.StatusHelper.GetString(Model.Status))
         </dd>
 
     </dl>

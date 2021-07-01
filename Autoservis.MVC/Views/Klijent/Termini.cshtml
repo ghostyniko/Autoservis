@@ -27,14 +27,14 @@
         <td>@Html.Label("Labela", new { @class = item.Status })</td>
        
 
-        @if (item.Status == Autoservis.Status.PonudaAutoservisa)
+        @if (item.Status == Autoservis.BLL.Status.PonudaAutoservisa)
         {
             <td>@Html.ActionLink("Potvdri termin", "PrihvatiTermin", new { IdTermina = item.IdTermina })</td>
             <td>@Html.ActionLink("Ponudi novi termin", "UrediTermin",  new { IdTermina = item.IdTermina })</td>
             <td>@Html.ActionLink("Poništi termin", "PonistiTermin", new { IdTermina = item.IdTermina })</td>
 
         }
-        else if (item.Status == Autoservis.Status.PonudaKlijenta)
+        else if (item.Status == Autoservis.BLL.Status.PonudaKlijenta)
         {
             <td>@Html.ActionLink("Poništi termin", "PonistiTermin", new { IdTermina = item.IdTermina })</td>
         }

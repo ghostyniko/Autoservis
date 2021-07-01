@@ -1,6 +1,6 @@
 ﻿<WorkflowService mc:Ignorable="sap sap2010 sads" p1:TextExpression.Namespaces="{x:Reference __ReferenceID1}" p1:TextExpression.References="{x:Reference __ReferenceID2}" ConfigurationName="MyService" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="WorkflowService_1" Name="MyService"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
- xmlns:a="clr-namespace:Autoservis;assembly=Autoservis.BLL"
+ xmlns:a="clr-namespace:Autoservis.BLL;assembly=Autoservis.BLL"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
  xmlns:p="http://tempuri.org/"

@@ -1,6 +1,6 @@
 ﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Autoservis.MVC.Appointment"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:a="clr-namespace:Autoservis;assembly=Autoservis.BLL"
+ xmlns:ab="clr-namespace:Autoservis.BLL;assembly=Autoservis.BLL"
  xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:local="clr-namespace:Autoservis.MVC.Services"
  xmlns:local1="clr-namespace:Autoservis.MVC"
@@ -14,7 +14,7 @@
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="IsValid" Type="OutArgument(x:Boolean)" />
-    <x:Property Name="Termin" Type="InArgument(a:TerminPregleda)" />
+    <x:Property Name="Termin" Type="InArgument(ab:TerminPregleda)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
   <sap2010:WorkflowViewState.IdRef>Autoservis.MVC.Appointment_1</sap2010:WorkflowViewState.IdRef>
@@ -30,11 +30,22 @@
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Antlr3.Runtime</AssemblyReference>
       <AssemblyReference>Csla</AssemblyReference>
       <AssemblyReference>EntityFramework</AssemblyReference>
       <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.AspNet.Identity.Core</AssemblyReference>
+      <AssemblyReference>Microsoft.AspNet.Identity.EntityFramework</AssemblyReference>
+      <AssemblyReference>Microsoft.AspNet.Identity.Owin</AssemblyReference>
       <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.Owin</AssemblyReference>
+      <AssemblyReference>Microsoft.Owin.Host.SystemWeb</AssemblyReference>
+      <AssemblyReference>Microsoft.Owin.Security</AssemblyReference>
+      <AssemblyReference>Microsoft.Owin.Security.Cookies</AssemblyReference>
+      <AssemblyReference>Microsoft.Owin.Security.OAuth</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>NLog</AssemblyReference>
+      <AssemblyReference>Owin</AssemblyReference>
       <AssemblyReference>PresentationCore</AssemblyReference>
       <AssemblyReference>PresentationFramework</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
@@ -54,6 +65,7 @@
       <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
       <AssemblyReference>System.Web.Extensions</AssemblyReference>
+      <AssemblyReference>System.Web.Optimization</AssemblyReference>
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
@@ -62,6 +74,7 @@
       <AssemblyReference>System.Configuration</AssemblyReference>
       <AssemblyReference>System.Web.Services</AssemblyReference>
       <AssemblyReference>System.EnterpriseServices</AssemblyReference>
+      <AssemblyReference>WebGrease</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>System.Web.Razor</AssemblyReference>
       <AssemblyReference>System.Web.WebPages</AssemblyReference>
@@ -102,27 +115,27 @@
       <If.Then>
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
           <Sequence.Variables>
-            <Variable x:TypeArguments="a:TerminPregleda" Name="newTermin" />
+            <Variable x:TypeArguments="ab:TerminPregleda" Name="newTermin" />
           </Sequence.Variables>
           <Flowchart sap2010:WorkflowViewState.IdRef="Flowchart_1">
             <Flowchart.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="IsDateChanged" />
             </Flowchart.Variables>
             <Flowchart.StartNode>
-              <FlowSwitch x:TypeArguments="a:Status" x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
+              <FlowSwitch x:TypeArguments="ab:Status" x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
                 <FlowSwitch.Expression>
-                  <mca:CSharpValue x:TypeArguments="a:Status">Termin.Status</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="ab:Status">Termin.Status</mca:CSharpValue>
                 </FlowSwitch.Expression>
                 <FlowStep x:Key="Kreirano" x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_8">
                   <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
                     <Assign.To>
-                      <OutArgument x:TypeArguments="a:Status">
-                        <mca:CSharpReference x:TypeArguments="a:Status">Termin.Status</mca:CSharpReference>
+                      <OutArgument x:TypeArguments="ab:Status">
+                        <mca:CSharpReference x:TypeArguments="ab:Status">Termin.Status</mca:CSharpReference>
                       </OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="a:Status">
-                        <mca:CSharpValue x:TypeArguments="a:Status">Status.PonudaKlijenta</mca:CSharpValue>
+                      <InArgument x:TypeArguments="ab:Status">
+                        <mca:CSharpValue x:TypeArguments="ab:Status">BLL.Status.PonudaKlijenta</mca:CSharpValue>
                       </InArgument>
                     </Assign.Value>
                   </Assign>
@@ -144,13 +157,13 @@
                 <FlowStep x:Key="Ponisteno" x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_9">
                   <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
                     <Assign.To>
-                      <OutArgument x:TypeArguments="a:Status">
-                        <mca:CSharpReference x:TypeArguments="a:Status">Termin.Status</mca:CSharpReference>
+                      <OutArgument x:TypeArguments="ab:Status">
+                        <mca:CSharpReference x:TypeArguments="ab:Status">Termin.Status</mca:CSharpReference>
                       </OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="a:Status">
-                        <mca:CSharpValue x:TypeArguments="a:Status">Status.Ponisteno</mca:CSharpValue>
+                      <InArgument x:TypeArguments="ab:Status">
+                        <mca:CSharpValue x:TypeArguments="ab:Status">BLL.Status.Ponisteno</mca:CSharpValue>
                       </InArgument>
                     </Assign.Value>
                   </Assign>
@@ -158,8 +171,8 @@
                     <FlowStep x:Name="__ReferenceID16" sap2010:WorkflowViewState.IdRef="FlowStep_18">
                       <local:NotifyAutoservisCanceled sap2010:WorkflowViewState.IdRef="NotifyAutoservisCanceled_1">
                         <local:NotifyAutoservisCanceled.NoviTermin>
-                          <InArgument x:TypeArguments="a:TerminPregleda">
-                            <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                          <InArgument x:TypeArguments="ab:TerminPregleda">
+                            <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                           </InArgument>
                         </local:NotifyAutoservisCanceled.NoviTermin>
                       </local:NotifyAutoservisCanceled>
@@ -174,8 +187,8 @@
                       </OutArgument>
                     </local1:Original.IsChanged>
                     <local1:Original.TerminZaProvjeru>
-                      <InArgument x:TypeArguments="a:TerminPregleda">
-                        <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                      <InArgument x:TypeArguments="ab:TerminPregleda">
+                        <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                       </InArgument>
                     </local1:Original.TerminZaProvjeru>
                     <sap2010:WorkflowViewState.ViewStateManager>
@@ -198,13 +211,13 @@
                         <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_5">
                           <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="a:Status">
-                                <mca:CSharpReference x:TypeArguments="a:Status">Termin.Status</mca:CSharpReference>
+                              <OutArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpReference x:TypeArguments="ab:Status">Termin.Status</mca:CSharpReference>
                               </OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="a:Status">
-                                <mca:CSharpValue x:TypeArguments="a:Status">Status.PonudaAutoservisa</mca:CSharpValue>
+                              <InArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpValue x:TypeArguments="ab:Status">BLL.Status.PonudaAutoservisa</mca:CSharpValue>
                               </InArgument>
                             </Assign.Value>
                           </Assign>
@@ -212,8 +225,8 @@
                             <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_13">
                               <local:NotifyClientNewAppointment sap2010:WorkflowViewState.IdRef="NotifyClientNewAppointment_1">
                                 <local:NotifyClientNewAppointment.NoviTermin>
-                                  <InArgument x:TypeArguments="a:TerminPregleda">
-                                    <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                                  <InArgument x:TypeArguments="ab:TerminPregleda">
+                                    <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                                   </InArgument>
                                 </local:NotifyClientNewAppointment.NoviTermin>
                               </local:NotifyClientNewAppointment>
@@ -225,13 +238,13 @@
                         <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_6">
                           <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="a:Status">
-                                <mca:CSharpReference x:TypeArguments="a:Status">Termin.Status</mca:CSharpReference>
+                              <OutArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpReference x:TypeArguments="ab:Status">Termin.Status</mca:CSharpReference>
                               </OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="a:Status">
-                                <mca:CSharpValue x:TypeArguments="a:Status">Status.PrihvatioAutoservis</mca:CSharpValue>
+                              <InArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpValue x:TypeArguments="ab:Status">BLL.Status.PrihvatioAutoservis</mca:CSharpValue>
                               </InArgument>
                             </Assign.Value>
                           </Assign>
@@ -239,8 +252,8 @@
                             <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_12">
                               <local:NotifyClientAccepted sap2010:WorkflowViewState.IdRef="NotifyClientAccepted_1">
                                 <local:NotifyClientAccepted.NoviTermin>
-                                  <InArgument x:TypeArguments="a:TerminPregleda">
-                                    <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                                  <InArgument x:TypeArguments="ab:TerminPregleda">
+                                    <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                                   </InArgument>
                                 </local:NotifyClientAccepted.NoviTermin>
                               </local:NotifyClientAccepted>
@@ -259,8 +272,8 @@
                       </OutArgument>
                     </local1:Original.IsChanged>
                     <local1:Original.TerminZaProvjeru>
-                      <InArgument x:TypeArguments="a:TerminPregleda">
-                        <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                      <InArgument x:TypeArguments="ab:TerminPregleda">
+                        <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                       </InArgument>
                     </local1:Original.TerminZaProvjeru>
                     <sap2010:WorkflowViewState.ViewStateManager>
@@ -283,13 +296,13 @@
                         <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_2">
                           <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="a:Status">
-                                <mca:CSharpReference x:TypeArguments="a:Status">Termin.Status</mca:CSharpReference>
+                              <OutArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpReference x:TypeArguments="ab:Status">Termin.Status</mca:CSharpReference>
                               </OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="a:Status">
-                                <mca:CSharpValue x:TypeArguments="a:Status">Status.PonudaKlijenta</mca:CSharpValue>
+                              <InArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpValue x:TypeArguments="ab:Status">BLL.Status.PonudaKlijenta</mca:CSharpValue>
                               </InArgument>
                             </Assign.Value>
                           </Assign>
@@ -297,8 +310,8 @@
                             <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_15">
                               <local:NotifyAutoservisNewAppointment sap2010:WorkflowViewState.IdRef="NotifyAutoservisNewAppointment_2">
                                 <local:NotifyAutoservisNewAppointment.NoviTermin>
-                                  <InArgument x:TypeArguments="a:TerminPregleda">
-                                    <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                                  <InArgument x:TypeArguments="ab:TerminPregleda">
+                                    <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                                   </InArgument>
                                 </local:NotifyAutoservisNewAppointment.NoviTermin>
                               </local:NotifyAutoservisNewAppointment>
@@ -310,13 +323,13 @@
                         <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_3">
                           <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="a:Status">
-                                <mca:CSharpReference x:TypeArguments="a:Status">Termin.Status</mca:CSharpReference>
+                              <OutArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpReference x:TypeArguments="ab:Status">Termin.Status</mca:CSharpReference>
                               </OutArgument>
                             </Assign.To>
                             <Assign.Value>
-                              <InArgument x:TypeArguments="a:Status">
-                                <mca:CSharpValue x:TypeArguments="a:Status">Status.PrihvatioKlijent</mca:CSharpValue>
+                              <InArgument x:TypeArguments="ab:Status">
+                                <mca:CSharpValue x:TypeArguments="ab:Status">BLL.Status.PrihvatioKlijent</mca:CSharpValue>
                               </InArgument>
                             </Assign.Value>
                           </Assign>
@@ -324,8 +337,8 @@
                             <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_16">
                               <local:NotifyAutoservisAccepted sap2010:WorkflowViewState.IdRef="NotifyAutoservisAccepted_1">
                                 <local:NotifyAutoservisAccepted.NoviTermin>
-                                  <InArgument x:TypeArguments="a:TerminPregleda">
-                                    <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+                                  <InArgument x:TypeArguments="ab:TerminPregleda">
+                                    <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
                                   </InArgument>
                                 </local:NotifyAutoservisAccepted.NoviTermin>
                               </local:NotifyAutoservisAccepted>
@@ -356,14 +369,14 @@
             <x:Reference>__ReferenceID15</x:Reference>
             <x:Reference>__ReferenceID16</x:Reference>
           </Flowchart>
-          <InvokeMethod sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Spremi" TargetType="a:TerminPregleda">
+          <InvokeMethod sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Spremi" TargetType="ab:TerminPregleda">
             <InvokeMethod.Result>
-              <OutArgument x:TypeArguments="a:TerminPregleda">
-                <mca:CSharpReference x:TypeArguments="a:TerminPregleda">newTermin</mca:CSharpReference>
+              <OutArgument x:TypeArguments="ab:TerminPregleda">
+                <mca:CSharpReference x:TypeArguments="ab:TerminPregleda">newTermin</mca:CSharpReference>
               </OutArgument>
             </InvokeMethod.Result>
-            <InArgument x:TypeArguments="a:TerminPregleda">
-              <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Termin</mca:CSharpValue>
+            <InArgument x:TypeArguments="ab:TerminPregleda">
+              <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Termin</mca:CSharpValue>
             </InArgument>
           </InvokeMethod>
           <If sap2010:WorkflowViewState.IdRef="If_2">
@@ -375,8 +388,8 @@
             <If.Then>
               <local:NotifyAutoservisNewAppointment sap2010:WorkflowViewState.IdRef="NotifyAutoservisNewAppointment_3">
                 <local:NotifyAutoservisNewAppointment.NoviTermin>
-                  <InArgument x:TypeArguments="a:TerminPregleda">
-                    <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Autoservis.TerminPregleda.Get(newTermin.IdTermina)</mca:CSharpValue>
+                  <InArgument x:TypeArguments="ab:TerminPregleda">
+                    <mca:CSharpValue x:TypeArguments="ab:TerminPregleda">Autoservis.BLL.TerminPregleda.Get(newTermin.IdTermina)</mca:CSharpValue>
                   </InArgument>
                 </local:NotifyAutoservisNewAppointment.NoviTermin>
               </local:NotifyAutoservisNewAppointment>
@@ -385,7 +398,7 @@
         </Sequence>
       </If.Then>
     </If>
-    <sads:DebugSymbol.Symbol>d0dDOlxVc2Vyc1xtYXRpamFcc291cmNlXHJlcG9zXEF1dG9zZXJ2aXNcQXV0b3NlcnZpcy5NVkNcQXBwb2ludG1lbnQueGFtbDhQA4UDDgIBAVI1UjwCAQJUBV8OAwHGAWAFgwMKAgEDXAtcWAMBywFXC1dZAwHHAWMLY1ECAQRnCYEDFAIBCGsL5gIXAgEg5wIL8AIaAgEV8QILgAMQAgEJchNyXgMBwAH/AROUAiUDAbMBmAIZmAJlAwGtAbcCG8ICJAMBoAHFAh/LAkADAZkBnAIbpwIkAwGMAaoCH7ACRgMBhQGqARO/ASUCAXjDARnDAWUCAXLiARvtASQCAWXwAR/2ATwCAV7HARvSASQCAVHVAR/bAUICAUqRAROcARwCAT2fARelATgCATZ1E4ABHAIBKYMBF4wBIAIBIe4CD+4CWwIBG+oCEeoCaAIBFvQCEfQCVwIBCvgCD/4CNgIBD4cCGYcCZQMBugGCAhmCAm0DAbQBvwIhvwJ2AwGnAboCIboCdAMBoQHIAiXIAnEDAZoBpAIhpAJ0AwGTAZ8CIZ8CdAMBjQGtAiWtAnEDAYYBsgEZsgFlAgF/rQEZrQFtAgF56gEh6gF5AgFs5QEh5QF0AgFm8wEl8wFxAgFfzwEhzwF3AgFYygEhygF0AgFS2AEl2AFxAgFLmQEZmQFnAgFElAEZlAFsAgE+ogEdogFpAgE3fRl9bAIBMHgZeGwCASqKAUOKAUcCASiGAR2GAWsCASL7AhX7Ao0BAgEQ</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d0RDOlxVc2Vyc1xtYXRpamFcRG93bmxvYWRzXEF1dG9zZXJ2aXNcQXV0b3NlcnZpcy5NVkNcQXBwb2ludG1lbnQueGFtbDhdA5IDDgIBAV81XzwCAQJhBWwOAwHGAW0FkAMKAgEDaQtpWAMBywFkC2RZAwHHAXALcFECAQR0CY4DFAIBCHgL8wIXAgEg9AIL/QIaAgEV/gILjQMQAgEJfxN/XwMBwAGMAhOhAiUDAbMBpQIZpQJlAwGtAcQCG88CJAMBoAHSAh/YAkADAZkBqQIbtAIkAwGMAbcCH70CRgMBhQG3ARPMASUCAXjQARnQAWUCAXLvARv6ASQCAWX9AR+DAjwCAV7UARvfASQCAVHiAR/oAUICAUqeAROpARwCAT2sAReyATgCATaCARONARwCASmQAReZASACASH7Ag/7AlwCARv3AhH3AmkCARaBAxGBA1cCAQqFAw+LAzYCAQ+UAhmUAmYDAboBjwIZjwJtAwG0AcwCIcwCewMBpwHHAiHHAnUDAaEB1QIl1QJyAwGaAbECIbECeQMBkwGsAiGsAnUDAY0BugIlugJyAwGGAb8BGb8BZgIBf7oBGboBbQIBefcBIfcBfgIBbPIBIfIBdQIBZoACJYACcgIBX9wBIdwBfAIBWNcBIdcBdQIBUuUBJeUBcgIBS6YBGaYBbAIBRKEBGaEBbQIBPq8BHa8BagIBN4oBGYoBcQIBMIUBGYUBbQIBKpcBQ5cBRwIBKJMBHZMBawIBIogDFYgDkgECARA=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -658,7 +671,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="464,52.8">
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="1074.4,872">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>

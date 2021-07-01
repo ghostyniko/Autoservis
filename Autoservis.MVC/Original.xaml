@@ -1,6 +1,6 @@
 ﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Autoservis.MVC.Original"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:a="clr-namespace:Autoservis;assembly=Autoservis.BLL"
+ xmlns:a="clr-namespace:Autoservis.BLL;assembly=Autoservis.BLL"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
@@ -87,14 +87,14 @@
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="a:TerminPregleda">
-          <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Autoservis.TerminPregleda.Get(TerminZaProvjeru.IdTermina)</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="a:TerminPregleda">Autoservis.BLL.TerminPregleda.Get(TerminZaProvjeru.IdTermina)</mca:CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
     <If sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
-          <mca:CSharpValue x:TypeArguments="x:Boolean">Autoservis.TerminPregleda.Compare(stariTermin,TerminZaProvjeru)</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:Boolean">Autoservis.BLL.TerminPregleda.Compare(stariTermin,TerminZaProvjeru)</mca:CSharpValue>
         </InArgument>
       </If.Condition>
       <If.Then>
