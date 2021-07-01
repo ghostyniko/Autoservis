@@ -20,7 +20,6 @@ namespace Autoservis.MVC.Controllers
         {
             var list = TerminPregledaInfoList.Get();
             
-            ViewBag.Poruke = "";
             return View(list);
         }
 
