@@ -28,3 +28,56 @@
         </tbody>
     </table>
 </div>
+
+<div class="bg-info p-5 rounded">
+    <h4>Detalji termina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Naziv vozila
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vozilo.PuniNazivVozila)
+        </dd>
+
+        <dt>
+            Prezime klijenta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klijent.PrezimeKlijenta)
+        </dd>
+
+        <dt>
+            Ime klijenta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klijent.ImeKlijenta)
+        </dd>
+        <dt>
+            Datum termina
+        </dt>
+        <dd>
+            @Html.Encode(Model.DatumIVrijemeTermina.ToLongDateString())
+        </dd>
+        <dt>
+            Status
+        </dt>
+        <dd>
+            @Html.Encode(Autoservis.StatusHelper.GetString(Model.Status))
+        </dd>
+
+    </dl>
+
+    <div class="d-flex flex-row justify-content-end align-items-center">
+        &nbsp;
+        @using (Html.BeginForm("Delete", "TerminPregleda", new { IdKlijenta = Model.IdKlijenta }))
+        {
+            <a class="delete btn-sm btn-danger">Obriši</a>
+        }
+    </div>
+</div>

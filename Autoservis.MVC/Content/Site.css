@@ -179,7 +179,7 @@ a.btn-sm:hover {
   float: left; 
   padding: 10px; 
   padding-top: 10px; 
-  width: 625px;
+  /*width: 100%;*/
 }
 
 .tablica
@@ -275,9 +275,10 @@ body {
 
 #main {
 	background-color: aquamarine;
-	height: 2000px;
+	min-height: 100vh;
 	
 	margin-left: 200px;
+	width:100%;
 }
 
 #toggleSidebar {
