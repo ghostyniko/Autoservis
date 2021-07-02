@@ -1,0 +1,74 @@
+﻿@model Autoservis.Zaposlenik
+
+@{
+    ViewBag.Title = "Ažuriranje zaposlenika";
+}
+
+@{
+    Autoservis.MjestoList listaMjesta = Autoservis.MjestoList.Get();
+    var defaultMjesto = Autoservis.MjestoList.Get(listaMjesta, Model.IdMjesto);
+}
+
+
+@using (Html.BeginForm(new { IdZaposlenika=Model.IdZaposlenika}))
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Ime</td>
+                    <td>@Html.EditorFor(zap => zap.ImeZaposlenika)</td>
+                </tr>
+                <tr>
+                    <td>Prezime</td>
+                    <td>@Html.EditorFor(zap => zap.PrezimeZaposlenika)</td>
+                </tr>
+
+                <tr>
+                    <td>Ulica</td>
+                    <td>@Html.EditorFor(zap => zap.UlicaZaposlenika)</td>
+                </tr>
+                <tr>
+                    <td>Kućni broj</td>
+                    <td>@Html.EditorFor(zap => zap.KucniBrojZaposlenika)</td>
+                </tr>
+                <tr>
+                    <td>Datum zaposlenja</td>
+                    <td>@Html.TextBoxFor(zap => zap.DatumZaposlenja, new { @class = "datum" })</td>
+                </tr>
+                <tr>
+                    <td>Mjesto</td>
+                    <td>
+                        @Html.DropDownListFor(zap=>zap.IdMjesto,
+                       new SelectList(listaMjesta, "Key", "Value",defaultMjesto.Key),
+                       new { @class = "form-control" })
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    <td>@Html.ActionLink("Odustani", "Details",new{IdZaposlenika=Model.IdZaposlenika })</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@{Html.RenderPartial("ValidationError");}
+
+<script language="javascript" type="text/javascript">
+	$(function () {
+		$.datepicker.setDefaults($.extend(
+			    { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
+	       	)); //default postavke kalendara
+
+        $('.datum').datepicker();
+        $('.datum').val('01.01.2000.');
+       // $('.datum').datepicker("setDate", new Date());
+	});
+
+</script>

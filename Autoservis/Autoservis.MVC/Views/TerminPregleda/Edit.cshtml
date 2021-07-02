@@ -1,0 +1,64 @@
+﻿@model Autoservis.TerminPregleda
+
+@{
+    var oldDatum = Model.DatumIVrijemeTermina;
+    var klijentUredio = ViewBag.KlijentUredio;
+}
+@using (Html.BeginForm(new { @id = "form", IdTermina = Model.IdTermina, klijentUredio = klijentUredio }))
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Ime</td>
+                    <td>@Model.Klijent.ImeKlijenta</td>
+                </tr>
+                <tr>
+                    <td>Prezime</td>
+                    <td>@Model.Klijent.PrezimeKlijenta</td>
+                </tr>
+                <tr>
+                    <td>Ponuđeni datum</td>
+                    <td>@Model.DatumIVrijemeTermina.ToLongDateString()</td>
+                </tr>
+
+                <tr>
+                    <td>Novi datum</td>
+                    <td>
+                        @Html.TextBoxFor(kl => kl.DatumIVrijemeTermina, new { @class = "datum", @id = "datum_termina" })
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    @if (klijentUredio)
+                    {
+                        <td>@Html.ActionLink("Odustani", "Details", "Klijent", new { IdKlijenta = Model.IdKlijenta }, null)</td>
+                    }
+                    else
+                    {
+                        <td> @Html.ActionLink("Odustani", "Index", "Voditelj") </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+@{Html.RenderPartial("ValidationError");}
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $.datepicker.setDefaults($.extend(
+            { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
+        )); //default postavke kalendara
+
+        $('.datum').datepicker();
+        $('.datum').val('01.01.2019.');
+
+    });
+
+
+</script>

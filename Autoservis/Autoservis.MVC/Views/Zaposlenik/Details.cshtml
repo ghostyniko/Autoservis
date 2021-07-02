@@ -1,0 +1,57 @@
+﻿@model Autoservis.Zaposlenik
+
+@{
+    ViewBag.Title = Model.PrezimeZaposlenika;
+}
+
+<div class="noviPodatak">
+    <table>
+        <tbody>
+            <tr>
+                <td>Ime</td>
+                <td>@Model.ImeZaposlenika</td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td>@Model.PrezimeZaposlenika</td>
+            </tr>
+            <tr>
+                <td>Adresa</td>
+                <td>@Model.UlicaZaposlenika @Model.KucniBrojZaposlenika</td>
+            </tr>
+            <tr>
+                <td>Mjesto</td>
+                <td>@Model.MjestoZaposlenika.NazivMjesta @Model.MjestoZaposlenika.PostanskiBroj</td>
+            </tr>
+
+            <tr>
+                <td>Datum zaposlenja</td>
+                <td>@Model.DatumZaposlenja</td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.ActionLink("Ažuriraj", "Edit", new { IdZaposlenika = Model.IdZaposlenika })
+                    &nbsp;
+                    @using (Html.BeginForm("Delete", "Zaposlenik", new { IdZaposlenika = Model.IdZaposlenika }))
+                    {
+                        <a class="delete">Obriši</a>
+                    }
+                </td>
+
+
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+
+</p>
+@{
+    if (Model.Obrade.Count > 0)
+    {
+        Html.RenderPartial("Obrade", Model.Obrade, new ViewDataDictionary() { { "IdZaposlenika", Model.IdZaposlenika } });
+    }
+}

@@ -1,0 +1,74 @@
+﻿@model Autoservis.ObradaVozila
+
+@{
+    ViewBag.Title = "Unos nove obrade vozila";
+}
+
+@using (Html.BeginForm(new {IdVozila=Model.Vozilo.IdVozila, @id="form"}))
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Vozilo</td>
+                    <td>@Model.Vozilo.PuniNazivVozila</td>
+                </tr>
+                <tr>
+                    <td>Datum zaprimanja</td>
+                    <td>@Html.TextBoxFor(obr => obr.DatumZaprimanja, new { @class = "datum" })</td>
+                </tr>
+                <tr>
+                    <td>Datum preuzimanja</td>
+                    <td>@Html.TextBoxFor(obr => obr.DatumPreuzimanja, new { @class = "datum",@id="datum_preuzimanja" }) 
+                    @Html.CheckBox("preuzeto",new { @id="check_preuzeto"}) Nije završeno</td>
+                </tr>
+                <tr>
+                    <td>Opis</td>
+                    <td>@Html.TextAreaFor(obr => obr.Opis)</td>
+                </tr>
+
+                <tr></tr>
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    <td>@Html.ActionLink("Odustani", "Details", "Vozilo", new { IdVozila = Model.Vozilo.IdVozila }, null)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@{Html.RenderPartial("ValidationError");}
+
+<script language="javascript" type="text/javascript">
+	$(function () {
+		$.datepicker.setDefaults($.extend(
+			    { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
+	       	)); //default postavke kalendara
+
+        $('.datum').datepicker();
+        $('.datum').val('01.01.2019.');
+       // $('.datum').datepicker("setDate", new Date());
+
+        $("#form").submit(function (event) {
+            var checked = $("#check_preuzeto").is(":checked");
+            if (checked != true) {
+                $("#datum_preuzimanja").val = null;
+            }
+        });
+
+        $('#check_preuzeto').click(function (event) {
+            var checked = $("#check_preuzeto").is(":checked");
+            if (checked != true) {
+                $("#datum_preuzimanja").attr("disabled", false);
+            }
+            else {
+                $("#datum_preuzimanja").attr("disabled", true);
+            }
+        });
+    });
+
+   
+</script>

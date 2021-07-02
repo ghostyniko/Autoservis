@@ -1,0 +1,265 @@
+﻿using System;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Csla;
+using Csla.Data;
+using Csla.Validation;
+using Autoservis.DAL;
+using Autoservis.CustomRuleHandlers;
+using Autoservis.Properties;
+
+namespace Autoservis
+{
+    [Serializable()]
+    public class Klijent:BusinessBase<Klijent>
+    {
+       #region Constructors
+        private Klijent()
+        {
+        }
+
+        #endregion
+
+       #region  Properties
+        private static PropertyInfo<int> IdKlijentaProperty =
+          RegisterProperty(new PropertyInfo<int>(Reflector.GetPropertyName<Klijent>(x => x.IdKlijenta)));
+        public int IdKlijenta
+        {
+            get { return GetProperty(IdKlijentaProperty); }
+        }
+
+        private static PropertyInfo<string> PrezimeKlijentaProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.PrezimeKlijenta),"Prezime"));
+        public string PrezimeKlijenta
+        {
+            get { return GetProperty(PrezimeKlijentaProperty); }
+            set { SetProperty(PrezimeKlijentaProperty, value); }
+        }
+
+        private static PropertyInfo<string> ImeKlijentaProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.ImeKlijenta),"Ime"));
+        public string ImeKlijenta
+        {
+            get { return GetProperty(ImeKlijentaProperty); }
+            set { SetProperty(ImeKlijentaProperty, value); }
+        }
+
+        private static PropertyInfo<string> KorisnickoImeProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.KorisnickoIme)));
+        public string KorisnickoIme
+        {
+            get { return GetProperty(KorisnickoImeProperty); }
+            set { SetProperty(KorisnickoImeProperty, value); }
+        }
+
+      
+
+        private static PropertyInfo<string> UlicaKlijentaProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.UlicaKlijenta),"Ulica"));
+        public string UlicaKlijenta
+        {
+            get { return GetProperty(UlicaKlijentaProperty); }
+            set { SetProperty(UlicaKlijentaProperty, value); }
+        }
+
+        private static PropertyInfo<string> KucniBrojKlijentaProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<string>(Reflector.GetPropertyName<Klijent>(x => x.KucniBrojKlijenta),"Kućni broj"));
+        public string KucniBrojKlijenta
+        {
+            get { return GetProperty(KucniBrojKlijentaProperty); }
+            set { SetProperty(KucniBrojKlijentaProperty, value); }
+        }
+
+        private static PropertyInfo<Mjesto> MjestoKlijentaProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<Mjesto>(Reflector.GetPropertyName<Klijent>(x => x.MjestoKlijenta),"Mjesto"));
+        public Mjesto MjestoKlijenta
+        {
+            get { return GetProperty(MjestoKlijentaProperty); }
+            set { SetProperty(MjestoKlijentaProperty, value); }
+        }
+
+        private static PropertyInfo<int> IdMjestoProperty =
+        RegisterProperty(typeof(Klijent), new PropertyInfo<int>(Reflector.GetPropertyName<Klijent>(x => x.MjestoKlijenta)));
+        public int IdMjesto
+        {
+            get { return GetProperty(IdMjestoProperty); }
+            set { SetProperty(IdMjestoProperty, value); }
+        }
+
+        private static PropertyInfo<KlijentVozilaInfoList> KlijentVozilaProperty =
+     RegisterProperty(typeof(Klijent), new PropertyInfo<KlijentVozilaInfoList>(Reflector.GetPropertyName<Klijent>(x => x.KlijentVozila)));
+        public KlijentVozilaInfoList KlijentVozila
+        {
+            get { return GetProperty(KlijentVozilaProperty); }
+        }
+
+        #endregion
+
+        #region  Validation Rules
+        protected override void AddBusinessRules()
+        {
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), ImeKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(ImeKlijentaProperty, 25));
+
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), PrezimeKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(PrezimeKlijentaProperty, 25));
+
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), UlicaKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(UlicaKlijentaProperty, 50));
+
+            ValidationRules.AddRule(CommonRulesDecorator.RuleHandler(CommonRules.StringRequired), KucniBrojKlijentaProperty);
+            ValidationRules.AddRule(CommonRulesDecorator.MaxStringRuleHandler(), new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));
+
+         //   ValidationRules.AddRule(CommonRules.StringRequired, IdMjestoProperty);
+            //ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(KucniBrojKlijentaProperty, 10));
+
+
+            /* ValidationRules.AddRule(CommonRules.StringMaxLength, new CommonRules.MaxLengthRuleArgs(OIBProperty, 11));
+             ValidationRules.AddRule<Osoba>(IsOIBValid, OIBProperty);
+             ValidationRules.AddRule<Osoba>(IsOIBUnique, OIBProperty);*/
+        }
+        #endregion
+        #region Factory Methods
+
+        public static Klijent New()
+        {
+            return DataPortal.Create<Klijent>();
+        }
+        public static Klijent Get(int idKlijenta)
+        {
+            return DataPortal.Fetch<Klijent>(new SingleCriteria<Klijent, int>(idKlijenta));
+        }
+        public static Klijent Get(string username)
+        {
+            return DataPortal.Fetch<Klijent>(new SingleCriteria<Klijent, string>(username));
+        }
+        public static void Delete(int idKlijenta)
+        {
+            DataPortal.Delete<Klijent>(new SingleCriteria<Klijent, int>(idKlijenta));
+        }
+        #endregion
+        #region Data Access
+        private void DataPortal_Fetch(SingleCriteria<Klijent, int> criteria)
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+            {
+        
+                // var data = (from o in ctx.DataContext.Osoba where o.IdOsobe == criteria.Value select o).Single();
+                var data = ctx.DataContext.KlijentSet.Find(criteria.Value);
+               
+                LoadProperty(IdKlijentaProperty, data.IdKlijent);
+                LoadProperty(KorisnickoImeProperty, data.Username);
+                LoadProperty(ImeKlijentaProperty, data.Ime);
+                LoadProperty(PrezimeKlijentaProperty, data.Prezime);
+               
+                LoadProperty(UlicaKlijentaProperty, data.Adresa.Naziv);
+                LoadProperty(KucniBrojKlijentaProperty, data.Adresa.KucniBroj);
+                LoadProperty(MjestoKlijentaProperty,Mjesto.Get(data.Adresa.MjestoIdMjesto));
+                LoadProperty(KlijentVozilaProperty, KlijentVozilaInfoList.Get(data.IdKlijent));
+            }
+        }
+
+        private void DataPortal_Fetch(SingleCriteria<Klijent, string> criteria)
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+            {
+
+                // var data = (from o in ctx.DataContext.Osoba where o.IdOsobe == criteria.Value select o).Single();
+                var data = ctx.DataContext.KlijentSet.Where(d => d.Username == criteria.Value).FirstOrDefault();
+
+                LoadProperty(IdKlijentaProperty, data.IdKlijent);
+                LoadProperty(KorisnickoImeProperty, data.Username);
+                LoadProperty(ImeKlijentaProperty, data.Ime);
+                LoadProperty(PrezimeKlijentaProperty, data.Prezime);
+
+                LoadProperty(UlicaKlijentaProperty, data.Adresa.Naziv);
+                LoadProperty(KucniBrojKlijentaProperty, data.Adresa.KucniBroj);
+                LoadProperty(MjestoKlijentaProperty, Mjesto.Get(data.Adresa.MjestoIdMjesto));
+                LoadProperty(KlijentVozilaProperty, KlijentVozilaInfoList.Get(data.IdKlijent));
+            }
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope)]
+        protected override void DataPortal_Insert()
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+
+            {
+
+                DAL.Klijent kl = new DAL.Klijent
+                {
+                    Ime = ImeKlijenta,
+                    Prezime = PrezimeKlijenta,
+                    Username = KorisnickoIme,
+                    Adresa = new DAL.Adresa
+                    {
+                        Naziv = UlicaKlijenta,
+                        KucniBroj = KucniBrojKlijenta,
+                        MjestoIdMjesto = IdMjesto
+                    }
+                   
+                };
+
+                ctx.DataContext.KlijentSet.Add(kl);
+                ctx.DataContext.SaveChanges();
+
+                LoadProperty(IdKlijentaProperty, kl.IdKlijent);
+
+                FieldManager.UpdateChildren(this);
+            }
+        }
+        
+        [Transactional(TransactionalTypes.TransactionScope)]
+        protected override void DataPortal_Update()
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+
+            {
+                DAL.Klijent kl = ctx.DataContext.KlijentSet.Find(this.IdKlijenta);
+         
+                kl.Ime = ImeKlijenta;
+                kl.Prezime = PrezimeKlijenta;
+                kl.Adresa.Naziv = UlicaKlijenta;
+                kl.Adresa.KucniBroj = KucniBrojKlijenta;
+                kl.Adresa.MjestoIdMjesto = IdMjesto;
+                kl.Username = KorisnickoIme;
+
+                FieldManager.UpdateChildren(this);
+
+                ctx.DataContext.SaveChanges();
+            }
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope)]
+        protected override void DataPortal_DeleteSelf()
+        {
+            DataPortal_Delete(new SingleCriteria<Klijent, int>(IdKlijenta));
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope)]
+        private void DataPortal_Delete(SingleCriteria<Klijent, int> criteria)
+        {
+            using (var ctx = DAL.ContextManager<AutoservisDATAContainer>.GetManager(DAL.Database.ProjektConnectionString))
+            {
+                var o = ctx.DataContext.KlijentSet.Find(criteria.Value);
+                if (o != null)
+                {
+                    try
+                    {
+                        ctx.DataContext.AdresaSet.Remove(o.Adresa);
+                        ctx.DataContext.KlijentSet.Remove(o);
+                        ctx.DataContext.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Izbrišite sve podatke");
+                    }
+                }
+            }
+        }
+        #endregion
+    }
+}

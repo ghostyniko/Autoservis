@@ -1,0 +1,66 @@
+﻿@model Autoservis.Klijent
+
+@{
+    ViewBag.Title = "Unos novog klijenta";
+}
+
+@{
+    Autoservis.MjestoList listaMjesta = Autoservis.MjestoList.Get();
+}
+
+
+
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PrezimeKlijenta, "Prezime", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.PrezimeKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.PrezimeKlijenta, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ImeKlijenta, "Ime", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.ImeKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ImeKlijenta, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.LozinkaKlijenta, "Lozinka", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LozinkaKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LozinkaKlijenta, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.UlicaKlijenta, "Ulica", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.UlicaKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.UlicaKlijenta, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.KucniBrojKlijenta, "Kućni broj", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.KucniBrojKlijenta, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.KucniBrojKlijenta, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.IdMjesto, "Mjesto", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+
+        @Html.DropDownListFor(model => model.IdMjesto, new SelectList(listaMjesta, "Key", "Value"), new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(model => model.IdMjesto, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+@{Html.RenderPartial("ValidationError");}

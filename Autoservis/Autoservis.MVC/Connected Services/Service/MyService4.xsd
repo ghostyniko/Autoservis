@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Autoservis" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Autoservis" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:59322/MyService.xamlx?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Csla" />
+  <xs:complexType name="TerminPregleda">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Csla" base="q1:BusinessBaseOfTerminPregledaK4h2C2ek">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TerminPregleda" nillable="true" type="tns:TerminPregleda" />
+</xs:schema>

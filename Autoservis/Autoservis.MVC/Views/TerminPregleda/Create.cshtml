@@ -1,0 +1,65 @@
+﻿@model Autoservis.TerminPregleda
+
+@{
+    var klijent = Autoservis.Klijent.Get(Model.IdKlijenta);
+    ViewBag.Title = "Novi termin za klijenta " + klijent.PrezimeKlijenta;
+    var listaAutomobila = klijent.KlijentVozila;
+    var defaultId = listaAutomobila[0].IdVozila;
+}
+
+
+@using (Html.BeginForm(new {IdKlijenta=Model.IdKlijenta}))
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Prezime</td>
+                    <td>@klijent.PrezimeKlijenta</td>
+                </tr>
+                <tr>
+                    <td>Ime</td>
+                    <td>@klijent.ImeKlijenta</td>
+                </tr>
+                <tr>
+                    <td>Vozilo</td>
+                    <td>
+                        @Html.DropDownListFor(ter=>ter.IdVozila,
+                       new SelectList(listaAutomobila, "IdVozila", "NazVozila",defaultId),
+                      
+                       new { @class = "form-control" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Datum </td>
+                    <td>@Html.TextBoxFor(ter => ter.DatumIVrijemeTermina, new { @class = "datum" })</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    <td>@Html.ActionLink("Odustani", "Details","Klijent",new {IdKlijenta=Model.IdKlijenta },null)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@{Html.RenderPartial("ValidationError");}
+
+
+<script language="javascript" type="text/javascript">
+	$(function () {
+		$.datepicker.setDefaults($.extend(
+			    { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
+	       	)); //default postavke kalendara
+
+        $('.datum').datepicker();
+        $('.datum').val('01.01.2019.');
+       // $('.datum').datepicker("setDate", new Date());
+	});
+
+</script>

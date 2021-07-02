@@ -1,0 +1,95 @@
+﻿@model Autoservis.ObradaVozila
+
+@{
+    ViewBag.Title = "Ažuriranje obrade";
+}
+
+@using (Html.BeginForm(new { IdObrade=Model.IdObrade, @id = "form" }))
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Vozilo</td>
+                    <td>@Model.Vozilo.PuniNazivVozila</td>
+                </tr>
+                <tr>
+                    <td>Datum zaprimanja</td>
+                    <td>@Html.TextBoxFor(obr => obr.DatumZaprimanja, new { @class = "datum" })</td>
+                </tr>
+                <tr>
+                    <td>Datum preuzimanja</td>
+                    <td>
+                        @Html.TextBoxFor(obr => obr.DatumPreuzimanja, new { @class = "datum", @id = "datum_preuzimanja" })
+                    @Html.CheckBox("preuzeto", new { @id = "check_preuzeto" }) Nije završeno
+                </td>
+            </tr>
+            <tr>
+                <td>Opis</td>
+                <td>@Html.TextAreaFor(obr => obr.Opis)</td>
+            </tr>
+
+            <tr></tr>
+            <tr>
+                <td>
+                    <a class="submit">Spremi</a>
+                </td>
+                <td>@Html.ActionLink("Odustani", "Details", "Obrada", new { IdObrade = Model.IdObrade }, null)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+}
+
+
+@{Html.RenderPartial("ValidationError");}
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+        $(window).load(function () {
+            var datum_preuzimanja = $("#datum_preuzimanja").datepicker('getDate');
+            //console.log(datum_preuzimanja);
+            if (datum_preuzimanja == undefined) {
+                $("#check_preuzeto").attr("checked", true);
+                $("#datum_preuzimanja").attr("disabled", true);
+            }
+        });
+       
+       
+
+        $.datepicker.setDefaults($.extend(
+            { 'dateFormat': 'dd.mm.yy.', numberOfMonths: 1, showOtherMonths: true, selectOtherMonths: true }
+        )); //default postavke kalendara
+
+        $('.datum').datepicker();
+       
+        // $('.datum').datepicker("setDate", new Date());
+
+        $("#form").submit(function (event) {
+            var checked = $("#check_preuzeto").is(":checked");
+            if (checked != true) {
+                $("#datum_preuzimanja").val = null;
+            }
+        });
+
+        $(document).ready(function (event) {
+            
+        });
+        $('#check_preuzeto').click(function (event) {
+            var checked = $("#check_preuzeto").is(":checked");
+            if (checked != true) {
+                $("#datum_preuzimanja").attr("disabled", false);
+            }
+            else {
+                $("#datum_preuzimanja").attr("disabled", true);
+            }
+        });
+
+       
+    });
+
+
+
+
+</script>

@@ -1,0 +1,60 @@
+﻿@model Autoservis.Klijent
+
+
+@{
+    ViewBag.Title = Model.PrezimeKlijenta + Model.ImeKlijenta;
+}
+
+@{
+    Autoservis.MjestoList listaMjesta = Autoservis.MjestoList.Get();
+    var defaultValue = Autoservis.MjestoList.Get(listaMjesta, Model.MjestoKlijenta.IdMjesta);
+}
+
+
+@using (Html.BeginForm(new { IdKlijenta = Model.IdKlijenta }))
+{
+    <div class="noviPodatak">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Ime</td>
+                    <td>@Html.EditorFor(kl => kl.ImeKlijenta)</td>
+                </tr>
+                <tr>
+                    <td>Prezime</td>
+                    <td>@Html.EditorFor(kl => kl.PrezimeKlijenta)</td>
+                </tr>
+                
+                <tr>
+                    <td>Ulica</td>
+                    <td>@Html.EditorFor(kl => kl.UlicaKlijenta)</td>
+                </tr>
+                <tr>
+                    <td>Kućni broj</td>
+                    <td>@Html.EditorFor(kl => kl.KucniBrojKlijenta)</td>
+                </tr>
+
+                <tr>
+                    <td>Mjesto</td>
+                    <td>
+                        @Html.DropDownListFor(kl=>kl.IdMjesto,
+                       new SelectList(listaMjesta, "Key", "Value",defaultValue.Key),
+                      
+                       new { @class = "form-control" })
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <a class="submit">Spremi</a>
+                    </td>
+                    <td>@Html.ActionLink("Odustani", "Index")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+}
+
+
