@@ -12,15 +12,27 @@ namespace Autoservis.MVC.Models
         public static void Initialize(ApplicationDbContext context)
         {
             var roles = context.Roles;
-            if (roles.Count() > 0)
+            
+            
+            
+            if (roles.Count()>0)
             {
                 return;
             }
-            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+
+            if (roles.Count() == 0)
             {
-                Name = "Customer"
-            });
+                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                {
+                    Name = "Customer"
+                });
+                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                {
+                    Name = "Admin"
+                });
+            }
             context.SaveChanges();
+
         }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/autoservisdbdbserver/databases/AutoservisDB",
+      "type": "mssql.azure",
+      "connectionId": "Identity",
+      "secretStore": "AzureAppSettings"
+    },
+    "mssql2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/autoservisdbdbserver/databases/AutoservisDBData",
+      "type": "mssql.azure",
+      "connectionId": "AutoservisDATAContainer",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

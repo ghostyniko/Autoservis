@@ -196,7 +196,7 @@ namespace Autoservis.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
      
-        public async Task<ActionResult> RegisterAdmin(RegisterViewModel model)
+        public async Task<ActionResult> RegisterAdmin()
         {
             var user = new ApplicationUser { UserName = "matija.cavlovic96@gmail.com", Email = "matija.cavlovic96@gmail.com" };
             var result = await UserManager.CreateAsync(user, "mc270396MC_");
