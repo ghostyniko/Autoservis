@@ -266,6 +266,7 @@ __pycache__/
 *.com
 *.class
 *.dll
+!Csla.dll
 *.exe
 *.pdb
 *.dll.config
@@ -284,7 +285,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
+bin/Debug
+bin/Release
 obj/
 TestResults/
 ###################
@@ -332,6 +334,13 @@ NuGet.exe
 _[Ss]cripts
 *.exe
 *.dll
+!Csla.dll
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+######################
+# Exceptions #
+######################
+!bin/Debug
+bin/Debug/*
+!bin/Debug/Csla.dll
