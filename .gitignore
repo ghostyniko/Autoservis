@@ -334,6 +334,7 @@ NuGet.exe
 _[Ss]cripts
 *.exe
 *.dll
+!Csla.dll
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
