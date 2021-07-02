@@ -8,7 +8,7 @@ namespace Autoservis.Test
     [TestClass]
     public class ObradaVozilaTest
     {
-        private  static ObradaVozila obrada = null;
+        private  static Autoservis.BLL.ObradaVozila obrada = null;
 
        [TestInitialize]
         public void PodesiDAL()

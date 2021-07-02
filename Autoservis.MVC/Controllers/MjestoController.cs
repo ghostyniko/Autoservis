@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Autoservis.MVC;
 
 namespace Autoservis.MVC.Controllers
 {
@@ -46,7 +47,9 @@ namespace Autoservis.MVC.Controllers
 
             catch (Csla.Validation.ValidationException ex)
             {
-                ViewBag.Pogreska = ex.Message;
+                mjesto.HandleBusinessException(ex,this.ControllerContext);
+
+               /* ViewBag.Pogreska = ex.Message;
                 if (mjesto.BrokenRulesCollection.Count > 0)
                 {
                     List<string> errors = new List<string>();
@@ -56,7 +59,7 @@ namespace Autoservis.MVC.Controllers
                         ModelState.AddModelError(rule.Property, rule.Description);
                     }
                     ViewBag.ErrorsList = errors;
-                }
+                }*/
                 return View(mjesto);
             }
             catch (Csla.DataPortalException ex)

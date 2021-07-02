@@ -408,7 +408,7 @@
     <Compile Include="Controllers\VoditeljController.cs" />
     <Compile Include="Controllers\VoziloController.cs" />
     <Compile Include="Controllers\ZaposlenikController.cs" />
-    <Compile Include="ExceptionFilters\CslaValidationExeption.cs" />
+    <Compile Include="ExceptionHandlers\CslaValidationExeption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
