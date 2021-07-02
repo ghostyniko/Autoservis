@@ -1,6 +1,7 @@
 ﻿using System;
 using Autoservis.DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Autoservis.BLL;
 
 namespace Autoservis.Test
 {
