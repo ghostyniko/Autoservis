@@ -267,11 +267,14 @@ body {
 #sidebar {
 	width: 200px;
 	height: 100vh;
-	overflow-y: scroll;
 	position: fixed;
-	
+	display:flex;
+	overflow-y:scroll;
+	flex-direction:column;
+	justify-content:flex-start;
 	z-index: 1;
 }
+	
 
 #main {
 	background-color: aquamarine;

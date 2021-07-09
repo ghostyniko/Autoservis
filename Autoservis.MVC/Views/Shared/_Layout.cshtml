@@ -50,8 +50,8 @@
 
     <div class="row h-100 container-fluid" id="underHeaderContent">
 
-        <nav id="sidebar" class="navbar h-100 bg-dark">
-            <ul class="navbar-nav">
+        <nav id="sidebar" class="navbar bg-dark">
+            <ul class="navbar-nav ">
                
                 @if (!Request.IsAuthenticated)
                 {
@@ -115,12 +115,13 @@
         }
 
         );
+        window.onresize = () => adjustHeaderAndContent();
 
         function adjustHeaderAndContent() {
             const navHeight = $("#navbar").innerHeight();
             $("#header").height(navHeight);
             $("#underHeaderContent").css("margin-top", navHeight);
-            
+            $("#sidebar").height(window.innerHeight - navHeight);
             
         }
     </script>
