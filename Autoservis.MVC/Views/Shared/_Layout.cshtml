@@ -42,9 +42,17 @@
             <span class="navbar-text text-white ml-5">
                 <h1>Autoservis</h1>
             </span>
-            <div class="text-white ml-auto mr-3 bg-light p-3 rounded">
+
+            <div class="ml-auto">
+                <button class="collapsor rounded mr-3 btn btn-primary" target="#userData" min-width="800">
+                    <i class="large material-icons">account_circle</i>
+                </button>
+            </div>
+
+            <div class="text-white  mr-3 bg-light p-2 rounded" id="userData">
                 @Html.Partial("_LoginPartial")
-             </div>
+            </div>
+
         </nav>
     </header>
 
@@ -161,8 +169,10 @@
         });
 
     </script>
+
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap");
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/layoutExtension.js")
     @RenderSection("JavaScript", required: false)
     @RenderSection("scripts", required: false)
 </body>
