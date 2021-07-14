@@ -77,7 +77,7 @@ namespace Autoservis.MVC.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -153,7 +153,7 @@ namespace Autoservis.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Username,Email="default@gmail.com"};
               
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded)
@@ -161,7 +161,7 @@ namespace Autoservis.MVC.Controllers
                     AddErrors(result);
                     return View(model);
                 }
-                var userId = UserManager.FindByEmail(model.Email).Id;
+                var userId = UserManager.FindByName(model.Username).Id;
 
                 var resultAddRole = UserManager.AddToRole(userId, "Customer");
 
@@ -172,7 +172,7 @@ namespace Autoservis.MVC.Controllers
                 }
 
                
-                model.Klijent.KorisnickoIme = model.Email;
+                model.Klijent.KorisnickoIme = model.Username;
                 model.Klijent.Save();
 
                 await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -191,21 +191,24 @@ namespace Autoservis.MVC.Controllers
             return View(model);
         }
 
-        /*
+        
         // POST: /Account/RegisterAdmin
         [HttpPost]
         [AllowAnonymous]
      
         public async Task<ActionResult> RegisterAdmin()
         {
-            var user = new ApplicationUser { UserName = "matija.cavlovic96@gmail.com", Email = "matija.cavlovic96@gmail.com" };
-            var result = await UserManager.CreateAsync(user, "mc270396MC_");
-            var userId = UserManager.FindByEmail("matija.cavlovic96@gmail.com").Id;
+            var user = new ApplicationUser { UserName = "admin",Email="matija.cavlovic96@gmail.com"};
+            
+            var result = await UserManager.CreateAsync(user, "administrator");
+
+            
+            var userId = UserManager.FindByName("admin").Id;
             var resultAddRole = UserManager.AddToRole(userId, "Admin");
 
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
-        */
+        
 
 
         //

@@ -60,7 +60,7 @@
 
         <nav id="sidebar" class="navbar bg-dark">
             <ul class="navbar-nav ">
-               
+            
                 @if (!Request.IsAuthenticated)
                 {
                     @Html.Partial("_UnregisteredUserSidebar")
@@ -120,12 +120,15 @@
             });
 
             adjustHeaderAndContent();
+            window.onresize = () => adjustHeaderAndContent();
+            
         }
 
         );
-        window.onresize = () => adjustHeaderAndContent();
+        
 
         function adjustHeaderAndContent() {
+            console.log("pozvan resize");
             const navHeight = $("#navbar").innerHeight();
             $("#header").height(navHeight);
             $("#underHeaderContent").css("margin-top", navHeight);
@@ -149,12 +152,6 @@
 
         })
 
-        /* let q = window.matchMedia(("min-width:800px"));
-         console.log(q)
-         if (q.matches)  {
-             alert("media");
-         }*/
-
         $(function () {
             $(window).on('resize', function () {
                 if (window.innerWidth > 800) {
@@ -173,6 +170,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/layoutExtension.js")
+   
     @RenderSection("JavaScript", required: false)
     @RenderSection("scripts", required: false)
 </body>

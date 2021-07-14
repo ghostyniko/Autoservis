@@ -91,10 +91,7 @@
     <div class="d-flex flex-row justify-content-end align-items-center">
         @Html.ActionLink("Ažuriraj", "Edit", new { IdKlijenta = Model.IdKlijenta },new { @class="btn-sm btn-primary"})
         &nbsp;
-        @using (Html.BeginForm("Delete", "Klijent", new { IdKlijenta = Model.IdKlijenta }))
-        {
-            <a class="delete btn-sm btn-danger">Obriši</a>
-        }
+       
     </div>
 </div>
 
